@@ -6,8 +6,8 @@
 import '../utils/export.dart';
 
 import 'package:camera/camera.dart';
-import 'package:flutter/material.dart';
 import 'package:open_ui/open_ui.dart';
+import 'package:flutter/material.dart';
 
 class FlashButton extends StatefulWidget {
   final EzCP config;

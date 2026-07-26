@@ -7,12 +7,12 @@ import './export.dart';
 import '../widgets/export.dart';
 
 import 'package:gal/gal.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_contacts/flutter_contacts.dart' as c;
 import 'package:permission_handler/permission_handler.dart';
-import 'package:open_ui/open_ui.dart';
 
 // Camera //
 
