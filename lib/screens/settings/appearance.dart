@@ -12,8 +12,9 @@ import 'package:open_ui/open_ui.dart';
 
 class AppearanceSettingsScreen extends StatelessWidget {
   final int? target;
+  final bool? primary;
 
-  const AppearanceSettingsScreen({super.key, this.target});
+  const AppearanceSettingsScreen({super.key, this.target, this.primary});
 
   @override
   Widget build(BuildContext context) {
