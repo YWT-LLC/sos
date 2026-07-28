@@ -11,10 +11,9 @@ import 'package:provider/provider.dart';
 import 'package:open_ui/open_ui.dart';
 
 class AppearanceSettingsScreen extends StatelessWidget {
-  /// Optionally override the starting position
-  final int? targetPass;
+  final int? target;
 
-  const AppearanceSettingsScreen({super.key, this.targetPass});
+  const AppearanceSettingsScreen({super.key, this.target});
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +91,7 @@ class AppearanceSettingsScreen extends StatelessWidget {
                 build: (EzSubSetting subSec) => EzTextSettings(config, target: subSec),
               ),
             ],
-            target: targetPass,
+            target: target,
           ),
         ),
         fabs: <Widget>[
