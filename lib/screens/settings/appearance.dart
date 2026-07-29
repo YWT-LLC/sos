@@ -225,9 +225,7 @@ class _RightsOpacity extends StatelessWidget {
           ),
         );
 
-        if (opacity != config.textBackgroundOpacity) {
-          await config.rebuildUI(<EzCacheType>{EzCacheType.text});
-        }
+        if (opacity != config.textBackgroundOpacity) await config.rebuildUI(allECT);
       },
       icon: EzIcon(config, Icons.opacity),
       label: config.ezL10n.tsTextBackground,
