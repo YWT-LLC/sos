@@ -362,10 +362,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_contacts
-      sha256: "8f76f36ae0efacdfbcc86ca1271cb14b160c40cdc10ebe6923910e33a80e066c"
+      sha256: "3a018a04ffc88f8555068f86b7750c7cbc758e9ebccafa985f91353bcb6df496"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.0"
+    version: "2.3.1"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
@@ -713,10 +713,10 @@ packages:
     dependency: transitive
     description:
       name: jni
-      sha256: "5bc9a9daac5ccfbd6a758377600b9f7fdce13d93f26e8012a8941014a5d978d1"
+      sha256: f038e58b4dc2c9037f50e233175086337e0b305e356d28211bf55f21c504cbd3
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.2"
+    version: "1.0.3"
   jni_flutter:
     dependency: transitive
     description:
