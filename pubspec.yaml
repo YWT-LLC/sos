@@ -30,6 +30,8 @@ dependencies:
   share_plus: ^13.2.0
 
   # YWT
+  ywt_private:
+    path: ../ywt_private
   open_ui: 
     path: ../open_ui
 
