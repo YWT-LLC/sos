@@ -246,9 +246,6 @@ const String contactSplit = ':';
 /// https://www.aclu.org/know-your-rights
 const String acluLink = 'https://www.aclu.org/know-your-rights';
 
-/// https://www.ywt.llc/#/contribute
-const String contributeLink = 'https://www.ywt.llc/#/contribute';
-
 /// https://dunkthevote4ever.org/project/the-black-book-know-your-rights/
 const String dunkLink = 'https://dunkthevote4ever.org/project/the-black-book-know-your-rights/';
 
