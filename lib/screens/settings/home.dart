@@ -6,6 +6,7 @@
 import '../export.dart';
 import '../../utils/export.dart';
 import '../../widgets/export.dart';
+import 'package:ywt_private/ywt_private.dart' as links;
 
 import 'package:open_ui/open_ui.dart';
 import 'package:flutter/material.dart';
@@ -735,7 +736,7 @@ class SettingsHomeScreen extends StatelessWidget {
                                     text: l10n(config).faqContributing,
                                     onTap: () => followLink(
                                       config,
-                                      url: contributeLink,
+                                      url: links.ywtContributePage,
                                       parentContext: context,
                                       modalContext: mCon,
                                     ),
