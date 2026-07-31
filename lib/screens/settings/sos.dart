@@ -99,38 +99,23 @@ class _SOSSettingsScreenState extends State<SOSSettingsScreen> with WidgetsBindi
                 config.separator,
 
                 // Link type
-                EzScrollView(
+                EzDropdownMenu<LLType>(
                   config,
-                  scrollDirection: Axis.horizontal,
-                  reverseHands: true,
-                  children: <Widget>[
-                    // Label
-                    EzText(
-                      config,
-                      text: l10n(config).bsLinkType,
-                      style: config.bodyStyle,
-                      textAlign: TextAlign.center,
-                    ),
-                    config.margin,
-                    EzDropdownMenu<LLType>(
-                      config,
-                      widthEntry: LLType.google.label,
-                      dropdownMenuEntries: LLType.values
-                          .map<DropdownMenuEntry<LLType>>(
-                            (LLType type) =>
-                                DropdownMenuEntry<LLType>(value: type, label: type.label),
-                          )
-                          .toList(),
-                      enableSearch: false,
-                      initialSelection: _linkType,
-                      onSelected: (LLType? selection) async {
-                        if (selection == null || selection == _linkType) return;
+                  label: l10n(config).bsLinkType,
+                  widthEntry: LLType.google.label,
+                  dropdownMenuEntries: LLType.values
+                      .map<DropdownMenuEntry<LLType>>(
+                        (LLType type) => DropdownMenuEntry<LLType>(value: type, label: type.label),
+                      )
+                      .toList(),
+                  enableSearch: false,
+                  initialSelection: _linkType,
+                  onSelected: (LLType? selection) async {
+                    if (selection == null || selection == _linkType) return;
 
-                        await EzCM.setString(linkTypeKey, selection.name);
-                        if (mounted) setState(() => _linkType = selection);
-                      },
-                    ),
-                  ],
+                    await EzCM.setString(linkTypeKey, selection.name);
+                    if (mounted) setState(() => _linkType = selection);
+                  },
                 ),
                 config.divider,
 
