@@ -779,7 +779,7 @@ class SettingsHomeScreen extends StatelessWidget {
                                     onPressed: () async {
                                       await EzCM.setBool(showTutorialKey, true);
                                       if (mCon.mounted) Navigator.of(mCon).pop();
-                                      await config.rebuildUI(noECT);
+                                      await config.rebuildUI();
                                     },
                                   ),
                                 ],
