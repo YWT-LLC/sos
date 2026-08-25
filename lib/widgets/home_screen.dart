@@ -33,11 +33,16 @@ class _FlashButtonState extends State<FlashButton> {
         widget.config,
         enabled: working.values.contains(true),
         icon: switch (widget.camera.value.flashMode) {
-          FlashMode.off => Icon(Icons.flash_off, semanticLabel: l10n(widget.config).hsFlashOff),
-          FlashMode.auto => Icon(Icons.flash_auto, semanticLabel: l10n(widget.config).hsFlashAuto),
-          FlashMode.always => Icon(Icons.flash_on, semanticLabel: l10n(widget.config).hsFlashOn),
-          FlashMode.torch =>
-            Icon(Icons.flashlight_on, semanticLabel: l10n(widget.config).hsFlashTorch),
+          FlashMode.off => const Icon(Icons.flash_off),
+          FlashMode.auto => const Icon(Icons.flash_auto),
+          FlashMode.always => const Icon(Icons.flash_on),
+          FlashMode.torch => const Icon(Icons.flashlight_on),
+        },
+        tooltip: switch (widget.camera.value.flashMode) {
+          FlashMode.off => l10n(widget.config).hsFlashOff,
+          FlashMode.auto => l10n(widget.config).hsFlashAuto,
+          FlashMode.always => l10n(widget.config).hsFlashOn,
+          FlashMode.torch => l10n(widget.config).hsFlashTorch,
         },
         onPressed: () async {
           bool hasResult = false;
@@ -152,10 +157,8 @@ class _PulsingIconWidgetState extends State<SOSIcon> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) => AnimatedBuilder(
         animation: ping,
-        builder: (_, __) => Icon(
-          ping.value < 0.5 ? Icons.notifications : Icons.notifications_active,
-          semanticLabel: l10n(widget.config).hsEndSOS,
-        ),
+        builder: (_, __) =>
+            Icon(ping.value < 0.5 ? Icons.notifications : Icons.notifications_active),
       );
 
   @override
