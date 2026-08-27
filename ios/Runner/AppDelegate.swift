@@ -20,7 +20,7 @@ import MessageUI
     GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
 
     let broadcastChannel = FlutterMethodChannel(
-      name: "llc.ywt.sos/broadcast",
+      name: "net.empathetech.sos/broadcast",
       binaryMessenger: engineBridge.applicationRegistrar.messenger()
     )
 

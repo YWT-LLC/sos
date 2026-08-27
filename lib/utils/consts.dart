@@ -106,8 +106,8 @@ extension SituationConfig on Situation {
 //* App config *//
 // Naming/ID //
 
-/// llc.ywt.sos
-const String androidPackage = 'llc.ywt.sos';
+/// net.empathetech.sos
+const String androidPackage = 'net.empathetech.sos';
 
 /// [androidPackage]/broadcast
 const MethodChannel platform = MethodChannel('$androidPackage/broadcast');

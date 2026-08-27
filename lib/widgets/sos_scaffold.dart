@@ -25,7 +25,7 @@ class SosScaffold extends StatelessWidget {
               appVersion: '3.0.2',
               versionSource:
                   'https://raw.githubusercontent.com/YWT-LLC/sos/refs/heads/main/APP_VERSION',
-              gPlay: 'https://play.google.com/store/apps/details?id=llc.ywt.sos',
+              gPlay: 'https://play.google.com/store/apps/details?id=net.empathetech.sos',
               appStore: 'https://apps.apple.com/us/app/instasos/id6744280817',
               github: 'https://github.com/YWT-LLC/sos/releases',
             ),

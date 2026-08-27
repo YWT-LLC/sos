@@ -3,7 +3,7 @@
  * See LICENSE for distribution and usage details.
  */
 
-package llc.ywt.sos
+package net.empathetech.sos
 
 import android.app.Application
 import android.content.Context
@@ -31,7 +31,7 @@ import io.flutter.embedding.android.FlutterActivity
 import io.flutter.plugin.common.MethodChannel
 
 class MainActivity : FlutterActivity() {
-  private val CHANNEL = "llc.ywt.sos/broadcast"
+  private val CHANNEL = "net.empathetech.sos/broadcast"
 
   // Init foreground SOS
   override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
