@@ -1,6 +1,6 @@
 name: sos
 description: "Document everything. Stay safe out there."
-version: 3.0.2+24
+version: 3.0.3+25
 publish_to: 'none'
 
 environment:
@@ -14,7 +14,7 @@ dependencies:
 
   # Flutter (Google)
   camera: ^0.12.0+1
-  go_router: ^17.3.0
+  go_router: ^18.0.0
   intl: ^0.20.2
   path_provider: ^2.1.6
   shared_preferences: ^2.5.5
@@ -22,7 +22,7 @@ dependencies:
 
   # Community
   after_layout: ^1.2.0
-  permission_handler: ^12.0.3
+  permission_handler: ^13.0.1
   flutter_contacts: ^2.2.2
   gal: ^2.3.2
   geolocator: ^14.0.3
