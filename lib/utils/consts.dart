@@ -1,5 +1,5 @@
 /* sos
- * Copyright (c) 2026 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2025 YWT (Empathetech LLC). All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -7,7 +7,7 @@ import './export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import 'package:open_ui/open_ui.dart';
 
 //* Enums *//
 // Location Link Type //
@@ -48,11 +48,12 @@ extension LLTypeConfig on LLType {
         LLType.raw => '',
       };
 
-  static LLType lookup(String name) => switch (name) {
+  /// Defaults to [LLType.google]
+  static LLType safeLookup(String? name) => switch (name) {
         esApple => LLType.apple,
         esWaze => LLType.waze,
         esRaw => LLType.raw,
-        esGoogle || _ => LLType.google,
+        _ => LLType.google,
       };
 }
 
@@ -94,10 +95,11 @@ extension SituationConfig on Situation {
         Situation.home => l10n.rvAtHome,
       };
 
-  static Situation lookup(String? tab) => switch (tab) {
+  /// Defaults to [Situation.walking]
+  static Situation safeLookup(String? tab) => switch (tab) {
         esDriving => Situation.driving,
         esHome => Situation.home,
-        esWalking || _ => Situation.walking,
+        _ => Situation.walking,
       };
 }
 
@@ -194,8 +196,8 @@ const Map<String, Type> sosColorKeys = <String, Type>{
 
 /// defaults for [EzCM.init]
 final Map<String, Object> sosConfig = <String, Object>{
-  // EFUI
-  ...empathMobileConfig,
+  // Base
+  ...ywtMobileConfig,
   darkShowBackFABKey: true,
   lightShowBackFABKey: true,
   darkTextBackgroundOpacityKey: 0.8,
@@ -230,10 +232,7 @@ const Map<String, Type> allSOSKeys = <String, Type>{
 };
 
 /// For [EzResetButton]s
-final Set<String> neverResetKeys = <String>{
-  ...sosBTSKeys.keys,
-  ...sosBroadcastKeys.keys,
-};
+final Set<String> neverResetKeys = <String>{...sosBTSKeys.keys, ...sosBroadcastKeys.keys};
 
 //* Runtime *//
 
@@ -246,9 +245,6 @@ const String contactSplit = ':';
 
 /// https://www.aclu.org/know-your-rights
 const String acluLink = 'https://www.aclu.org/know-your-rights';
-
-/// https://www.empathetech.net/#/contribute
-const String contributeLink = 'https://www.empathetech.net/#/contribute';
 
 /// https://dunkthevote4ever.org/project/the-black-book-know-your-rights/
 const String dunkLink = 'https://dunkthevote4ever.org/project/the-black-book-know-your-rights/';

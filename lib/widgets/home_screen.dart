@@ -1,13 +1,13 @@
 /* sos
- * Copyright (c) 2026 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2025 YWT (Empathetech LLC). All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
 import '../utils/export.dart';
 
 import 'package:camera/camera.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
 
 class FlashButton extends StatefulWidget {
   final EzCP config;
@@ -33,14 +33,16 @@ class _FlashButtonState extends State<FlashButton> {
         widget.config,
         enabled: working.values.contains(true),
         icon: switch (widget.camera.value.flashMode) {
-          FlashMode.off =>
-            EzIcon(widget.config, Icons.flash_off, semanticLabel: l10n(widget.config).hsFlashOff),
-          FlashMode.auto =>
-            EzIcon(widget.config, Icons.flash_auto, semanticLabel: l10n(widget.config).hsFlashAuto),
-          FlashMode.always =>
-            EzIcon(widget.config, Icons.flash_on, semanticLabel: l10n(widget.config).hsFlashOn),
-          FlashMode.torch => EzIcon(widget.config, Icons.flashlight_on,
-              semanticLabel: l10n(widget.config).hsFlashTorch),
+          FlashMode.off => const Icon(Icons.flash_off),
+          FlashMode.auto => const Icon(Icons.flash_auto),
+          FlashMode.always => const Icon(Icons.flash_on),
+          FlashMode.torch => const Icon(Icons.flashlight_on),
+        },
+        tooltip: switch (widget.camera.value.flashMode) {
+          FlashMode.off => l10n(widget.config).hsFlashOff,
+          FlashMode.auto => l10n(widget.config).hsFlashAuto,
+          FlashMode.always => l10n(widget.config).hsFlashOn,
+          FlashMode.torch => l10n(widget.config).hsFlashTorch,
         },
         onPressed: () async {
           bool hasResult = false;
@@ -144,10 +146,7 @@ class _PulsingIconWidgetState extends State<SOSIcon> with SingleTickerProviderSt
   void initState() {
     super.initState();
 
-    controller = AnimationController(
-      duration: const Duration(seconds: 3),
-      vsync: this,
-    );
+    controller = AnimationController(duration: const Duration(seconds: 3), vsync: this);
 
     ping = Tween<double>(begin: 0, end: 1).animate(controller);
     controller.repeat(reverse: true);
@@ -158,10 +157,8 @@ class _PulsingIconWidgetState extends State<SOSIcon> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) => AnimatedBuilder(
         animation: ping,
-        builder: (_, __) => Icon(
-          ping.value < 0.5 ? Icons.notifications : Icons.notifications_active,
-          semanticLabel: l10n(widget.config).hsEndSOS,
-        ),
+        builder: (_, __) =>
+            Icon(ping.value < 0.5 ? Icons.notifications : Icons.notifications_active),
       );
 
   @override

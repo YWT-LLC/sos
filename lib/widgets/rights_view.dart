@@ -1,12 +1,12 @@
 /* sos
- * Copyright (c) 2026 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2025 YWT (Empathetech LLC). All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
 import '../utils/export.dart';
 
 import 'package:flutter/material.dart';
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import 'package:open_ui/open_ui.dart';
 
 class RightsView extends StatefulWidget {
   final EzCP config;
@@ -20,7 +20,7 @@ class RightsView extends StatefulWidget {
 class _RightsViewState extends State<RightsView> {
   // Define the build data //
 
-  Situation currTab = SituationConfig.lookup(EzCM.get(savedTabKey));
+  Situation currTab = SituationConfig.safeLookup(EzCM.get(savedTabKey));
   int delta = 0;
 
   // Define custom functions //
@@ -78,11 +78,13 @@ class _RightsViewState extends State<RightsView> {
                 // Switcher
                 SegmentedButton<Situation>(
                   segments: Situation.values
-                      .map((Situation sitch) => ButtonSegment<Situation>(
-                            value: sitch,
-                            label: EzIcon(widget.config, sitch.icon),
-                            tooltip: sitch.tooltip(sosL10n),
-                          ))
+                      .map(
+                        (Situation sitch) => ButtonSegment<Situation>(
+                          value: sitch,
+                          label: EzIcon(widget.config, sitch.icon),
+                          tooltip: sitch.tooltip(sosL10n),
+                        ),
+                      )
                       .toList(),
                   selected: <Situation>{currTab},
                   showSelectedIcon: false,
@@ -103,13 +105,13 @@ class _RightsViewState extends State<RightsView> {
               onHorizontalDragEnd: (DragEndDetails details) async {
                 if (details.primaryVelocity == null) return;
 
-                if (details.primaryVelocity! < -100) {
+                if (details.primaryVelocity! < -ezSwipeV) {
                   // RTL -> nav right
                   if (currTab.position >= (Situation.values.length - 1)) return;
                   await _nav(Situation.values[currTab.position + 1]);
                 }
 
-                if (details.primaryVelocity! > 100) {
+                if (details.primaryVelocity! > ezSwipeV) {
                   // LTR -> nav left
                   if (currTab.position <= 0) return;
                   await _nav(Situation.values[currTab.position - 1]);

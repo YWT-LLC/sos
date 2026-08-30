@@ -1,5 +1,5 @@
 /* sos
- * Copyright (c) 2026 Empathetech LLC. All rights reserved.
+ * Copyright (c) 2025 YWT (Empathetech LLC). All rights reserved.
  * See LICENSE for distribution and usage details.
  */
 
@@ -17,7 +17,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:empathetech_flutter_ui/empathetech_flutter_ui.dart';
+import 'package:open_ui/open_ui.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -63,8 +63,9 @@ class _HomeScreenState extends State<HomeScreen>
     if (!(await Permission.camera.isGranted)) return false;
 
     final List<CameraDescription> cameras = await availableCameras();
-    cameraDesc =
-        cameras.firstWhere((CameraDescription c) => c.lensDirection == CameraLensDirection.back);
+    cameraDesc = cameras.firstWhere(
+      (CameraDescription c) => c.lensDirection == CameraLensDirection.back,
+    );
     if (cameraDesc == null) return false;
 
     try {
@@ -75,13 +76,7 @@ class _HomeScreenState extends State<HomeScreen>
       final String message = e.toString();
 
       if (e is! CameraException || e.code != 'CameraAccessDenied') {
-        (mounted)
-            ? await ezLogAlert(
-                config,
-                context: context,
-                message: message,
-              )
-            : ezLog(message);
+        (mounted) ? await ezLogAlert(config, context: context, message: message) : ezLog(message);
       } else {
         ezLog('CameraException from initCamera.../n$message');
       }
@@ -98,12 +93,12 @@ class _HomeScreenState extends State<HomeScreen>
               context: context,
               message: l10n(config).sosNeedSMS,
               customActions: <Widget>[
-                EzAction(config,
-                    text: config.ezL10n.gSettings,
-                    onPressed: openAppSettings,
-                    style: config.bodyStyle?.copyWith(
-                      color: config.colors.primary,
-                    )),
+                EzAction(
+                  config,
+                  text: config.ezL10n.gSettings,
+                  onPressed: openAppSettings,
+                  style: config.bodyStyle?.copyWith(color: config.colors.primary),
+                ),
               ],
             )
           : ezLog(l10n(config).sosNeedSMS);
@@ -113,11 +108,7 @@ class _HomeScreenState extends State<HomeScreen>
     // Check contacts
     if (emc.isEmpty) {
       if (mounted) {
-        ezSnackBar(
-          config,
-          context: context,
-          message: l10n(config).bsSnackRequest,
-        );
+        ezSnackBar(config, context: context, message: l10n(config).bsSnackRequest);
         await context.pushNamed(sosSettingsPath);
         if (mounted) setState(() {});
       }
@@ -144,8 +135,12 @@ class _HomeScreenState extends State<HomeScreen>
 
     // Make it so (periodic SOS)
     if (mounted) {
-      setState(() => sosTimer =
-          Timer.periodic(const Duration(minutes: 5), (_) => foregroundSOS(l10n(config))));
+      setState(
+        () => sosTimer = Timer.periodic(
+          const Duration(minutes: 5),
+          (_) => foregroundSOS(l10n(config)),
+        ),
+      );
     }
 
     // Double reminder/option to cancel
@@ -233,29 +228,32 @@ class _HomeScreenState extends State<HomeScreen>
                             forceFade: true,
                             kid: RightsView(config),
                           )
-                        : Stack(children: <Widget>[
-                            Center(
-                              child: Semantics(
-                                hint: l10n(config).hsPreviewHint,
-                                excludeSemantics: showRights,
-                                child: CameraPreview(camera!),
+                        : Stack(
+                            children: <Widget>[
+                              Center(
+                                child: Semantics(
+                                  hint: l10n(config).hsPreviewHint,
+                                  excludeSemantics: showRights,
+                                  child: CameraPreview(camera!),
+                                ),
                               ),
-                            ),
-                            EzAnimVis(
-                              config,
-                              mod: 0.5,
-                              visible: showRights,
-                              forceType: EzTransitionType.none,
-                              forceFade: true,
-                              kid: Container(
-                                height: double.infinity,
-                                width: double.infinity,
-                                color: config.colors.surfaceContainer
-                                    .withValues(alpha: config.textBackgroundOpacity),
-                                child: RightsView(config),
+                              EzAnimVis(
+                                config,
+                                mod: 0.5,
+                                visible: showRights,
+                                forceType: EzTransitionType.none,
+                                forceFade: true,
+                                kid: Container(
+                                  height: double.infinity,
+                                  width: double.infinity,
+                                  color: config.colors.surfaceContainer.withValues(
+                                    alpha: config.textBackgroundOpacity,
+                                  ),
+                                  child: RightsView(config),
+                                ),
                               ),
-                            ),
-                          ]),
+                            ],
+                          ),
                   ),
                 ),
               ),
@@ -304,11 +302,7 @@ class _HomeScreenState extends State<HomeScreen>
                           config.marginVal,
                       left: 0,
                       right: 0,
-                      title: EzIcon(
-                        config,
-                        Icons.arrow_upward,
-                        color: config.colors.onSurface,
-                      ),
+                      title: EzIcon(config, Icons.arrow_upward, color: config.colors.onSurface),
                       content: isIOS
                           ? l10n(config).hsBroadcastTutorial
                           : '${l10n(config).hsBroadcastTutorial}\n\n${l10n(config).hsBroadcastTutorialAndroid}',
@@ -327,12 +321,14 @@ class _HomeScreenState extends State<HomeScreen>
                             config,
                             icon: SOSIcon(config),
                             iconSize: config.iconSize * 1.5,
+                            tooltip: l10n(config).hsEndSOS,
                             onPressed: stopForegroundSOS,
                           )
                         : EzIconButton(
                             config,
                             fauxDisabled: emc.isEmpty,
-                            icon: Icon(Icons.sos, semanticLabel: l10n(config).hsStartSOS),
+                            icon: const Icon(Icons.sos),
+                            tooltip: l10n(config).hsStartSOS,
                             iconSize: config.iconSize * 1.5,
                             onPressed: () => startForegroundSOS(config),
                           ),
@@ -355,11 +351,7 @@ class _HomeScreenState extends State<HomeScreen>
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
-                        EzIcon(
-                          config,
-                          Icons.arrow_forward,
-                          color: config.colors.onSurface,
-                        ),
+                        EzIcon(config, Icons.arrow_forward, color: config.colors.onSurface),
                       ],
                     ),
                     content: l10n(config).hsSettingsTutorial,
@@ -373,11 +365,8 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                   child: EzIconButton(
                     config,
-                    icon: EzIcon(
-                      config,
-                      Icons.settings,
-                      semanticLabel: config.ezL10n.gSettings,
-                    ),
+                    icon: const Icon(Icons.settings),
+                    tooltip: config.ezL10n.gSettings,
                     enabled: !recording,
                     onPressed: () => context.goNamed(settingsHomePath),
                   ),
@@ -392,11 +381,8 @@ class _HomeScreenState extends State<HomeScreen>
                   left: config.isLefty ? null : config.marginVal,
                   child: EzIconButton(
                     config,
-                    icon: EzIcon(
-                      config,
-                      Icons.thumb_up,
-                      semanticLabel: l10n(config).hsSafeCloseHint,
-                    ),
+                    icon: const Icon(Icons.thumb_up),
+                    tooltip: l10n(config).hsSafeCloseHint,
                     enabled: !recording,
                     onPressed: () {
                       if (sosTimer?.isActive == true) stopForegroundSOS();
@@ -423,16 +409,11 @@ class _HomeScreenState extends State<HomeScreen>
                           ? EzIconButton(
                               config,
                               icon: showRights
-                                  ? EzIcon(
-                                      config,
-                                      Icons.visibility_off,
-                                      semanticLabel: l10n(config).hsHideRights,
-                                    )
-                                  : EzIcon(
-                                      config,
-                                      Icons.gavel,
-                                      semanticLabel: l10n(config).hsShowRights,
-                                    ),
+                                  ? const Icon(Icons.visibility_off)
+                                  : const Icon(Icons.gavel),
+                              tooltip: showRights
+                                  ? l10n(config).hsHideRights
+                                  : l10n(config).hsShowRights,
                               onPressed: () {
                                 if (mounted) {
                                   setState(() => showRights = !showRights);
@@ -441,11 +422,8 @@ class _HomeScreenState extends State<HomeScreen>
                             )
                           : EzIconButton(
                               config,
-                              icon: EzIcon(
-                                config,
-                                Icons.camera_alt,
-                                semanticLabel: l10n(config).hsCameraHint,
-                              ),
+                              icon: const Icon(Icons.camera_alt),
+                              tooltip: l10n(config).hsCameraHint,
                               onPressed: () async {
                                 try {
                                   // Take a picture
@@ -458,16 +436,18 @@ class _HomeScreenState extends State<HomeScreen>
                                   if (autoShareMedia && context.mounted) {
                                     final RenderBox? box = context.findRenderObject() as RenderBox?;
 
-                                    await SharePlus.instance.share(ShareParams(
-                                      text: await getCoordinates(
-                                        l10n(config),
-                                        linkBase: linkType.base,
-                                        nullable: true,
+                                    await SharePlus.instance.share(
+                                      ShareParams(
+                                        text: await getCoordinates(
+                                          l10n(config),
+                                          linkBase: linkType.base,
+                                          nullable: true,
+                                        ),
+                                        files: <XFile>[image],
+                                        sharePositionOrigin:
+                                            box!.localToGlobal(Offset.zero) & box.size,
                                       ),
-                                      files: <XFile>[image],
-                                      sharePositionOrigin:
-                                          box!.localToGlobal(Offset.zero) & box.size,
-                                    ));
+                                    );
                                   }
                                 } catch (e) {
                                   (context.mounted)
@@ -532,7 +512,8 @@ class _HomeScreenState extends State<HomeScreen>
                                   foregroundColor: videoColor(config),
                                   side: config.borderSide(color: videoTextColor(config)),
                                 ),
-                                icon: Icon(Icons.stop, semanticLabel: l10n(config).hsEndRecord),
+                                icon: const Icon(Icons.stop),
+                                tooltip: l10n(config).hsEndRecord,
                                 iconSize: config.iconSize * 2,
                                 onPressed: () async {
                                   late final XFile? video;
@@ -577,16 +558,18 @@ class _HomeScreenState extends State<HomeScreen>
                                       final RenderBox? box =
                                           context.findRenderObject() as RenderBox?;
 
-                                      await SharePlus.instance.share(ShareParams(
-                                        text: await getCoordinates(
-                                          l10n(config),
-                                          linkBase: linkType.base,
-                                          nullable: true,
+                                      await SharePlus.instance.share(
+                                        ShareParams(
+                                          text: await getCoordinates(
+                                            l10n(config),
+                                            linkBase: linkType.base,
+                                            nullable: true,
+                                          ),
+                                          files: <XFile>[XFile(mp4Path)],
+                                          sharePositionOrigin:
+                                              box!.localToGlobal(Offset.zero) & box.size,
                                         ),
-                                        files: <XFile>[XFile(mp4Path)],
-                                        sharePositionOrigin:
-                                            box!.localToGlobal(Offset.zero) & box.size,
-                                      ));
+                                      );
                                     }
                                   } catch (e) {
                                     (context.mounted)
@@ -611,7 +594,8 @@ class _HomeScreenState extends State<HomeScreen>
                                         foregroundColor: videoColor(config),
                                         side: config.borderSide(color: config.colors.onSurface),
                                       ),
-                                icon: Icon(Icons.circle, semanticLabel: l10n(config).hsStartRecord),
+                                icon: const Icon(Icons.circle),
+                                tooltip: l10n(config).hsStartRecord,
                                 iconSize: config.iconSize * 2,
                                 onLongPress:
                                     camera == null ? () => context.goNamed(settingsHomePath) : null,
@@ -657,7 +641,8 @@ class _HomeScreenState extends State<HomeScreen>
                           ? EzIconButton(
                               config,
                               fauxDisabled: true,
-                              icon: EzIcon(config, Icons.flash_off),
+                              icon: const Icon(Icons.flash_off),
+                              tooltip: l10n(config).hsFlashAuto,
                               onPressed: () async {
                                 final bool worked = await initCamera(config);
 
@@ -758,11 +743,7 @@ class _HomeScreenState extends State<HomeScreen>
           } catch (e) {
             if (e is! CameraException || e.code != 'CameraAccessDenied') {
               mounted
-                  ? await ezLogAlert(
-                      config,
-                      context: context,
-                      message: e.toString(),
-                    )
+                  ? await ezLogAlert(config, context: context, message: e.toString())
                   : ezLog(e.toString());
             }
           }

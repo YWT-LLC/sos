@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.3] - 2026-08-29
+### Updated
+- EFUI
+
 ## [3.0.2] - 2026-07-02
 ### Updated
 - Better intro/permissions requesting
@@ -157,6 +161,6 @@ All notable changes to this project will be documented in this file.
 
 ## [0.0.0] - 2025-03-25
 ### Added
-- InstaSOS foundation generated via [Open UI](https://www.empathetech.net/#/products/open-ui)
+- InstaSOS foundation generated via [Open UI](https://ywt.llc/#/products/open-ui)
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
