@@ -8,9 +8,9 @@ import './utils/export.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:open_ui/open_ui.dart';
 
 void main() async {
   // Configure the app //
