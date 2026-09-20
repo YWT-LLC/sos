@@ -5,12 +5,13 @@
 
 import '../utils/export.dart';
 
+import 'dart:async';
 import 'package:gal/gal.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_contacts/flutter_contacts.dart' as fc;
 import 'package:permission_handler/permission_handler.dart';
-import 'package:open_ui/open_ui.dart';
 
 // Icon generators //
 
@@ -563,11 +564,11 @@ class _LocationSetupState extends State<LocationSetup> with WidgetsBindingObserv
               final bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
               if (!serviceEnabled) {
                 (context.mounted)
-                    ? await ezLogAlert(
+                    ? unawaited(ezLogAlert(
                         widget.config,
                         context: context,
                         message: l10n(widget.config).sosDisabled,
-                      )
+                      ))
                     : ezLog(l10n(widget.config).sosDisabled);
                 return;
               }
