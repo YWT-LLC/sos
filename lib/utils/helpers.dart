@@ -326,7 +326,7 @@ Future<void> stopBackgroundSOS(EzCP config, {required BuildContext context}) asy
     // The most likely error is that the task is already stopped
     // But there could be scenarios where taskRunningKey should remain true
     context.mounted
-        ? unawaited(ezLogAlert(config, context: context, message: e.toString()))
+        ? ezLogAlert(config, context: context, message: e.toString())
         : ezLog(e.toString());
   }
   await EzCM.setBool(taskRunningKey, false);

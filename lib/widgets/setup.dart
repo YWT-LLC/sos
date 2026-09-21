@@ -564,11 +564,11 @@ class _LocationSetupState extends State<LocationSetup> with WidgetsBindingObserv
               final bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
               if (!serviceEnabled) {
                 (context.mounted)
-                    ? unawaited(ezLogAlert(
+                    ? ezLogAlert(
                         widget.config,
                         context: context,
                         message: l10n(widget.config).sosDisabled,
-                      ))
+                      )
                     : ezLog(l10n(widget.config).sosDisabled);
                 return;
               }
