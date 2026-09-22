@@ -63,9 +63,9 @@ class _HomeScreenState extends State<HomeScreen>
     if (!(await Permission.camera.isGranted)) return false;
 
     final List<CameraDescription> cameras = await availableCameras();
-    cameraDesc = cameras.firstWhere(
-      (CameraDescription c) => c.lensDirection == CameraLensDirection.back,
-    );
+    cameraDesc = cameras
+        .where((CameraDescription c) => c.lensDirection == CameraLensDirection.back)
+        .firstOrNull;
     if (cameraDesc == null) return false;
 
     try {
