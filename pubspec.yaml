@@ -2,6 +2,7 @@ name: sos
 description: "Document everything. Stay safe out there."
 version: 3.0.3+25
 publish_to: 'none'
+repository: https://github.com/YWT-LLC/sos
 
 environment:
   sdk: ^3.6.0
