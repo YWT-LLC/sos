@@ -796,7 +796,7 @@ class SettingsHomeScreen extends StatelessWidget {
                   icon: EzIcon(config, Icons.help_outline),
                   label: l10n(config).ssSupport,
                 ),
-                EzFooter(config),
+                EzFooter(config, a11howPath: ywt.sosContributeA11),
               ],
             ),
           ),
