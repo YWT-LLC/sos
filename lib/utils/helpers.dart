@@ -235,7 +235,7 @@ Future<void> appSetupModal(EzCP config, BuildContext context) async {
           Text(
             // TODO: l10n
             kIsWeb
-                ? 'On web, this is just a KYR camera.\nYou will need to install the InstaSOS app to use the emergency features.'
+                ? 'The web version is only a KYR camera.\n\nYou will need to install the InstaSOS app to use the emergency features.'
                 : (showTutorial ? l10n(config).hsAppIntro : l10n(config).hsAppIntroAlt),
             style: config.bodyStyle,
             textAlign: TextAlign.center,
