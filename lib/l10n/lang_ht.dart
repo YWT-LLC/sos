@@ -307,6 +307,10 @@ class LangHt extends Lang {
   String get hsNoFlash => 'Flash kamera a pa mache';
 
   @override
+  String get hsNoWebSOS =>
+      'Fonksyonalite ijans pa disponib sou wèb la.\nSèvi ak bouton SOS la pou telechaje aplikasyon InstaSOS la.';
+
+  @override
   String get hsOneOfFour => 'Premye sou kat. Kontinye...';
 
   @override
@@ -330,6 +334,14 @@ class LangHt extends Lang {
   @override
   String get hsSettingsTutorialFix =>
       'Ou ka konfigire difizyon SOS ou a, pèsonalize aparans aplikasyon an, epi jwenn aksè a plis resous/sipò nan anviwònman yo.';
+
+  @override
+  String get hsSettingsTutorialWeb =>
+      '- Pèsonalize aparans aplikasyon an\n- Jwenn aksè a plis resous ak sipò\n\nnan paramèt yo.';
+
+  @override
+  String get hsSettingsTutorialWebFix =>
+      'Ou ka pèsonalize aparans aplikasyon an, epi jwenn aksè a plis resous/sipò nan paramèt yo.';
 
   @override
   String get hsShowRights => 'Montre dwa w yo.';
@@ -365,6 +377,10 @@ class LangHt extends Lang {
   @override
   String get hsVideoTutorial =>
       'Lè w fè yon foto oswa anrejistre yon videyo, ou ka pataje l tousuit.\n\nPa defo, si yon anrejistreman entèwonp, yon difizyon SOS ap kòmanse otomatikman.\n\nPeze lontan sou previzyalizasyon kamera a pou montre/kache dwa ou yo.';
+
+  @override
+  String get hsWebIntro =>
+      'Vèsyon wèb la se sèlman yon kamera KYR.\n\nOu pral bezwen enstale aplikasyon InstaSOS la pou itilize fonksyonalite ijans yo.';
 
   @override
   String get hsWelcome => 'Byenvini sou InstaSOS';

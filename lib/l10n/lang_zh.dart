@@ -288,6 +288,9 @@ class LangZh extends Lang {
   String get hsNoFlash => '相机闪光灯无法使用';
 
   @override
+  String get hsNoWebSOS => '网页版无法使用紧急功能。\n请使用 SOS 按钮下载 InstaSOS 应用。';
+
+  @override
   String get hsOneOfFour => '四分之一。继续...';
 
   @override
@@ -308,6 +311,12 @@ class LangZh extends Lang {
 
   @override
   String get hsSettingsTutorialFix => '您可以在设置中配置您的 SOS 广播、自定义应用外观以及获取更多资源和支持。';
+
+  @override
+  String get hsSettingsTutorialWeb => '- 自定义应用外观\n- 获取更多资源和支持\n\n尽在设置中。';
+
+  @override
+  String get hsSettingsTutorialWebFix => '您可以在设置中自定义应用外观，并获取更多资源/支持。';
 
   @override
   String get hsShowRights => '显示您的权利。';
@@ -342,6 +351,9 @@ class LangZh extends Lang {
   @override
   String get hsVideoTutorial =>
       '拍照或录制视频后，您可以立即分享。\n\n默认情况下，如果录制被中断，将自动开始 SOS 广播。\n\n长按相机预览以显示/隐藏您的权利。';
+
+  @override
+  String get hsWebIntro => '网页版仅作为 KYR 相机使用。\n\n您需要安装 InstaSOS 应用才能使用紧急功能。';
 
   @override
   String get hsWelcome => '欢迎使用 InstaSOS';
@@ -737,6 +749,9 @@ class LangZhCn extends LangZh {
   String get hsNoFlash => '相机闪光灯无法使用';
 
   @override
+  String get hsNoWebSOS => '网页版无法使用紧急功能。\n请使用 SOS 按钮下载 InstaSOS 应用。';
+
+  @override
   String get hsOneOfFour => '四分之一。继续...';
 
   @override
@@ -757,6 +772,12 @@ class LangZhCn extends LangZh {
 
   @override
   String get hsSettingsTutorialFix => '您可以在设置中配置您的 SOS 广播、自定义应用外观以及获取更多资源和支持。';
+
+  @override
+  String get hsSettingsTutorialWeb => '- 自定义应用外观\n- 获取更多资源和支持\n\n尽在设置中。';
+
+  @override
+  String get hsSettingsTutorialWebFix => '您可以在设置中自定义应用外观，并获取更多资源/支持。';
 
   @override
   String get hsShowRights => '显示您的权利。';
@@ -791,6 +812,9 @@ class LangZhCn extends LangZh {
   @override
   String get hsVideoTutorial =>
       '拍照或录制视频后，您可以立即分享。\n\n默认情况下，如果录制被中断，将自动开始 SOS 广播。\n\n长按相机预览以显示/隐藏您的权利。';
+
+  @override
+  String get hsWebIntro => '网页版仅作为 KYR 相机使用。\n\n您需要安装 InstaSOS 应用才能使用紧急功能。';
 
   @override
   String get hsWelcome => '欢迎使用 InstaSOS';

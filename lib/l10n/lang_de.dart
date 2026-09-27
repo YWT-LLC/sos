@@ -313,6 +313,10 @@ class LangDe extends Lang {
   String get hsNoFlash => 'Kamerablitz funktioniert nicht';
 
   @override
+  String get hsNoWebSOS =>
+      'Die Notfallfunktion ist im Web nicht verfügbar.\nNutze den SOS-Button, um die InstaSOS-App herunterzuladen.';
+
+  @override
   String get hsOneOfFour => 'Erster von vier Schritten. Weiter...';
 
   @override
@@ -336,6 +340,14 @@ class LangDe extends Lang {
   @override
   String get hsSettingsTutorialFix =>
       'Du kannst deinen SOS-Notruf konfigurieren, das Aussehen der App anpassen und auf weitere Ressourcen/Support in den Einstellungen zugreifen.';
+
+  @override
+  String get hsSettingsTutorialWeb =>
+      '- Passe das Aussehen der App an\n- Greife auf weitere Ressourcen und Support zu\n\nin den Einstellungen.';
+
+  @override
+  String get hsSettingsTutorialWebFix =>
+      'Du kannst in den Einstellungen das Aussehen der App anpassen und auf weitere Ressourcen/Support zugreifen.';
 
   @override
   String get hsShowRights => 'Zeige deine Rechte.';
@@ -371,6 +383,10 @@ class LangDe extends Lang {
   @override
   String get hsVideoTutorial =>
       'Wenn du ein Foto oder Video aufnimmst, kannst du es sofort teilen.\n\nWenn eine Aufnahme unterbrochen wird, startet standardmäßig automatisch ein SOS-Notruf.\n\nHalte die Kameravorschau gedrückt, um deine Rechte ein-/auszublenden.';
+
+  @override
+  String get hsWebIntro =>
+      'Die Webversion ist nur eine KYR-Kamera.\n\nDu musst die InstaSOS-App installieren, um die Notfallfunktionen nutzen zu können.';
 
   @override
   String get hsWelcome => 'Willkommen bei InstaSOS';

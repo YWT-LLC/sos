@@ -312,6 +312,10 @@ class LangFr extends Lang {
   String get hsNoFlash => 'Le flash de la caméra ne fonctionne pas';
 
   @override
+  String get hsNoWebSOS =>
+      'La fonctionnalité d\'urgence n\'est pas disponible sur le Web.\nUtilisez le bouton SOS pour télécharger l\'application InstaSOS.';
+
+  @override
   String get hsOneOfFour => 'Un sur quatre. Continuer...';
 
   @override
@@ -334,6 +338,14 @@ class LangFr extends Lang {
   @override
   String get hsSettingsTutorialFix =>
       'Vous pouvez configurer votre diffusion SOS, personnaliser l\'apparence de l\'application et accéder à plus de ressources/d\'assistance dans les paramètres.';
+
+  @override
+  String get hsSettingsTutorialWeb =>
+      '- Personnalisez l\'apparence de l\'application\n- Accédez à plus de ressources et d\'assistance\n\ndans les paramètres.';
+
+  @override
+  String get hsSettingsTutorialWebFix =>
+      'Vous pouvez personnaliser l\'apparence de l\'application et accéder à plus de ressources/d\'assistance dans les paramètres.';
 
   @override
   String get hsShowRights => 'Afficher vos droits.';
@@ -369,6 +381,10 @@ class LangFr extends Lang {
   @override
   String get hsVideoTutorial =>
       'Lorsque vous prenez une photo ou enregistrez une vidéo, vous pouvez la partager immédiatement.\n\nPar défaut, si un enregistrement est interrompu, une diffusion SOS démarrera automatiquement.\n\nAppuyez longuement sur l\'aperçu de la caméra pour afficher/masquer vos droits.';
+
+  @override
+  String get hsWebIntro =>
+      'La version Web n\'est qu\'une caméra KYR.\n\nVous devrez installer l\'application InstaSOS pour utiliser les fonctionnalités d\'urgence.';
 
   @override
   String get hsWelcome => 'Bienvenue sur InstaSOS';

@@ -296,6 +296,10 @@ class LangKo extends Lang {
   String get hsNoFlash => '카메라 플래시가 작동하지 않음';
 
   @override
+  String get hsNoWebSOS =>
+      '웹에서는 긴급 기능을 사용할 수 없습니다.\nSOS 버튼을 사용하여 InstaSOS 앱을 다운로드하세요.';
+
+  @override
   String get hsOneOfFour => '4개 중 첫 번째. 계속...';
 
   @override
@@ -317,6 +321,14 @@ class LangKo extends Lang {
   @override
   String get hsSettingsTutorialFix =>
       '설정에서 SOS 브로드캐스트를 구성하고, 앱의 모양을 사용자 지정하고, 더 많은 리소스/지원에 액세스할 수 있습니다.';
+
+  @override
+  String get hsSettingsTutorialWeb =>
+      '- 앱의 디자인을 맞춤 설정하고\n- 더 많은 리소스와 지원에 액세스하세요.\n\n설정에서 확인하실 수 있습니다.';
+
+  @override
+  String get hsSettingsTutorialWebFix =>
+      '설정에서 앱의 디자인을 맞춤 설정하고 더 많은 리소스/지원에 액세스할 수 있습니다.';
 
   @override
   String get hsShowRights => '권리 표시하기.';
@@ -351,6 +363,10 @@ class LangKo extends Lang {
   @override
   String get hsVideoTutorial =>
       '사진을 찍거나 비디오를 녹화하면 바로 공유할 수 있습니다.\n\n기본적으로 녹화가 중단되면 SOS 브로드캐스트가 자동으로 시작됩니다.\n\n카메라 미리보기를 길게 눌러 권리를 표시하거나 숨길 수 있습니다.';
+
+  @override
+  String get hsWebIntro =>
+      '웹 버전은 KYR 카메라로만 작동합니다.\n\n긴급 기능을 사용하려면 InstaSOS 앱을 설치해야 합니다.';
 
   @override
   String get hsWelcome => 'InstaSOS에 오신 것을 환영합니다';

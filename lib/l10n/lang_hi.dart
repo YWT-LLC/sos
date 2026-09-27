@@ -309,6 +309,10 @@ class LangHi extends Lang {
   String get hsNoFlash => 'कैमरा फ़्लैश काम नहीं कर रहा है';
 
   @override
+  String get hsNoWebSOS =>
+      'आपातकालीन कार्यक्षमता वेब पर उपलब्ध नहीं है।\nInstaSOS ऐप डाउनलोड करने के लिए SOS बटन का उपयोग करें।';
+
+  @override
   String get hsOneOfFour => 'चार में से पहला। जारी रखें...';
 
   @override
@@ -331,6 +335,14 @@ class LangHi extends Lang {
   @override
   String get hsSettingsTutorialFix =>
       'आप सेटिंग्स में अपना SOS ब्रॉडकास्ट कॉन्फ़िगर कर सकते हैं, ऐप का स्वरूप कस्टमाइज़ कर सकते हैं, और अधिक संसाधनों/समर्थन तक पहुंच प्राप्त कर सकते हैं।';
+
+  @override
+  String get hsSettingsTutorialWeb =>
+      '- ऐप के स्वरूप को कस्टमाइज़ करें\n- अधिक संसाधनों और सहायता तक पहुंचें\n\nसेटिंग्स में।';
+
+  @override
+  String get hsSettingsTutorialWebFix =>
+      'आप ऐप के स्वरूप को कस्टमाइज़ कर सकते हैं, और सेटिंग्स में अधिक संसाधनों/सहायता तक पहुंच प्राप्त कर सकते हैं।';
 
   @override
   String get hsShowRights => 'अपने अधिकार दिखाएं।';
@@ -366,6 +378,10 @@ class LangHi extends Lang {
   @override
   String get hsVideoTutorial =>
       'जब आप कोई चित्र लेते हैं या वीडियो रिकॉर्ड करते हैं, तो आप उसे तुरंत साझा कर सकते हैं।\n\nडिफ़ॉल्ट रूप से, यदि रिकॉर्डिंग बाधित होती है, तो एक SOS ब्रॉडकास्ट स्वचालित रूप से शुरू हो जाएगा।\n\nअपने अधिकार दिखाने/छिपाने के लिए कैमरा पूर्वावलोकन को देर तक दबाएं।';
+
+  @override
+  String get hsWebIntro =>
+      'वेब संस्करण केवल एक KYR कैमरा है।\n\nआपातकालीन सुविधाओं का उपयोग करने के लिए आपको InstaSOS ऐप इंस्टॉल करना होगा।';
 
   @override
   String get hsWelcome => 'InstaSOS में आपका स्वागत है';

@@ -293,6 +293,10 @@ class LangJa extends Lang {
   String get hsNoFlash => 'カメラのフラッシュが機能していません';
 
   @override
+  String get hsNoWebSOS =>
+      'ウェブ版では緊急機能は利用できません。\nSOSボタンを使ってInstaSOSアプリをダウンロードしてください。';
+
+  @override
   String get hsOneOfFour => '4つのうちの1つ目。次へ...';
 
   @override
@@ -314,6 +318,14 @@ class LangJa extends Lang {
   @override
   String get hsSettingsTutorialFix =>
       '設定から、SOS発信の設定、アプリの外観のカスタマイズ、その他のリソースやサポートへのアクセスが可能です。';
+
+  @override
+  String get hsSettingsTutorialWeb =>
+      '- アプリの外観をカスタマイズ\n- より多くのリソースやサポートにアクセス\n\n設定から行えます。';
+
+  @override
+  String get hsSettingsTutorialWebFix =>
+      '設定から、アプリの外観をカスタマイズしたり、より多くのリソースやサポートにアクセスしたりできます。';
 
   @override
   String get hsShowRights => '権利を表示します。';
@@ -348,6 +360,10 @@ class LangJa extends Lang {
   @override
   String get hsVideoTutorial =>
       '写真や動画を撮影すると、すぐに共有できます。\n\nデフォルトでは、録画が中断された場合、SOS発信が自動的に開始されます。\n\nカメラのプレビューを長押しすると、あなたの権利の表示/非表示を切り替えられます。';
+
+  @override
+  String get hsWebIntro =>
+      'ウェブ版はKYRカメラ専用です。\n\n緊急機能を使用するには、InstaSOSアプリをインストールする必要があります。';
 
   @override
   String get hsWelcome => 'InstaSOSへようこそ';

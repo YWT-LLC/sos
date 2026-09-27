@@ -311,6 +311,10 @@ class LangRu extends Lang {
   String get hsNoFlash => 'Вспышка камеры не работает';
 
   @override
+  String get hsNoWebSOS =>
+      'Функция экстренной помощи недоступна в веб-версии.\nИспользуйте кнопку SOS, чтобы скачать приложение InstaSOS.';
+
+  @override
   String get hsOneOfFour => 'Первый из четырех. Продолжить...';
 
   @override
@@ -334,6 +338,14 @@ class LangRu extends Lang {
   @override
   String get hsSettingsTutorialFix =>
       'Вы можете настроить трансляцию SOS, изменить внешний вид приложения и получить доступ к ресурсам/поддержке в настройках.';
+
+  @override
+  String get hsSettingsTutorialWeb =>
+      '- Настройте внешний вид приложения\n- Получите доступ к дополнительным ресурсам и поддержке\n\nв настройках.';
+
+  @override
+  String get hsSettingsTutorialWebFix =>
+      'Вы можете настроить внешний вид приложения и получить доступ к дополнительным ресурсам/поддержке в настройках.';
 
   @override
   String get hsShowRights => 'Показать ваши права.';
@@ -369,6 +381,10 @@ class LangRu extends Lang {
   @override
   String get hsVideoTutorial =>
       'Когда вы делаете фото или записываете видео, вы можете сразу же им поделиться.\n\nПо умолчанию, если запись прерывается, трансляция SOS начнется автоматически.\n\nДолгое нажатие на экран камеры покажет/скроет список ваших прав.';
+
+  @override
+  String get hsWebIntro =>
+      'Веб-версия представляет собой только камеру KYR.\n\nВам потребуется установить приложение InstaSOS для использования экстренных функций.';
 
   @override
   String get hsWelcome => 'Добро пожаловать в InstaSOS';

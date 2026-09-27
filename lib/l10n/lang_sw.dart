@@ -309,6 +309,10 @@ class LangSw extends Lang {
   String get hsNoFlash => 'Mwangaza wa kamera haufanyi kazi';
 
   @override
+  String get hsNoWebSOS =>
+      'Kipengele cha dharura hakipatikani kwenye wavuti.\nTumia kitufe cha SOS kupakua programu ya InstaSOS.';
+
+  @override
   String get hsOneOfFour => 'Ya kwanza kati ya nne. Endelea...';
 
   @override
@@ -332,6 +336,14 @@ class LangSw extends Lang {
   @override
   String get hsSettingsTutorialFix =>
       'Unaweza kusanidi utangazaji wako wa SOS, kugeuza kukufaa mwonekano wa programu, na kufikia nyenzo/usaidizi zaidi kwenye mipangilio.';
+
+  @override
+  String get hsSettingsTutorialWeb =>
+      '- Badilisha mwonekano wa programu\n- Fikia rasilimali na usaidizi zaidi\n\nkwenye mipangilio.';
+
+  @override
+  String get hsSettingsTutorialWebFix =>
+      'Unaweza kubadilisha mwonekano wa programu, na kufikia rasilimali/usaidizi zaidi kwenye mipangilio.';
 
   @override
   String get hsShowRights => 'Onyesha haki zako.';
@@ -366,6 +378,10 @@ class LangSw extends Lang {
   @override
   String get hsVideoTutorial =>
       'Unapopiga picha au kurekodi video, unaweza kuishiriki mara moja.\n\nKwa chaguo-msingi, ikiwa kurekodi kutakatizwa, tangazo la SOS litaanza kiotomatiki.\n\nBonyeza kwa muda mrefu onyesho la kukagua la kamera ili kuonyesha/kuficha haki zako.';
+
+  @override
+  String get hsWebIntro =>
+      'Toleo la wavuti ni kamera ya KYR pekee.\n\nUtahitaji kusakinisha programu ya InstaSOS ili kutumia vipengele vya dharura.';
 
   @override
   String get hsWelcome => 'Karibu kwenye InstaSOS';

@@ -305,6 +305,10 @@ class LangAr extends Lang {
   String get hsNoFlash => 'فلاش الكاميرا لا يعمل';
 
   @override
+  String get hsNoWebSOS =>
+      'وظيفة الطوارئ غير متوفرة على الويب.\nاستخدم زر SOS لتنزيل تطبيق InstaSOS.';
+
+  @override
   String get hsOneOfFour => 'الأول من أربعة. متابعة...';
 
   @override
@@ -328,6 +332,14 @@ class LangAr extends Lang {
   @override
   String get hsSettingsTutorialFix =>
       'يمكنك إعداد بث طلب الاستغاثة (SOS) الخاص بك، وتخصيص مظهر التطبيق، والوصول إلى المزيد من الموارد/الدعم في الإعدادات.';
+
+  @override
+  String get hsSettingsTutorialWeb =>
+      '- تخصيص مظهر التطبيق\n- الوصول إلى المزيد من الموارد والدعم\n\nفي الإعدادات.';
+
+  @override
+  String get hsSettingsTutorialWebFix =>
+      'يمكنك تخصيص مظهر التطبيق، والوصول إلى المزيد من الموارد/الدعم في الإعدادات.';
 
   @override
   String get hsShowRights => 'إظهار حقوقك.';
@@ -363,6 +375,10 @@ class LangAr extends Lang {
   @override
   String get hsVideoTutorial =>
       'عندما تلتقط صورة أو تسجل مقطع فيديو، يمكنك مشاركته على الفور.\n\nافتراضياً، إذا تمت مقاطعة التسجيل، سيبدأ بث طلب الاستغاثة (SOS) تلقائياً.\n\nاضغط مطولاً على معاينة الكاميرا لإظهار/إخفاء حقوقك.';
+
+  @override
+  String get hsWebIntro =>
+      'إصدار الويب عبارة عن كاميرا KYR فقط.\n\nستحتاج إلى تثبيت تطبيق InstaSOS لاستخدام ميزات الطوارئ.';
 
   @override
   String get hsWelcome => 'مرحباً بك في InstaSOS';
@@ -783,6 +799,10 @@ class LangArEg extends LangAr {
   String get hsNoFlash => 'فلاش الكاميرا لا يعمل';
 
   @override
+  String get hsNoWebSOS =>
+      'وظيفة الطوارئ غير متوفرة على الويب.\nاستخدم زر SOS لتنزيل تطبيق InstaSOS.';
+
+  @override
   String get hsOneOfFour => 'الأول من أربعة. متابعة...';
 
   @override
@@ -806,6 +826,14 @@ class LangArEg extends LangAr {
   @override
   String get hsSettingsTutorialFix =>
       'يمكنك إعداد بث طلب الاستغاثة (SOS) الخاص بك، وتخصيص مظهر التطبيق، والوصول إلى المزيد من الموارد/الدعم في الإعدادات.';
+
+  @override
+  String get hsSettingsTutorialWeb =>
+      '- تخصيص مظهر التطبيق\n- الوصول إلى المزيد من الموارد والدعم\n\nفي الإعدادات.';
+
+  @override
+  String get hsSettingsTutorialWebFix =>
+      'يمكنك تخصيص مظهر التطبيق، والوصول إلى المزيد من الموارد/الدعم في الإعدادات.';
 
   @override
   String get hsShowRights => 'إظهار حقوقك.';
@@ -841,6 +869,10 @@ class LangArEg extends LangAr {
   @override
   String get hsVideoTutorial =>
       'عندما تلتقط صورة أو تسجل مقطع فيديو، يمكنك مشاركته على الفور.\n\nافتراضياً، إذا تمت مقاطعة التسجيل، سيبدأ بث طلب الاستغاثة (SOS) تلقائياً.\n\nاضغط مطولاً على معاينة الكاميرا لإظهار/إخفاء حقوقك.';
+
+  @override
+  String get hsWebIntro =>
+      'إصدار الويب عبارة عن كاميرا KYR فقط.\n\nستحتاج إلى تثبيت تطبيق InstaSOS لاستخدام ميزات الطوارئ.';
 
   @override
   String get hsWelcome => 'مرحباً بك في InstaSOS';

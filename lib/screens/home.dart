@@ -305,8 +305,8 @@ class _HomeScreenState extends State<HomeScreen>
                       left: 0,
                       right: 0,
                       title: EzIcon(config, Icons.arrow_upward, color: config.colors.onSurface),
-                      content: kIsWeb // TODO: l10n
-                          ? 'Emergency functionality is unavailable on web.\nUse the SOS button to download the InstaSOS app.'
+                      content: kIsWeb
+                          ? l10n(config).hsNoWebSOS
                           : (isIOS
                               ? l10n(config).hsBroadcastTutorial
                               : '${l10n(config).hsBroadcastTutorial}\n\n${l10n(config).hsBroadcastTutorialAndroid}'),
@@ -348,7 +348,6 @@ class _HomeScreenState extends State<HomeScreen>
               ),
 
               // Settings
-              // TODO: remove the first one on web (l10n)
               Positioned(
                 top: config.marginVal,
                 right: config.isLefty ? null : config.marginVal,
@@ -366,8 +365,12 @@ class _HomeScreenState extends State<HomeScreen>
                         EzIcon(config, Icons.arrow_forward, color: config.colors.onSurface),
                       ],
                     ),
-                    content: l10n(config).hsSettingsTutorial,
-                    contentSemantics: l10n(config).hsSettingsTutorialFix,
+                    content: kIsWeb
+                        ? l10n(config).hsSettingsTutorialWeb
+                        : l10n(config).hsSettingsTutorial,
+                    contentSemantics: kIsWeb
+                        ? l10n(config).hsSettingsTutorialWebFix
+                        : l10n(config).hsSettingsTutorialFix,
                     acceptMessage: '2/4\t>>',
                     acceptSemantics: l10n(config).hsTwoOfFour,
                     onAccept: () {

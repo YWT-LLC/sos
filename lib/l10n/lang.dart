@@ -645,6 +645,12 @@ abstract class Lang {
   /// **'Camera flash not working'**
   String get hsNoFlash;
 
+  /// No description provided for @hsNoWebSOS.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency functionality is unavailable on web.\nUse the SOS button to download the InstaSOS app.'**
+  String get hsNoWebSOS;
+
   /// No description provided for @hsOneOfFour.
   ///
   /// In en, this message translates to:
@@ -686,6 +692,18 @@ abstract class Lang {
   /// In en, this message translates to:
   /// **'You can configure your SOS broadcast, customize the app\'s appearance, and access more resources/support in the settings.'**
   String get hsSettingsTutorialFix;
+
+  /// No description provided for @hsSettingsTutorialWeb.
+  ///
+  /// In en, this message translates to:
+  /// **'- Customize the app\'s appearance\n- Access more resources and support\n\nin the settings.'**
+  String get hsSettingsTutorialWeb;
+
+  /// No description provided for @hsSettingsTutorialWebFix.
+  ///
+  /// In en, this message translates to:
+  /// **'You can customize the app\'s appearance, and access more resources/support in the settings.'**
+  String get hsSettingsTutorialWebFix;
 
   /// No description provided for @hsShowRights.
   ///
@@ -752,6 +770,12 @@ abstract class Lang {
   /// In en, this message translates to:
   /// **'When you take a picture or record a video, you can share it right away.\n\nBy default, if a recording is interrupted, an SOS broadcast will start automatically.\n\nLong press the camera preview to show/hide your rights.'**
   String get hsVideoTutorial;
+
+  /// No description provided for @hsWebIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'The web version is only a KYR camera.\n\nYou will need to install the InstaSOS app to use the emergency features.'**
+  String get hsWebIntro;
 
   /// No description provided for @hsWelcome.
   ///

@@ -314,6 +314,10 @@ class LangFil extends Lang {
   String get hsNoFlash => 'Hindi gumagana ang flash ng camera';
 
   @override
+  String get hsNoWebSOS =>
+      'Hindi available ang emergency functionality sa web.\nGamitin ang SOS button para i-download ang InstaSOS app.';
+
+  @override
   String get hsOneOfFour => 'Una sa apat. Magpatuloy...';
 
   @override
@@ -338,6 +342,14 @@ class LangFil extends Lang {
   @override
   String get hsSettingsTutorialFix =>
       'Maaari mong i-configure ang iyong SOS broadcast, i-customize ang anyo ng app, at i-access ang higit pang mga mapagkukunan/suporta sa mga setting.';
+
+  @override
+  String get hsSettingsTutorialWeb =>
+      '- I-customize ang hitsura ng app\n- Mag-access ng higit pang mga resource at suporta\n\nsa mga setting.';
+
+  @override
+  String get hsSettingsTutorialWebFix =>
+      'Maaari mong i-customize ang hitsura ng app, at mag-access ng higit pang mga resource/suporta sa mga setting.';
 
   @override
   String get hsShowRights => 'Ipakita ang iyong mga karapatan.';
@@ -373,6 +385,10 @@ class LangFil extends Lang {
   @override
   String get hsVideoTutorial =>
       'Kapag kumuha ka ng litrato o nag-record ng video, maaari mo itong ibahagi kaagad.\n\nBilang default, kung maantala ang isang recording, awtomatikong magsisimula ang isang SOS broadcast.\n\nPindutin nang matagal ang preview ng camera para ipakita/itago ang iyong mga karapatan.';
+
+  @override
+  String get hsWebIntro =>
+      'Ang web version ay isa lamang KYR camera.\n\nKakailanganin mong i-install ang InstaSOS app para magamit ang mga emergency feature.';
 
   @override
   String get hsWelcome => 'Maligayang pagdating sa InstaSOS';
