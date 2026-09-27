@@ -531,8 +531,9 @@ class _HomeScreenState extends State<HomeScreen>
                                 iconSize: config.iconSize * 2,
                                 onPressed: () async {
                                   late final XFile? video;
+
+                                  // Stop recording
                                   try {
-                                    // Stop recording
                                     video = await camera!.stopVideoRecording();
                                   } catch (e) {
                                     (context.mounted)
@@ -550,22 +551,27 @@ class _HomeScreenState extends State<HomeScreen>
                                   stopwatch.reset();
 
                                   if (video == null) return;
+
                                   try {
-                                    // Videos are saved as tmp files
-                                    // We need to fix that before proceeding
-                                    final File tmpFile = File(video.path);
+                                    late String finalPath;
+                                    late XFile finalFile;
 
-                                    // Create a unique mp4 file path
-                                    final Directory appDir =
-                                        await getApplicationDocumentsDirectory();
-                                    final String mp4Path =
-                                        '${appDir.path}/${DateTime.now().millisecondsSinceEpoch}.mp4';
+                                    if (kIsWeb) {
+                                      finalPath = video.path;
+                                      finalFile = video;
+                                    } else {
+                                      final File tmpFile = File(video.path);
 
-                                    // Copy the tmp file to the new mp4
-                                    await tmpFile.copy(mp4Path);
+                                      final Directory appDir =
+                                          await getApplicationDocumentsDirectory();
+                                      finalPath =
+                                          '${appDir.path}/${DateTime.now().millisecondsSinceEpoch}.mp4';
 
-                                    // Attempt to save the video
-                                    await saveToGallery(mp4Path, false);
+                                      await tmpFile.copy(finalPath);
+                                      finalFile = XFile(finalPath);
+                                    }
+
+                                    await saveToGallery(finalPath, false);
 
                                     // Attempt to share the video (config based)
                                     if (autoShareMedia && context.mounted) {
@@ -579,7 +585,7 @@ class _HomeScreenState extends State<HomeScreen>
                                             linkBase: linkType.base,
                                             nullable: true,
                                           ),
-                                          files: <XFile>[XFile(mp4Path)],
+                                          files: <XFile>[finalFile],
                                           sharePositionOrigin:
                                               box!.localToGlobal(Offset.zero) & box.size,
                                         ),
