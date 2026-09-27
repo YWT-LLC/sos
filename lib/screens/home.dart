@@ -450,11 +450,13 @@ class _HomeScreenState extends State<HomeScreen>
 
                                     await SharePlus.instance.share(
                                       ShareParams(
-                                        text: await getCoordinates(
-                                          l10n(config),
-                                          linkBase: linkType.base,
-                                          nullable: true,
-                                        ),
+                                        text: kIsWeb
+                                            ? null
+                                            : await getCoordinates(
+                                                l10n(config),
+                                                linkBase: linkType.base,
+                                                nullable: true,
+                                              ),
                                         files: <XFile>[image],
                                         sharePositionOrigin:
                                             box!.localToGlobal(Offset.zero) & box.size,
@@ -580,11 +582,13 @@ class _HomeScreenState extends State<HomeScreen>
 
                                       await SharePlus.instance.share(
                                         ShareParams(
-                                          text: await getCoordinates(
-                                            l10n(config),
-                                            linkBase: linkType.base,
-                                            nullable: true,
-                                          ),
+                                          text: kIsWeb
+                                              ? null
+                                              : await getCoordinates(
+                                                  l10n(config),
+                                                  linkBase: linkType.base,
+                                                  nullable: true,
+                                                ),
                                           files: <XFile>[finalFile],
                                           sharePositionOrigin:
                                               box!.localToGlobal(Offset.zero) & box.size,
