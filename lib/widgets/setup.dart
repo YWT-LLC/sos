@@ -9,6 +9,7 @@ import 'dart:async';
 import 'package:gal/gal.dart';
 import 'package:open_ui/open_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_contacts/flutter_contacts.dart' as fc;
 import 'package:permission_handler/permission_handler.dart';
@@ -83,7 +84,7 @@ class _CameraSetupState extends State<CameraSetup> {
 
   Future<void> backgroundCheck() async {
     camStatus = await Permission.camera.status;
-    galStatus = await Gal.hasAccess();
+    galStatus = kIsWeb ? true : await Gal.hasAccess();
     micStatus = await Permission.microphone.status;
 
     if (mounted) setState(() {});
