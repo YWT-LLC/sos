@@ -11,6 +11,7 @@ import 'package:gal/gal.dart';
 import 'package:open_ui/open_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_contacts/flutter_contacts.dart' as c;
 import 'package:permission_handler/permission_handler.dart';
@@ -232,7 +233,10 @@ Future<void> appSetupModal(EzCP config, BuildContext context) async {
 
           // Have it your way
           Text(
-            showTutorial ? l10n(config).hsAppIntro : l10n(config).hsAppIntroAlt,
+            // TODO: l10n
+            kIsWeb
+                ? 'On web, this is just a KYR camera.\nYou will need to install the InstaSOS app to use the emergency features.'
+                : (showTutorial ? l10n(config).hsAppIntro : l10n(config).hsAppIntroAlt),
             style: config.bodyStyle,
             textAlign: TextAlign.center,
           ),
@@ -248,19 +252,20 @@ Future<void> appSetupModal(EzCP config, BuildContext context) async {
           ),
           config.spacer,
 
-          SOSSetup(
-            config,
-            locked: locked,
-            setLock: (bool active) => setModal(() => locked = active),
-          ),
-          config.spacer,
-
-          LocationSetup(
-            config,
-            locked: locked,
-            setLock: (bool active) => setModal(() => locked = active),
-          ),
-          config.spacer,
+          if (!kIsWeb) ...<Widget>[
+            SOSSetup(
+              config,
+              locked: locked,
+              setLock: (bool active) => setModal(() => locked = active),
+            ),
+            config.spacer,
+            LocationSetup(
+              config,
+              locked: locked,
+              setLock: (bool active) => setModal(() => locked = active),
+            ),
+            config.spacer,
+          ],
 
           // Finish/leave
           EzTextIconButton(

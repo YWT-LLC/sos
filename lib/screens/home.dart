@@ -10,14 +10,16 @@ import '../widgets/export.dart';
 import 'dart:io';
 import 'dart:async';
 import 'package:camera/camera.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:after_layout/after_layout.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:open_ui/open_ui.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -303,12 +305,16 @@ class _HomeScreenState extends State<HomeScreen>
                       left: 0,
                       right: 0,
                       title: EzIcon(config, Icons.arrow_upward, color: config.colors.onSurface),
-                      content: isIOS
-                          ? l10n(config).hsBroadcastTutorial
-                          : '${l10n(config).hsBroadcastTutorial}\n\n${l10n(config).hsBroadcastTutorialAndroid}',
-                      contentSemantics: isIOS
-                          ? l10n(config).hsBroadcastTutorialFix
-                          : '${l10n(config).hsBroadcastTutorialFix}\n\n${l10n(config).hsBroadcastTutorialAndroid}',
+                      content: kIsWeb // TODO: l10n
+                          ? 'Emergency functionality is unavailable on web.\nUse the SOS button to download the InstaSOS app.'
+                          : (isIOS
+                              ? l10n(config).hsBroadcastTutorial
+                              : '${l10n(config).hsBroadcastTutorial}\n\n${l10n(config).hsBroadcastTutorialAndroid}'),
+                      contentSemantics: kIsWeb
+                          ? null
+                          : (isIOS
+                              ? l10n(config).hsBroadcastTutorialFix
+                              : '${l10n(config).hsBroadcastTutorialFix}\n\n${l10n(config).hsBroadcastTutorialAndroid}'),
                       acceptMessage: '1/4\t>>',
                       acceptSemantics: l10n(config).hsOneOfFour,
                       onAccept: () {
@@ -330,7 +336,12 @@ class _HomeScreenState extends State<HomeScreen>
                             icon: const Icon(Icons.sos),
                             tooltip: l10n(config).hsStartSOS,
                             iconSize: config.iconSize * 1.5,
-                            onPressed: () => startForegroundSOS(config),
+                            onPressed: () => kIsWeb
+                                ? launchUrl(Uri.parse((EzCM.platform == TargetPlatform.iOS ||
+                                        EzCM.platform == TargetPlatform.macOS)
+                                    ? 'https://apps.apple.com/us/app/instasos/id6744280817'
+                                    : 'https://play.google.com/store/apps/details?id=llc.ywt.sos'))
+                                : startForegroundSOS(config),
                           ),
                   ),
                 ),
@@ -478,7 +489,7 @@ class _HomeScreenState extends State<HomeScreen>
                             Icons.arrow_downward,
                             color: config.colors.onSurface,
                           ),
-                          content: isIOS
+                          content: (kIsWeb || isIOS)
                               ? l10n(config).hsIOSVideoTutorial
                               : l10n(config).hsVideoTutorial,
                           acceptMessage: '3/4\t>>',
@@ -494,11 +505,13 @@ class _HomeScreenState extends State<HomeScreen>
                                   l10n(config).hsTutorialComplete,
                                   textAlign: TextAlign.center,
                                 ),
-                                content: Text(
-                                  l10n(config).hsAddEMC,
-                                  style: config.bodyStyle,
-                                  textAlign: TextAlign.center,
-                                ),
+                                content: kIsWeb
+                                    ? null
+                                    : Text(
+                                        l10n(config).hsAddEMC,
+                                        style: config.bodyStyle,
+                                        textAlign: TextAlign.center,
+                                      ),
                               ),
                             );
                             await EzCM.setBool(showTutorialKey, false);
