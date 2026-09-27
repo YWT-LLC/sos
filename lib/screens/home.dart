@@ -348,7 +348,7 @@ class _HomeScreenState extends State<HomeScreen>
               ),
 
               // Settings
-              // TODO: remove the first one on web
+              // TODO: remove the first one on web (l10n)
               Positioned(
                 top: config.marginVal,
                 right: config.isLefty ? null : config.marginVal,
