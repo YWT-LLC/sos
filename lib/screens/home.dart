@@ -340,7 +340,7 @@ class _HomeScreenState extends State<HomeScreen>
                                 ? launchUrl(Uri.parse((EzCM.platform == TargetPlatform.iOS ||
                                         EzCM.platform == TargetPlatform.macOS)
                                     ? 'https://apps.apple.com/us/app/instasos/id6744280817'
-                                    : 'https://play.google.com/store/apps/details?id=llc.ywt.sos'))
+                                    : 'https://play.google.com/store/apps/details?id=net.empathetech.sos'))
                                 : startForegroundSOS(config),
                           ),
                   ),
@@ -348,6 +348,7 @@ class _HomeScreenState extends State<HomeScreen>
               ),
 
               // Settings
+              // TODO: remove the first one on web
               Positioned(
                 top: config.marginVal,
                 right: config.isLefty ? null : config.marginVal,
