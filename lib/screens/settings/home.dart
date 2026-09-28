@@ -75,18 +75,18 @@ class SettingsHomeScreen extends StatelessWidget {
                 ),
                 config.separator,
 
-                // Auto-share media
-                EzSwitchPair(
-                  config,
-                  text: l10n(config).ssAutoShare,
-                  valueKey: autoShareMediaKey,
-                ),
-
-                // GoTo SOS
                 ...kIsWeb
-                    ? <Widget>[config.spacer]
+                    ? <Widget>[]
                     : <Widget>[
+                        // Auto-share media
+                        EzSwitchPair(
+                          config,
+                          text: l10n(config).ssAutoShare,
+                          valueKey: autoShareMediaKey,
+                        ),
                         config.separator,
+
+                        // GoTo SOS
                         EzElevatedIconButton(
                           config,
                           onPressed: () => context.goNamed(sosSettingsPath),
@@ -103,7 +103,7 @@ class SettingsHomeScreen extends StatelessWidget {
                   icon: EzIcon(config, Icons.navigate_next),
                   label: l10n(config).ssAppearance,
                 ),
-                config.divider,
+                kIsWeb ? config.spacer : config.divider,
 
                 // Permissions
                 EzElevatedIconButton(

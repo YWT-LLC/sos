@@ -18,7 +18,6 @@ import 'package:go_router/go_router.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -441,30 +440,25 @@ class _HomeScreenState extends State<HomeScreen>
                               tooltip: l10n(config).hsCameraHint,
                               onPressed: () async {
                                 try {
-                                  // Take a picture
                                   final XFile image = await camera!.takePicture();
-
-                                  // Attempt to save the image
                                   await saveToGallery(image.path, true);
 
                                   // Attempt to share (config based)
                                   if (autoShareMedia && context.mounted) {
                                     final RenderBox? box = context.findRenderObject() as RenderBox?;
 
-                                    await SharePlus.instance.share(
-                                      ShareParams(
-                                        text: kIsWeb
-                                            ? null
-                                            : await getCoordinates(
-                                                l10n(config),
-                                                linkBase: linkType.base,
-                                                nullable: true,
-                                              ),
-                                        files: <XFile>[image],
-                                        sharePositionOrigin:
-                                            box!.localToGlobal(Offset.zero) & box.size,
-                                      ),
-                                    );
+                                    await SharePlus.instance.share(ShareParams(
+                                      text: kIsWeb
+                                          ? null
+                                          : await getCoordinates(
+                                              l10n(config),
+                                              linkBase: linkType.base,
+                                              nullable: true,
+                                            ),
+                                      files: <XFile>[image],
+                                      sharePositionOrigin:
+                                          box!.localToGlobal(Offset.zero) & box.size,
+                                    ));
                                   }
                                 } catch (e) {
                                   (context.mounted)
@@ -535,7 +529,8 @@ class _HomeScreenState extends State<HomeScreen>
                                 tooltip: l10n(config).hsEndRecord,
                                 iconSize: config.iconSize * 2,
                                 onPressed: () async {
-                                  late final XFile? video;
+                                  late final XFile video;
+                                  bool fileSuccess = true;
 
                                   // Stop recording
                                   try {
@@ -548,35 +543,16 @@ class _HomeScreenState extends State<HomeScreen>
                                             message: e.toString(),
                                           )
                                         : ezLog(e.toString());
+                                    fileSuccess = false;
+                                  } finally {
+                                    stopwatch.stop();
+                                    stopwatch.reset();
+                                    if (mounted) setState(() => recording = false);
                                   }
-                                  stopwatch.stop();
-
-                                  // Update the UI
-                                  if (mounted) setState(() => recording = false);
-                                  stopwatch.reset();
-
-                                  if (video == null) return;
+                                  if (!fileSuccess) return;
 
                                   try {
-                                    late String finalPath;
-                                    late XFile finalFile;
-
-                                    if (kIsWeb) {
-                                      finalPath = video.path;
-                                      finalFile = video;
-                                    } else {
-                                      final File tmpFile = File(video.path);
-
-                                      final Directory appDir =
-                                          await getApplicationDocumentsDirectory();
-                                      finalPath =
-                                          '${appDir.path}/${DateTime.now().millisecondsSinceEpoch}.mp4';
-
-                                      await tmpFile.copy(finalPath);
-                                      finalFile = XFile(finalPath);
-                                    }
-
-                                    await saveToGallery(finalPath, false);
+                                    await saveToGallery(video.path, false);
 
                                     // Attempt to share the video (config based)
                                     if (autoShareMedia && context.mounted) {
@@ -592,7 +568,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                   linkBase: linkType.base,
                                                   nullable: true,
                                                 ),
-                                          files: <XFile>[finalFile],
+                                          files: <XFile>[video],
                                           sharePositionOrigin:
                                               box!.localToGlobal(Offset.zero) & box.size,
                                         ),
@@ -711,6 +687,16 @@ class _HomeScreenState extends State<HomeScreen>
         break; // Do nothing
 
       case AppLifecycleState.hidden:
+        if (kIsWeb) {
+          if (recording) {
+            stopwatch.stop();
+            stopwatch.reset();
+            if (mounted) setState(() => recording = false);
+          }
+
+          return;
+        }
+
         final EzCP config = configWatcher(context);
 
         final bool alreadyRunning = EzCM.get(taskRunningKey);
@@ -726,20 +712,7 @@ class _HomeScreenState extends State<HomeScreen>
           // Attempt to save the partial recording
           try {
             final XFile video = await camera!.stopVideoRecording();
-
-            // Videos are saved as tmp files
-            // We need to fix that before proceeding
-            final File tmpFile = File(video.path);
-
-            // Create a unique mp4 file path
-            final Directory appDir = await getApplicationDocumentsDirectory();
-            final String mp4Path = '${appDir.path}/${DateTime.now().millisecondsSinceEpoch}.mp4';
-
-            // Copy the tmp file to the new mp4
-            await tmpFile.copy(mp4Path);
-
-            // Attempt to save the video
-            await saveToGallery(mp4Path, false);
+            await saveToGallery(video.path, false);
           } catch (e) {
             // The app is unfocussed, so we can't do anything
             ezLog('Error saving the partial recording');

@@ -8,7 +8,6 @@ import '../widgets/export.dart';
 
 import 'dart:async';
 import 'package:gal/gal.dart';
-import 'package:web/web.dart' as web;
 import 'package:open_ui/open_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,22 +21,7 @@ import 'package:permission_handler/permission_handler.dart';
 /// Save the file at [path] to the gallery
 /// Includes error handling
 Future<void> saveToGallery(String path, bool image) async {
-  if (kIsWeb) {
-    try {
-      final web.HTMLAnchorElement anchor = web.HTMLAnchorElement()
-        ..href = path
-        ..download = 'instasos_${DateTime.now().millisecondsSinceEpoch}.${image ? 'jpg' : 'mp4'}';
-
-      web.document.body?.append(anchor);
-      anchor.click();
-      anchor.remove();
-    } catch (e) {
-      ezLog('Error downloading file on web');
-      ezLog(e.toString());
-    }
-
-    return;
-  }
+  if (kIsWeb) return;
 
   final bool galAccess = await Gal.requestAccess();
   if (!galAccess) return;
