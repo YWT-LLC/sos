@@ -5,6 +5,7 @@
 
 import '../../utils/export.dart';
 import '../../widgets/export.dart';
+import 'package:ywt_private/ywt_private.dart' as ywt;
 
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -212,7 +213,7 @@ class _SOSSettingsScreenState extends State<SOSSettingsScreen> with WidgetsBindi
                     canChange: (bool choice) => canSet(sosOnInterruptKey, choice),
                   ),
                 ],
-                EzFooter(config),
+                EzFooter(config, a11howPath: ywt.sosContributeA11),
               ],
             ),
           ),

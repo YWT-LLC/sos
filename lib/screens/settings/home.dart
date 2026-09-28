@@ -11,6 +11,7 @@ import 'package:ywt_private/ywt_private.dart' as ywt;
 import 'package:open_ui/open_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -74,18 +75,26 @@ class SettingsHomeScreen extends StatelessWidget {
                 ),
                 config.separator,
 
-                // Auto-share media
-                EzSwitchPair(config, text: l10n(config).ssAutoShare, valueKey: autoShareMediaKey),
-                config.separator,
+                ...kIsWeb
+                    ? <Widget>[]
+                    : <Widget>[
+                        // Auto-share media
+                        EzSwitchPair(
+                          config,
+                          text: l10n(config).ssAutoShare,
+                          valueKey: autoShareMediaKey,
+                        ),
+                        config.separator,
 
-                // GoTo SOS
-                EzElevatedIconButton(
-                  config,
-                  onPressed: () => context.goNamed(sosSettingsPath),
-                  icon: EzIcon(config, Icons.navigate_next),
-                  label: l10n(config).ssSOS,
-                ),
-                config.spacer,
+                        // GoTo SOS
+                        EzElevatedIconButton(
+                          config,
+                          onPressed: () => context.goNamed(sosSettingsPath),
+                          icon: EzIcon(config, Icons.navigate_next),
+                          label: l10n(config).ssSOS,
+                        ),
+                        config.spacer,
+                      ],
 
                 // GoTo Appearance
                 EzElevatedIconButton(
@@ -94,7 +103,7 @@ class SettingsHomeScreen extends StatelessWidget {
                   icon: EzIcon(config, Icons.navigate_next),
                   label: l10n(config).ssAppearance,
                 ),
-                config.divider,
+                kIsWeb ? config.spacer : config.divider,
 
                 // Permissions
                 EzElevatedIconButton(
@@ -151,19 +160,20 @@ class SettingsHomeScreen extends StatelessWidget {
                             ),
                             config.spacer,
 
-                            SOSSetup(
-                              config,
-                              locked: locked,
-                              setLock: (bool active) => setModal(() => locked = active),
-                            ),
-                            config.spacer,
-
-                            LocationSetup(
-                              config,
-                              locked: locked,
-                              setLock: (bool active) => setModal(() => locked = active),
-                            ),
-                            config.spacer,
+                            if (!kIsWeb) ...<Widget>[
+                              SOSSetup(
+                                config,
+                                locked: locked,
+                                setLock: (bool active) => setModal(() => locked = active),
+                              ),
+                              config.spacer,
+                              LocationSetup(
+                                config,
+                                locked: locked,
+                                setLock: (bool active) => setModal(() => locked = active),
+                              ),
+                              config.spacer,
+                            ],
 
                             // Finish/leave
                             EzTextIconButton(
@@ -433,7 +443,7 @@ class SettingsHomeScreen extends StatelessWidget {
                           ),
 
                           // Android section //
-                          if (!isIOS) ...<Widget>[
+                          if (!kIsWeb && !isIOS) ...<Widget>[
                             // Settings explanation
                             ExpansionTile(
                               title: Text(
@@ -568,7 +578,7 @@ class SettingsHomeScreen extends StatelessWidget {
                           ],
 
                           // iOS section //
-                          if (isIOS) ...<Widget>[
+                          if (!kIsWeb && isIOS) ...<Widget>[
                             // Settings explanation
                             ExpansionTile(
                               title: Text(
@@ -734,12 +744,10 @@ class SettingsHomeScreen extends StatelessWidget {
                                   EzInlineLink(
                                     config,
                                     text: l10n(config).faqContributing,
-                                    onTap: () => followLink(
-                                      config,
-                                      url: ywt.ywtContributePage,
-                                      parentContext: context,
-                                      modalContext: mCon,
-                                    ),
+                                    url: Uri.parse(
+                                        '${ywt.a11howLive}?${Uri(queryParameters: <String, String>{
+                                          'project': ywt.sosContributeA11
+                                        }).query}'),
                                     hint: config.ezL10n.gOpenLink,
                                   ),
                                   EzPlainText(text: l10n(config).faqExpand, style: answer),
@@ -796,7 +804,7 @@ class SettingsHomeScreen extends StatelessWidget {
                   icon: EzIcon(config, Icons.help_outline),
                   label: l10n(config).ssSupport,
                 ),
-                EzFooter(config),
+                EzFooter(config, a11howPath: ywt.sosContributeA11),
               ],
             ),
           ),

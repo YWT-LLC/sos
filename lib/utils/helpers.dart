@@ -6,10 +6,12 @@
 import './export.dart';
 import '../widgets/export.dart';
 
+import 'dart:async';
 import 'package:gal/gal.dart';
 import 'package:open_ui/open_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_contacts/flutter_contacts.dart' as c;
 import 'package:permission_handler/permission_handler.dart';
@@ -19,14 +21,14 @@ import 'package:permission_handler/permission_handler.dart';
 /// Save the file at [path] to the gallery
 /// Includes error handling
 Future<void> saveToGallery(String path, bool image) async {
+  if (kIsWeb) return;
+
   final bool galAccess = await Gal.requestAccess();
   if (!galAccess) return;
 
   try {
     image ? await Gal.putImage(path) : await Gal.putVideo(path);
   } catch (e) {
-    // If this fails, it's likely the user has bigger problems at hand
-    // We can still try to share the file without saving it to the gallery
     ezLog('Error saving to gallery');
     ezLog(e.toString());
   }
@@ -231,7 +233,9 @@ Future<void> appSetupModal(EzCP config, BuildContext context) async {
 
           // Have it your way
           Text(
-            showTutorial ? l10n(config).hsAppIntro : l10n(config).hsAppIntroAlt,
+            kIsWeb
+                ? l10n(config).hsWebIntro
+                : (showTutorial ? l10n(config).hsAppIntro : l10n(config).hsAppIntroAlt),
             style: config.bodyStyle,
             textAlign: TextAlign.center,
           ),
@@ -247,19 +251,20 @@ Future<void> appSetupModal(EzCP config, BuildContext context) async {
           ),
           config.spacer,
 
-          SOSSetup(
-            config,
-            locked: locked,
-            setLock: (bool active) => setModal(() => locked = active),
-          ),
-          config.spacer,
-
-          LocationSetup(
-            config,
-            locked: locked,
-            setLock: (bool active) => setModal(() => locked = active),
-          ),
-          config.spacer,
+          if (!kIsWeb) ...<Widget>[
+            SOSSetup(
+              config,
+              locked: locked,
+              setLock: (bool active) => setModal(() => locked = active),
+            ),
+            config.spacer,
+            LocationSetup(
+              config,
+              locked: locked,
+              setLock: (bool active) => setModal(() => locked = active),
+            ),
+            config.spacer,
+          ],
 
           // Finish/leave
           EzTextIconButton(
@@ -325,7 +330,7 @@ Future<void> stopBackgroundSOS(EzCP config, {required BuildContext context}) asy
     // The most likely error is that the task is already stopped
     // But there could be scenarios where taskRunningKey should remain true
     context.mounted
-        ? await ezLogAlert(config, context: context, message: e.toString())
+        ? ezLogAlert(config, context: context, message: e.toString())
         : ezLog(e.toString());
   }
   await EzCM.setBool(taskRunningKey, false);

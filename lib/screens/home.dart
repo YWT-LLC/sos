@@ -6,18 +6,20 @@
 import '../screens/export.dart';
 import '../utils/export.dart';
 import '../widgets/export.dart';
+import 'package:ywt_private/ywt_private.dart' as ywt;
 
 import 'dart:io';
 import 'dart:async';
 import 'package:camera/camera.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:after_layout/after_layout.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:open_ui/open_ui.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -63,9 +65,9 @@ class _HomeScreenState extends State<HomeScreen>
     if (!(await Permission.camera.isGranted)) return false;
 
     final List<CameraDescription> cameras = await availableCameras();
-    cameraDesc = cameras.firstWhere(
-      (CameraDescription c) => c.lensDirection == CameraLensDirection.back,
-    );
+    cameraDesc = cameras
+        .where((CameraDescription c) => c.lensDirection == CameraLensDirection.back)
+        .firstOrNull;
     if (cameraDesc == null) return false;
 
     try {
@@ -76,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen>
       final String message = e.toString();
 
       if (e is! CameraException || e.code != 'CameraAccessDenied') {
-        (mounted) ? await ezLogAlert(config, context: context, message: message) : ezLog(message);
+        (mounted) ? ezLogAlert(config, context: context, message: message) : ezLog(message);
       } else {
         ezLog('CameraException from initCamera.../n$message');
       }
@@ -88,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen>
     // Check permissions
     if (!isIOS && deniedPermCheck(await Permission.sms.status)) {
       mounted
-          ? await ezLogAlert(
+          ? ezLogAlert(
               config,
               context: context,
               message: l10n(config).sosNeedSMS,
@@ -303,12 +305,16 @@ class _HomeScreenState extends State<HomeScreen>
                       left: 0,
                       right: 0,
                       title: EzIcon(config, Icons.arrow_upward, color: config.colors.onSurface),
-                      content: isIOS
-                          ? l10n(config).hsBroadcastTutorial
-                          : '${l10n(config).hsBroadcastTutorial}\n\n${l10n(config).hsBroadcastTutorialAndroid}',
-                      contentSemantics: isIOS
-                          ? l10n(config).hsBroadcastTutorialFix
-                          : '${l10n(config).hsBroadcastTutorialFix}\n\n${l10n(config).hsBroadcastTutorialAndroid}',
+                      content: kIsWeb
+                          ? l10n(config).hsNoWebSOS
+                          : (isIOS
+                              ? l10n(config).hsBroadcastTutorial
+                              : '${l10n(config).hsBroadcastTutorial}\n\n${l10n(config).hsBroadcastTutorialAndroid}'),
+                      contentSemantics: kIsWeb
+                          ? null
+                          : (isIOS
+                              ? l10n(config).hsBroadcastTutorialFix
+                              : '${l10n(config).hsBroadcastTutorialFix}\n\n${l10n(config).hsBroadcastTutorialAndroid}'),
                       acceptMessage: '1/4\t>>',
                       acceptSemantics: l10n(config).hsOneOfFour,
                       onAccept: () {
@@ -330,7 +336,12 @@ class _HomeScreenState extends State<HomeScreen>
                             icon: const Icon(Icons.sos),
                             tooltip: l10n(config).hsStartSOS,
                             iconSize: config.iconSize * 1.5,
-                            onPressed: () => startForegroundSOS(config),
+                            onPressed: () => kIsWeb
+                                ? launchUrl(Uri.parse((EzCM.platform == TargetPlatform.iOS ||
+                                        EzCM.platform == TargetPlatform.macOS)
+                                    ? ywt.sosAppStore
+                                    : ywt.sosGPlay))
+                                : startForegroundSOS(config),
                           ),
                   ),
                 ),
@@ -354,8 +365,12 @@ class _HomeScreenState extends State<HomeScreen>
                         EzIcon(config, Icons.arrow_forward, color: config.colors.onSurface),
                       ],
                     ),
-                    content: l10n(config).hsSettingsTutorial,
-                    contentSemantics: l10n(config).hsSettingsTutorialFix,
+                    content: kIsWeb
+                        ? l10n(config).hsSettingsTutorialWeb
+                        : l10n(config).hsSettingsTutorial,
+                    contentSemantics: kIsWeb
+                        ? l10n(config).hsSettingsTutorialWebFix
+                        : l10n(config).hsSettingsTutorialFix,
                     acceptMessage: '2/4\t>>',
                     acceptSemantics: l10n(config).hsTwoOfFour,
                     onAccept: () {
@@ -426,32 +441,29 @@ class _HomeScreenState extends State<HomeScreen>
                               tooltip: l10n(config).hsCameraHint,
                               onPressed: () async {
                                 try {
-                                  // Take a picture
                                   final XFile image = await camera!.takePicture();
-
-                                  // Attempt to save the image
                                   await saveToGallery(image.path, true);
 
                                   // Attempt to share (config based)
                                   if (autoShareMedia && context.mounted) {
                                     final RenderBox? box = context.findRenderObject() as RenderBox?;
 
-                                    await SharePlus.instance.share(
-                                      ShareParams(
-                                        text: await getCoordinates(
-                                          l10n(config),
-                                          linkBase: linkType.base,
-                                          nullable: true,
-                                        ),
-                                        files: <XFile>[image],
-                                        sharePositionOrigin:
-                                            box!.localToGlobal(Offset.zero) & box.size,
-                                      ),
-                                    );
+                                    await SharePlus.instance.share(ShareParams(
+                                      text: kIsWeb
+                                          ? null
+                                          : await getCoordinates(
+                                              l10n(config),
+                                              linkBase: linkType.base,
+                                              nullable: true,
+                                            ),
+                                      files: <XFile>[image],
+                                      sharePositionOrigin:
+                                          box!.localToGlobal(Offset.zero) & box.size,
+                                    ));
                                   }
                                 } catch (e) {
                                   (context.mounted)
-                                      ? await ezLogAlert(
+                                      ? ezLogAlert(
                                           config,
                                           context: context,
                                           message: e.toString(),
@@ -478,7 +490,7 @@ class _HomeScreenState extends State<HomeScreen>
                             Icons.arrow_downward,
                             color: config.colors.onSurface,
                           ),
-                          content: isIOS
+                          content: (kIsWeb || isIOS)
                               ? l10n(config).hsIOSVideoTutorial
                               : l10n(config).hsVideoTutorial,
                           acceptMessage: '3/4\t>>',
@@ -494,11 +506,13 @@ class _HomeScreenState extends State<HomeScreen>
                                   l10n(config).hsTutorialComplete,
                                   textAlign: TextAlign.center,
                                 ),
-                                content: Text(
-                                  l10n(config).hsAddEMC,
-                                  style: config.bodyStyle,
-                                  textAlign: TextAlign.center,
-                                ),
+                                content: kIsWeb
+                                    ? null
+                                    : Text(
+                                        l10n(config).hsAddEMC,
+                                        style: config.bodyStyle,
+                                        textAlign: TextAlign.center,
+                                      ),
                               ),
                             );
                             await EzCM.setBool(showTutorialKey, false);
@@ -516,42 +530,30 @@ class _HomeScreenState extends State<HomeScreen>
                                 tooltip: l10n(config).hsEndRecord,
                                 iconSize: config.iconSize * 2,
                                 onPressed: () async {
-                                  late final XFile? video;
+                                  late final XFile video;
+                                  bool fileSuccess = true;
+
+                                  // Stop recording
                                   try {
-                                    // Stop recording
                                     video = await camera!.stopVideoRecording();
                                   } catch (e) {
                                     (context.mounted)
-                                        ? await ezLogAlert(
+                                        ? ezLogAlert(
                                             config,
                                             context: context,
                                             message: e.toString(),
                                           )
                                         : ezLog(e.toString());
+                                    fileSuccess = false;
+                                  } finally {
+                                    stopwatch.stop();
+                                    stopwatch.reset();
+                                    if (mounted) setState(() => recording = false);
                                   }
-                                  stopwatch.stop();
+                                  if (!fileSuccess) return;
 
-                                  // Update the UI
-                                  if (mounted) setState(() => recording = false);
-                                  stopwatch.reset();
-
-                                  if (video == null) return;
                                   try {
-                                    // Videos are saved as tmp files
-                                    // We need to fix that before proceeding
-                                    final File tmpFile = File(video.path);
-
-                                    // Create a unique mp4 file path
-                                    final Directory appDir =
-                                        await getApplicationDocumentsDirectory();
-                                    final String mp4Path =
-                                        '${appDir.path}/${DateTime.now().millisecondsSinceEpoch}.mp4';
-
-                                    // Copy the tmp file to the new mp4
-                                    await tmpFile.copy(mp4Path);
-
-                                    // Attempt to save the video
-                                    await saveToGallery(mp4Path, false);
+                                    await saveToGallery(video.path, false);
 
                                     // Attempt to share the video (config based)
                                     if (autoShareMedia && context.mounted) {
@@ -560,12 +562,14 @@ class _HomeScreenState extends State<HomeScreen>
 
                                       await SharePlus.instance.share(
                                         ShareParams(
-                                          text: await getCoordinates(
-                                            l10n(config),
-                                            linkBase: linkType.base,
-                                            nullable: true,
-                                          ),
-                                          files: <XFile>[XFile(mp4Path)],
+                                          text: kIsWeb
+                                              ? null
+                                              : await getCoordinates(
+                                                  l10n(config),
+                                                  linkBase: linkType.base,
+                                                  nullable: true,
+                                                ),
+                                          files: <XFile>[video],
                                           sharePositionOrigin:
                                               box!.localToGlobal(Offset.zero) & box.size,
                                         ),
@@ -573,7 +577,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     }
                                   } catch (e) {
                                     (context.mounted)
-                                        ? await ezLogAlert(
+                                        ? ezLogAlert(
                                             config,
                                             context: context,
                                             message: e.toString(),
@@ -624,7 +628,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     if (mounted) setState(() => recording = true);
                                   } catch (e) {
                                     (context.mounted)
-                                        ? await ezLogAlert(
+                                        ? ezLogAlert(
                                             config,
                                             context: context,
                                             message: e.toString(),
@@ -684,6 +688,16 @@ class _HomeScreenState extends State<HomeScreen>
         break; // Do nothing
 
       case AppLifecycleState.hidden:
+        if (kIsWeb) {
+          if (recording) {
+            stopwatch.stop();
+            stopwatch.reset();
+            if (mounted) setState(() => recording = false);
+          }
+
+          return;
+        }
+
         final EzCP config = configWatcher(context);
 
         final bool alreadyRunning = EzCM.get(taskRunningKey);
@@ -699,20 +713,7 @@ class _HomeScreenState extends State<HomeScreen>
           // Attempt to save the partial recording
           try {
             final XFile video = await camera!.stopVideoRecording();
-
-            // Videos are saved as tmp files
-            // We need to fix that before proceeding
-            final File tmpFile = File(video.path);
-
-            // Create a unique mp4 file path
-            final Directory appDir = await getApplicationDocumentsDirectory();
-            final String mp4Path = '${appDir.path}/${DateTime.now().millisecondsSinceEpoch}.mp4';
-
-            // Copy the tmp file to the new mp4
-            await tmpFile.copy(mp4Path);
-
-            // Attempt to save the video
-            await saveToGallery(mp4Path, false);
+            await saveToGallery(video.path, false);
           } catch (e) {
             // The app is unfocussed, so we can't do anything
             ezLog('Error saving the partial recording');
@@ -743,7 +744,7 @@ class _HomeScreenState extends State<HomeScreen>
           } catch (e) {
             if (e is! CameraException || e.code != 'CameraAccessDenied') {
               mounted
-                  ? await ezLogAlert(config, context: context, message: e.toString())
+                  ? ezLogAlert(config, context: context, message: e.toString())
                   : ezLog(e.toString());
             }
           }

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.0] - 2026-09-27
+### Updated
+- EFUI
+  - a11how integration
+- Web compatibility
+  - ywt.llc/sos
+
 ## [3.0.3] - 2026-08-29
 ### Updated
 - EFUI
