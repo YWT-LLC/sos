@@ -6,6 +6,7 @@
 import '../screens/export.dart';
 import '../utils/export.dart';
 import '../widgets/export.dart';
+import 'package:ywt_private/ywt_private.dart' as ywt;
 
 import 'dart:io';
 import 'dart:async';
@@ -338,8 +339,8 @@ class _HomeScreenState extends State<HomeScreen>
                             onPressed: () => kIsWeb
                                 ? launchUrl(Uri.parse((EzCM.platform == TargetPlatform.iOS ||
                                         EzCM.platform == TargetPlatform.macOS)
-                                    ? 'https://apps.apple.com/us/app/instasos/id6744280817'
-                                    : 'https://play.google.com/store/apps/details?id=net.empathetech.sos'))
+                                    ? ywt.sosAppStore
+                                    : ywt.sosGPlay))
                                 : startForegroundSOS(config),
                           ),
                   ),
