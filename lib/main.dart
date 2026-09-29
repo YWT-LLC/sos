@@ -27,7 +27,9 @@ void main() async {
     localeFallback: americanEnglish,
     l10nFallback: await OUILang.delegate.load(americanEnglish),
     preferences: await SharedPreferencesWithCache.create(
-      cacheOptions: SharedPreferencesWithCacheOptions(allowList: allSOSKeys.keys.toSet()),
+      cacheOptions: SharedPreferencesWithCacheOptions(
+        allowList: allSOSKeys.keys.toSet(),
+      ),
     ),
     defaults: sosConfig,
     neverReset: neverResetKeys,
