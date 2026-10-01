@@ -31,7 +31,7 @@ class SosScaffold extends StatelessWidget {
               github: ywt.sosReleases,
             ),
             if (fabs != null) ...fabs!,
-            ...config.backFABs(isHome),
+            ...config.backFABs(isHome: isHome),
           ],
         ),
       );
