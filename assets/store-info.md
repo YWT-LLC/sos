@@ -5,8 +5,7 @@ Emergency, Safety, KYR, Accessibility, Open Source
 - Sometimes the Play Console doesn't re-validate on copy/paste, so everything has a trailing space
   - Paste + backspace = happy form
 
-
-
+____  ____  ____
 # ar
 ## Promotional text
 كاميرا، ومنارة SOS، وقائمة بحقوقك، كل ذلك في مكان واحد.
@@ -20,8 +19,7 @@ Emergency, Safety, KYR, Accessibility, Open Source
 
 ابقَ آمنًا في الخارج.
 
-
-
+____
 # de
 ## Promotional text
 Eine Kamera, ein SOS-Notsignal und eine Liste deiner Rechte – alles an einem Ort 
@@ -35,8 +33,7 @@ InstaSOS hat keine Konten, Cookies, Werbung oder Zahlungen.
 
 Pass auf dich auf. 
 
-
-
+____
 # en
 ## Promotional text
 A camera, SOS beacon, and list of your rights all in one place. 
@@ -50,8 +47,7 @@ InstaSOS has no accounts, cookies, ads, or payments.
 
 Stay safe out there. 
 
-
-
+____
 # es
 ## Promotional text
 Una cámara, una señal de SOS y una lista con tus derechos, todo en uno. 
@@ -65,8 +61,7 @@ InstaSOS no tiene cuentas, cookies, anuncios, ni pagos.
 
 Seguridad ante todo. 
 
-
-
+____
 # fil
 ## Promotional text
 Ang camera, SOS beacon, at ang mga tala ng iyong mga karapatan ay nasa iisang lugar. 
@@ -80,8 +75,7 @@ Ang InstaSOS ay walang accounts, cookies, ads, o bayad.
 
 Manatiling ligtas. 
 
-
-
+____
 # fr
 ## Promotional text
 Une caméra, une balise SOS et la liste de vos droits, le tout au même endroit. 
@@ -95,8 +89,7 @@ InstaSOS ne propose ni comptes, ni cookies, ni publicités, ni paiements.
 
 Protégez-vous. 
 
-
-
+____
 # hi
 ## Promotional text
 एक कैमरा, SOS बीकन, और आपके अधिकारों की सूची, सब कुछ एक ही जगह पर। 
@@ -110,8 +103,7 @@ InstaSOS में कोई अकाउंट, कुकीज़, विज�
 
 सुरक्षित रहें। 
 
-
-
+____
 # ht
 ## Promotional text
 Yon kamera, yon lanp SOS, ak yon lis dwa ou yo, tout yon sèl kote. 
@@ -125,8 +117,7 @@ InstaSOS pa gen plizyè kont, cookies, anons piblisitè, oswa pèman.
 
 Rete an sekirite! 
 
-
-
+____
 # ja
 ## Promotional text
 カメラ、SOSビーコン、そしてあなたの権利リスト、すべてがこのひとつに。 
@@ -140,8 +131,7 @@ InstaSOSには、アカウント、Cookie、広告、課金は一切ありませ
 
 安全にお過ごしください。 
 
-
-
+____
 # ko
 ## Promotional text
 카메라, SOS 구조 신호, 그리고 귀하의 권리 목록을 모두 한 곳에 담았습니다. 
@@ -155,8 +145,7 @@ InstaSOS에는 계정, 쿠키, 광고 또는 결제가 없습니다.
 
 항상 안전에 유의하세요. 
 
-
-
+____
 # ru
 ## Promotional text
 Камера, SOS-маячок и список ваших прав — всё в одном месте. 
@@ -170,8 +159,7 @@ InstaSOS делится вашим статусом с экстренными к
 
 Берегите себя. 
 
-
-
+____
 # sw
 ## Promotional text
 Kamera, ishara ya SOS, na orodha ya haki zako vyote katika sehemu moja. 
@@ -185,8 +173,7 @@ InstaSOS haina akaunti, vidakuzi, matangazo, wala malipo.
 
 Kaa salama huko nje. 
 
-
-
+____
 # uk
 ## Promotional text
 Камера, SOS-маячок та перелік ваших прав — усе в одному місці. 
@@ -200,8 +187,7 @@ InstaSOS ділиться вашим статусом з екстреними к
 
 Бережіть себе. 
 
-
-
+____
 # zh
 ## Promotional text
 一款集成了相机、SOS 求救信号和权利清单的多功能工具。 
