@@ -86,6 +86,27 @@ class _HomeScreenState extends State<HomeScreen>
     }
   }
 
+  Future<void> saveNShare(EzCP config, XFile file, bool image) async {
+    await saveToGallery(file.path, image);
+
+    if (autoShareMedia && mounted) {
+      if (isIOS) {
+        final RenderBox box = context.findRenderObject() as RenderBox;
+
+        await SharePlus.instance.share(ShareParams(
+          text: kIsWeb ? null : await getCoordinates(l10n(config)),
+          files: <XFile>[file],
+          sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
+        ));
+      } else {
+        await SharePlus.instance.share(ShareParams(
+          text: kIsWeb ? null : await getCoordinates(l10n(config)),
+          files: <XFile>[file],
+        ));
+      }
+    }
+  }
+
   Future<bool> sosChecks(EzCP config) async {
     // Check permissions
     if (!isIOS && deniedPermCheck(await Permission.sms.status)) {
@@ -442,32 +463,10 @@ class _HomeScreenState extends State<HomeScreen>
                               onPressed: () async {
                                 try {
                                   final XFile image = await camera!.takePicture();
-                                  await saveToGallery(image.path, true);
-
-                                  // Attempt to share (config based)
-                                  if (autoShareMedia && context.mounted) {
-                                    final RenderBox? box = context.findRenderObject() as RenderBox?;
-
-                                    await SharePlus.instance.share(ShareParams(
-                                      text: kIsWeb
-                                          ? null
-                                          : await getCoordinates(
-                                              l10n(config),
-                                              linkBase: linkType.base,
-                                              nullable: true,
-                                            ),
-                                      files: <XFile>[image],
-                                      sharePositionOrigin:
-                                          box!.localToGlobal(Offset.zero) & box.size,
-                                    ));
-                                  }
+                                  await saveNShare(config, image, true);
                                 } catch (e) {
-                                  (context.mounted)
-                                      ? ezLogAlert(
-                                          config,
-                                          context: context,
-                                          message: e.toString(),
-                                        )
+                                  context.mounted
+                                      ? ezLogAlert(config, context: context, message: e.toString())
                                       : ezLog(e.toString());
                                 }
                               },
@@ -533,16 +532,12 @@ class _HomeScreenState extends State<HomeScreen>
                                   late final XFile video;
                                   bool fileSuccess = true;
 
-                                  // Stop recording
                                   try {
                                     video = await camera!.stopVideoRecording();
                                   } catch (e) {
                                     (context.mounted)
-                                        ? ezLogAlert(
-                                            config,
-                                            context: context,
-                                            message: e.toString(),
-                                          )
+                                        ? ezLogAlert(config,
+                                            context: context, message: e.toString())
                                         : ezLog(e.toString());
                                     fileSuccess = false;
                                   } finally {
@@ -553,35 +548,11 @@ class _HomeScreenState extends State<HomeScreen>
                                   if (!fileSuccess) return;
 
                                   try {
-                                    await saveToGallery(video.path, false);
-
-                                    // Attempt to share the video (config based)
-                                    if (autoShareMedia && context.mounted) {
-                                      final RenderBox? box =
-                                          context.findRenderObject() as RenderBox?;
-
-                                      await SharePlus.instance.share(
-                                        ShareParams(
-                                          text: kIsWeb
-                                              ? null
-                                              : await getCoordinates(
-                                                  l10n(config),
-                                                  linkBase: linkType.base,
-                                                  nullable: true,
-                                                ),
-                                          files: <XFile>[video],
-                                          sharePositionOrigin:
-                                              box!.localToGlobal(Offset.zero) & box.size,
-                                        ),
-                                      );
-                                    }
+                                    await saveNShare(config, video, false);
                                   } catch (e) {
                                     (context.mounted)
-                                        ? ezLogAlert(
-                                            config,
-                                            context: context,
-                                            message: e.toString(),
-                                          )
+                                        ? ezLogAlert(config,
+                                            context: context, message: e.toString())
                                         : ezLog(e.toString());
                                   }
                                 },
