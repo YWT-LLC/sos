@@ -347,7 +347,7 @@ Future<bool> foregroundSOS(Lang l10n) async {
       currEMC.map((String contact) => contact.split(contactSplit).last).toList();
 
   final Map<String, dynamic> mapData = <String, dynamic>{
-    'message': 'SOS\n${await getCoordinates(l10n, linkBase: linkType.base)}',
+    'message': 'SOS\n${await getCoordinates(l10n)}',
     'recipients': isIOS ? numbers : numbers.join(';'),
   };
 
@@ -363,10 +363,10 @@ Future<bool> foregroundSOS(Lang l10n) async {
 /// Gets coordinates from [Geolocator]
 /// Returns the coordinates injected into a Google Maps URL
 /// Includes error handling
-Future<String?> getCoordinates(Lang l10n, {required String linkBase, bool nullable = false}) async {
-  late final String? disabled = nullable ? null : l10n.sosDisabled;
-  late final String? denied = nullable ? null : l10n.sosDenied;
-  late final String? errored = nullable ? null : l10n.sosError;
+Future<String?> getCoordinates(Lang l10n) async {
+  late final String disabled = l10n.sosDisabled;
+  late final String denied = l10n.sosDenied;
+  late final String errored = l10n.sosError;
 
   final bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
   if (!serviceEnabled) return disabled;
@@ -385,7 +385,7 @@ Future<String?> getCoordinates(Lang l10n, {required String linkBase, bool nullab
 
   try {
     final Position pos = await Geolocator.getCurrentPosition();
-    return '$linkBase${pos.latitude.toStringAsFixed(4)},${pos.longitude.toStringAsFixed(4)}';
+    return '${linkType.base}${pos.latitude.toStringAsFixed(4)},${pos.longitude.toStringAsFixed(4)}';
   } catch (e) {
     ezLog('Error getting coordinates');
     ezLog(e.toString());
