@@ -14,11 +14,8 @@ export 'home.dart';
 
 // Route names //
 
-/// settings-home
+const String homePath = 'sos';
+
 const String settingsHomePath = 'settings-home';
-
-/// sos-settings
 const String sosSettingsPath = 'sos-settings';
-
-/// appearance-home
 const String appearanceSettingsPath = 'appearance-settings';
