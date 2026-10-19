@@ -89,7 +89,7 @@ class SettingsHomeScreen extends StatelessWidget {
                         // GoTo SOS
                         EzElevatedIconButton(
                           config,
-                          onPressed: () => context.goNamed(sosSettingsPath),
+                          onPressed: () => context.goNamed(sosSettingsScreenName),
                           icon: EzIcon(config, Icons.navigate_next),
                           label: l10n(config).ssSOS,
                         ),
@@ -99,7 +99,7 @@ class SettingsHomeScreen extends StatelessWidget {
                 // GoTo Appearance
                 EzElevatedIconButton(
                   config,
-                  onPressed: () => context.goNamed(appearanceSettingsPath),
+                  onPressed: () => context.goNamed(appearanceSettingsScreenName),
                   icon: EzIcon(config, Icons.navigate_next),
                   label: l10n(config).ssAppearance,
                 ),
@@ -692,7 +692,7 @@ class SettingsHomeScreen extends StatelessWidget {
                                       text: l10n(config).ssSOS.toLowerCase(),
                                       onTap: () {
                                         Navigator.of(mCon).pop();
-                                        context.goNamed(sosSettingsPath);
+                                        context.goNamed(sosSettingsScreenName);
                                       },
                                       hint: config.ezL10n.gOpenLink,
                                     ),

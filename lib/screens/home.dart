@@ -132,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen>
     if (emc.isEmpty) {
       if (mounted) {
         ezSnackBar(config, context: context, message: l10n(config).bsSnackRequest);
-        await context.pushNamed(sosSettingsPath);
+        await context.pushNamed(sosSettingsScreenName);
         if (mounted) setState(() {});
       }
       return false;
@@ -404,7 +404,7 @@ class _HomeScreenState extends State<HomeScreen>
                     icon: const Icon(Icons.settings),
                     tooltip: config.ezL10n.gSettings,
                     enabled: !recording,
-                    onPressed: () => context.goNamed(settingsHomePath),
+                    onPressed: () => context.goNamed(settingsHomeScreenName),
                   ),
                 ),
               ),
@@ -572,8 +572,9 @@ class _HomeScreenState extends State<HomeScreen>
                                 icon: const Icon(Icons.circle),
                                 tooltip: l10n(config).hsStartRecord,
                                 iconSize: config.iconSize * 2,
-                                onLongPress:
-                                    camera == null ? () => context.goNamed(settingsHomePath) : null,
+                                onLongPress: camera == null
+                                    ? () => context.goNamed(settingsHomeScreenName)
+                                    : null,
                                 onPressed: () async {
                                   if (camera == null) {
                                     final bool worked = await initCamera(config);
@@ -633,7 +634,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   }
                                 }
                               },
-                              onLongPress: () => context.goNamed(settingsHomePath),
+                              onLongPress: () => context.goNamed(settingsHomeScreenName),
                             )
                           : FlashButton(config, camera: camera!),
                     ],

@@ -18,29 +18,29 @@ final List<RouteBase> routes = <RouteBase>[
   // Home
   GoRoute(
     path: homePath,
-    name: homePath,
+    name: homeName,
     pageBuilder: (BuildContext pbc, GoRouterState pbs) =>
         ezPageBuilder(configWatcher(pbc), pbc, pbs, const HomeScreen()),
     routes: <RouteBase>[
       // Settings home
       GoRoute(
-        path: settingsHomePath,
-        name: settingsHomePath,
+        path: settingsHomeScreenPath,
+        name: settingsHomeScreenName,
         pageBuilder: (BuildContext pbc, GoRouterState pbs) =>
             ezPageBuilder(configWatcher(pbc), pbc, pbs, const SettingsHomeScreen()),
         routes: <RouteBase>[
           // SOS settings
           GoRoute(
-            path: sosSettingsPath,
-            name: sosSettingsPath,
+            path: sosSettingsScreenPath,
+            name: sosSettingsScreenName,
             pageBuilder: (BuildContext pbc, GoRouterState pbs) =>
                 ezPageBuilder(configWatcher(pbc), pbc, pbs, const SOSSettingsScreen()),
           ),
 
           // Appearance settings
           GoRoute(
-            path: appearanceSettingsPath,
-            name: appearanceSettingsPath,
+            path: appearanceSettingsScreenPath,
+            name: appearanceSettingsScreenName,
             pageBuilder: (BuildContext pbc, GoRouterState pbs) =>
                 ezPageBuilder(configWatcher(pbc), pbc, pbs, const AppearanceSettingsScreen()),
           ),
