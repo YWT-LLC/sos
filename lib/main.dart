@@ -15,36 +15,27 @@ import 'package:shared_preferences/shared_preferences.dart';
 // Define the router //
 
 final List<RouteBase> routes = <RouteBase>[
-  // Home
+  // Settings home
   GoRoute(
-    path: homePath,
-    name: homeName,
+    path: settingsHomeScreenPath,
+    name: settingsHomeScreenName,
     pageBuilder: (BuildContext pbc, GoRouterState pbs) =>
-        ezPageBuilder(configWatcher(pbc), pbc, pbs, const HomeScreen()),
+        ezPageBuilder(configWatcher(pbc), pbc, pbs, const SettingsHomeScreen()),
     routes: <RouteBase>[
-      // Settings home
+      // SOS settings
       GoRoute(
-        path: settingsHomeScreenPath,
-        name: settingsHomeScreenName,
+        path: sosSettingsScreenPath,
+        name: sosSettingsScreenName,
         pageBuilder: (BuildContext pbc, GoRouterState pbs) =>
-            ezPageBuilder(configWatcher(pbc), pbc, pbs, const SettingsHomeScreen()),
-        routes: <RouteBase>[
-          // SOS settings
-          GoRoute(
-            path: sosSettingsScreenPath,
-            name: sosSettingsScreenName,
-            pageBuilder: (BuildContext pbc, GoRouterState pbs) =>
-                ezPageBuilder(configWatcher(pbc), pbc, pbs, const SOSSettingsScreen()),
-          ),
+            ezPageBuilder(configWatcher(pbc), pbc, pbs, const SOSSettingsScreen()),
+      ),
 
-          // Appearance settings
-          GoRoute(
-            path: appearanceSettingsScreenPath,
-            name: appearanceSettingsScreenName,
-            pageBuilder: (BuildContext pbc, GoRouterState pbs) =>
-                ezPageBuilder(configWatcher(pbc), pbc, pbs, const AppearanceSettingsScreen()),
-          ),
-        ],
+      // Appearance settings
+      GoRoute(
+        path: appearanceSettingsScreenPath,
+        name: appearanceSettingsScreenName,
+        pageBuilder: (BuildContext pbc, GoRouterState pbs) =>
+            ezPageBuilder(configWatcher(pbc), pbc, pbs, const AppearanceSettingsScreen()),
       ),
     ],
   ),
@@ -70,7 +61,16 @@ class SOS extends StatelessWidget {
           navigatorKey: ezRootNav,
           initialLocation: homePath,
           errorBuilder: (_, __) => const ErrorScreen(),
-          routes: routes,
+          routes: <RouteBase>[
+            // Home
+            GoRoute(
+              path: homePath,
+              name: homeName,
+              pageBuilder: (BuildContext pbc, GoRouterState pbs) =>
+                  ezPageBuilder(configWatcher(pbc), pbc, pbs, const HomeScreen()),
+              routes: routes,
+            ),
+          ],
         ),
       );
 }
