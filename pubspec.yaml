@@ -56,9 +56,11 @@ flutter_launcher_icons:
   adaptive_icon_background: "#A520DA"
   android: true
   ios: true
+  background_color_ios: "#A520DA"
   remove_alpha_ios: true
   web:
     generate: true
+    background_color: "#A520DA"
   windows:
     generate: false
   macos:
