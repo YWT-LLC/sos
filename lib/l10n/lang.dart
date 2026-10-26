@@ -192,13 +192,13 @@ abstract class Lang {
   /// No description provided for @bsSOSOnCloseHint.
   ///
   /// In en, this message translates to:
-  /// **'A safe close (thumbs up) button will be appear on the home page, opposite the settings.\nIf InstaSOS loses focus for any reason except the safe close button (minimized, switched apps, screen off), an SOS broadcast will begin.'**
+  /// **'A safe close (thumbs up) button will appear on the home page, opposite the settings.\nIf InstaSOS loses focus for any reason except the safe close button (minimized, switched apps, screen off), an SOS broadcast will begin.'**
   String get bsSOSOnCloseHint;
 
   /// No description provided for @bsSOSOnCloseHintFix.
   ///
   /// In en, this message translates to:
-  /// **'A safe close (thumbs up) button will be appear on the home page, opposite the settings.\nIf Insta-SOS loses focus for any reason except the safe close button (minimized, switched apps, screen off), an SOS broadcast will begin.'**
+  /// **'A safe close (thumbs up) button will appear on the home page, opposite the settings.\nIf Insta-SOS loses focus for any reason except the safe close button (minimized, switched apps, screen off), an SOS broadcast will begin.'**
   String get bsSOSOnCloseHintFix;
 
   /// No description provided for @bsSOSOnOpen.
@@ -300,13 +300,13 @@ abstract class Lang {
   /// No description provided for @faqLocationTrust.
   ///
   /// In en, this message translates to:
-  /// **'The app only uses your location while an SOS broadcast is active. Neither InstaSOS or YWT track, store, or sell user data.'**
+  /// **'The app only uses your location while an SOS broadcast is active. Neither InstaSOS nor YWT track, store, or sell user data.'**
   String get faqLocationTrust;
 
   /// No description provided for @faqLocationTrustFix.
   ///
   /// In en, this message translates to:
-  /// **'The app only uses your location while an SOS broadcast is active. Neither Insta-SOS or YWT track, store, or sell user data.'**
+  /// **'The app only uses your location while an SOS broadcast is active. Neither Insta-SOS nor YWT track, store, or sell user data.'**
   String get faqLocationTrustFix;
 
   /// No description provided for @faqMissing.
@@ -858,7 +858,7 @@ abstract class Lang {
   /// No description provided for @rvHomeWarrant.
   ///
   /// In en, this message translates to:
-  /// **'Keep you door shut. If they have a warrant, ask them to slip it under the door first. If a \"warrant\" is not signed by a judge, it\'s not valid. Keep your door shut.'**
+  /// **'Keep your door shut. If they have a warrant, ask them to slip it under the door first. If a \"warrant\" is not signed by a judge, it\'s not valid. Keep your door shut.'**
   String get rvHomeWarrant;
 
   /// No description provided for @rvMobileLeave.
@@ -906,7 +906,7 @@ abstract class Lang {
   /// No description provided for @rvSharedLawyer.
   ///
   /// In en, this message translates to:
-  /// **'To consult a lawyer. If you have been formally arrested, your are entitled to a court appointed lawyer.'**
+  /// **'To consult a lawyer. If you have been formally arrested, you are entitled to a court appointed lawyer.'**
   String get rvSharedLawyer;
 
   /// No description provided for @rvSharedRemainSilent.

@@ -44,7 +44,7 @@ class LangFil extends Lang {
   String get bsRemoveHint => 'Alisin ang contact';
 
   @override
-  String get bsSOSOnClose => 'SOS pagsara';
+  String get bsSOSOnClose => 'SOS sa pagsara';
 
   @override
   String get bsSOSOnCloseHint =>
@@ -55,7 +55,7 @@ class LangFil extends Lang {
       'Lilitaw ang isang ligtas na button sa pagsasara (thumbs up) sa home page, sa kabilang banda ng mga setting.\nKung mawalan ng focus ang Insta-SOS sa anumang dahilan maliban sa ligtas na button sa pagsasara (na-minimize, lumipat ng app, naka-off ang screen), magsisimula ang isang SOS broadcast.';
 
   @override
-  String get bsSOSOnOpen => 'SOS pagkabukas';
+  String get bsSOSOnOpen => 'SOS sa pagbukas';
 
   @override
   String get bsSOSOnVideo => 'SOS sa naantalang pag-record';
@@ -125,11 +125,11 @@ class LangFil extends Lang {
 
   @override
   String get faqOnInterruptA =>
-      ' kung may nagre-record na video at nawalan ng focus ang InstaSOS, magsisimula ang isang SOS broadcast. Ang pagkawala ng focus ay: pag-minimize sa app, paglipat ng mga app, at/o pag-lock sa screen. Inirerekomendang i-enable ito o ang \"SOS on close\" (o pareho).';
+      ' kung may nagre-record na video at nawalan ng focus ang InstaSOS, magsisimula ang isang SOS broadcast. Ang pagkawala ng focus ay: pag-minimize sa app, paglipat ng mga app, at/o pag-lock sa screen. Inirerekomendang i-enable ito o ang \"SOS sa pagsara\" (o pareho).';
 
   @override
   String get faqOnInterruptAFix =>
-      ' kung may nagre-record na video at nawalan ng focus ang Insta-SOS, magsisimula ang isang SOS broadcast. Ang pagkawala ng focus ay: pag-minimize sa app, paglipat ng mga app, at/o pag-lock sa screen. Inirerekomendang i-enable ito o ang \"SOS on close\" (o pareho).';
+      ' kung may nagre-record na video at nawalan ng focus ang Insta-SOS, magsisimula ang isang SOS broadcast. Ang pagkawala ng focus ay: pag-minimize sa app, paglipat ng mga app, at/o pag-lock sa screen. Inirerekomendang i-enable ito o ang \"SOS sa pagsara\" (o pareho).';
 
   @override
   String get faqOnOpenA =>
@@ -184,7 +184,7 @@ class LangFil extends Lang {
 
   @override
   String get gOnCloseWarning =>
-      'Naka-enable ang \"SOS on close\". Magsisimula ito ng broadcast.';
+      'Naka-enable ang \"SOS sa pagsara\". Magsisimula ito ng broadcast.';
 
   @override
   String get gReminder => 'Paalala';
@@ -194,7 +194,7 @@ class LangFil extends Lang {
 
   @override
   String get hsAddAlways =>
-      'Inirerekomendang i-enable palagi. Pindutin muli para buksan ang System Settings.';
+      'Inirerekomendang i-enable palagi. Pindutin muli para buksan ang mga setting ng system.';
 
   @override
   String get hsAddContacts => 'Pinapagana ang mga SOS message';
@@ -345,7 +345,7 @@ class LangFil extends Lang {
 
   @override
   String get hsSettingsTutorialWeb =>
-      '- I-customize ang hitsura ng app\n- Mag-access ng higit pang mga resource at suporta\n\nsa mga setting.';
+      '- I-customize ang anyo ng app\n- I-access ang higit pang mga mapagkukunan at suporta\n\nsa mga setting.';
 
   @override
   String get hsSettingsTutorialWebFix =>

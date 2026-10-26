@@ -316,7 +316,7 @@ class LangFr extends Lang {
       'La fonctionnalité d\'urgence n\'est pas disponible sur le Web.\nUtilisez le bouton SOS pour télécharger l\'application InstaSOS.';
 
   @override
-  String get hsOneOfFour => 'Un sur quatre. Continuer...';
+  String get hsOneOfFour => 'Premier sur quatre. Continuer...';
 
   @override
   String get hsPreviewHint => 'Appui long pour afficher/masquer vos droits.';
@@ -367,13 +367,13 @@ class LangFr extends Lang {
       'Activer pour donner à Insta-SOS l\'autorisation d\'envoyer des messages.';
 
   @override
-  String get hsThreeOfFour => 'Trois sur quatre. Continuer...';
+  String get hsThreeOfFour => 'Troisième sur quatre. Continuer...';
 
   @override
   String get hsTutorialComplete => 'Tutoriel terminé';
 
   @override
-  String get hsTwoOfFour => 'Deux sur quatre. Continuer...';
+  String get hsTwoOfFour => 'Deuxième sur quatre. Continuer...';
 
   @override
   String get hsUnable => 'Impossible de déterminer';

@@ -85,7 +85,7 @@ class LangKo extends Lang {
   String get faqContributing => '번역 참여';
 
   @override
-  String get faqExpand => ' 하여 언어 옵션을 확장하는 데 도움을 주실 수 있습니다.';
+  String get faqExpand => '를 통해 언어 옵션 확장에 도움을 주세요.';
 
   @override
   String get faqLanguages => 'X 언어는 왜 지원되지 않나요?';
@@ -136,8 +136,7 @@ class LangKo extends Lang {
   String get faqReset => '튜토리얼 재설정';
 
   @override
-  String get faqResponsible =>
-      '권리 목록에 기계 번역을 사용하는 것은 무책임한 일일 수 있습니다. 다음을 고려해 주세요: ';
+  String get faqResponsible => '권리 목록에 기계 번역을 사용하는 것은 무책임한 일입니다. ';
 
   @override
   String get faqRestricted =>
@@ -151,11 +150,10 @@ class LangKo extends Lang {
       'iOS 단축어는 어떤가요?\n사용자 단축어 액세스에도 제한이 있어 중요한 기능이 중단될 수 있습니다. 주로 비디오 녹화를 방해하게 됩니다.';
 
   @override
-  String get faqSplitClarity1 =>
-      '연락처에 액세스 권한을 부여한다고 해서 비상 연락처가 되는 것은 아닙니다. 다음에 나열된 번호로만 ';
+  String get faqSplitClarity1 => '연락처에 액세스 권한을 부여한다고 해서 비상 연락처가 되는 것은 아닙니다. ';
 
   @override
-  String get faqSplitClarity2 => ' SOS 브로드캐스트 중에 연락이 갑니다.';
+  String get faqSplitClarity2 => '에 나열된 번호로만 SOS 브로드캐스트 중에 연락이 갑니다.';
 
   @override
   String get faqUnavailable => 'SOS에서 \"위치를 사용할 수 없음\"이라고 표시되나요?';
@@ -210,7 +208,7 @@ class LangKo extends Lang {
 
   @override
   String get hsAppleContacts =>
-      '이 단계는 앱 권한만을 위한 것입니다.\n아직 긴급 연락처를 선택하는 것이 아닙니다.\n\n번거로움을 줄이려면 모든 권한을 허용하는 것을 권장합니다.';
+      '이 단계는 앱 권한만을 위한 것입니다.\n아직 비상 연락처를 선택하는 것이 아닙니다.\n\n번거로움을 줄이려면 모든 권한을 허용하는 것을 권장합니다.';
 
   @override
   String get hsBroadcastTutorial =>
@@ -258,10 +256,10 @@ class LangKo extends Lang {
   String get hsFlashAuto => '자동 플래시. 플래시를 켜려면 활성화하세요.';
 
   @override
-  String get hsFlashOff => '플래시 끄기. 자동 플래시를 켜려면 활성화하세요.';
+  String get hsFlashOff => '플래시 꺼짐. 자동 플래시를 켜려면 활성화하세요.';
 
   @override
-  String get hsFlashOn => '플래시 켜기. 플래시를 끄려면 활성화하세요.';
+  String get hsFlashOn => '플래시 켜짐. 플래시를 끄려면 활성화하세요.';
 
   @override
   String get hsFlashTorch => '토치 모드. 플래시를 끄려면 활성화하세요.';

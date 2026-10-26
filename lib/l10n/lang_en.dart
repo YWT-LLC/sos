@@ -47,11 +47,11 @@ class LangEn extends Lang {
 
   @override
   String get bsSOSOnCloseHint =>
-      'A safe close (thumbs up) button will be appear on the home page, opposite the settings.\nIf InstaSOS loses focus for any reason except the safe close button (minimized, switched apps, screen off), an SOS broadcast will begin.';
+      'A safe close (thumbs up) button will appear on the home page, opposite the settings.\nIf InstaSOS loses focus for any reason except the safe close button (minimized, switched apps, screen off), an SOS broadcast will begin.';
 
   @override
   String get bsSOSOnCloseHintFix =>
-      'A safe close (thumbs up) button will be appear on the home page, opposite the settings.\nIf Insta-SOS loses focus for any reason except the safe close button (minimized, switched apps, screen off), an SOS broadcast will begin.';
+      'A safe close (thumbs up) button will appear on the home page, opposite the settings.\nIf Insta-SOS loses focus for any reason except the safe close button (minimized, switched apps, screen off), an SOS broadcast will begin.';
 
   @override
   String get bsSOSOnOpen => 'SOS on open';
@@ -109,11 +109,11 @@ class LangEn extends Lang {
 
   @override
   String get faqLocationTrust =>
-      'The app only uses your location while an SOS broadcast is active. Neither InstaSOS or YWT track, store, or sell user data.';
+      'The app only uses your location while an SOS broadcast is active. Neither InstaSOS nor YWT track, store, or sell user data.';
 
   @override
   String get faqLocationTrustFix =>
-      'The app only uses your location while an SOS broadcast is active. Neither Insta-SOS or YWT track, store, or sell user data.';
+      'The app only uses your location while an SOS broadcast is active. Neither Insta-SOS nor YWT track, store, or sell user data.';
 
   @override
   String get faqMissing => 'Why are some Android features missing?';
@@ -425,7 +425,7 @@ class LangEn extends Lang {
 
   @override
   String get rvHomeWarrant =>
-      'Keep you door shut. If they have a warrant, ask them to slip it under the door first. If a \"warrant\" is not signed by a judge, it\'s not valid. Keep your door shut.';
+      'Keep your door shut. If they have a warrant, ask them to slip it under the door first. If a \"warrant\" is not signed by a judge, it\'s not valid. Keep your door shut.';
 
   @override
   String get rvMobileLeave => 'Leave if you are not being detained.';
@@ -454,7 +454,7 @@ class LangEn extends Lang {
 
   @override
   String get rvSharedLawyer =>
-      'To consult a lawyer. If you have been formally arrested, your are entitled to a court appointed lawyer.';
+      'To consult a lawyer. If you have been formally arrested, you are entitled to a court appointed lawyer.';
 
   @override
   String get rvSharedRemainSilent =>
@@ -543,11 +543,11 @@ class LangEnUs extends LangEn {
 
   @override
   String get bsSOSOnCloseHint =>
-      'A safe close (thumbs up) button will be appear on the home page, opposite the settings.\nIf InstaSOS loses focus for any reason except the safe close button (minimized, switched apps, screen off), an SOS broadcast will begin.';
+      'A safe close (thumbs up) button will appear on the home page, opposite the settings.\nIf InstaSOS loses focus for any reason except the safe close button (minimized, switched apps, screen off), an SOS broadcast will begin.';
 
   @override
   String get bsSOSOnCloseHintFix =>
-      'A safe close (thumbs up) button will be appear on the home page, opposite the settings.\nIf Insta-SOS loses focus for any reason except the safe close button (minimized, switched apps, screen off), an SOS broadcast will begin.';
+      'A safe close (thumbs up) button will appear on the home page, opposite the settings.\nIf Insta-SOS loses focus for any reason except the safe close button (minimized, switched apps, screen off), an SOS broadcast will begin.';
 
   @override
   String get bsSOSOnOpen => 'SOS on open';
@@ -605,11 +605,11 @@ class LangEnUs extends LangEn {
 
   @override
   String get faqLocationTrust =>
-      'The app only uses your location while an SOS broadcast is active. Neither InstaSOS or YWT track, store, or sell user data.';
+      'The app only uses your location while an SOS broadcast is active. Neither InstaSOS nor YWT track, store, or sell user data.';
 
   @override
   String get faqLocationTrustFix =>
-      'The app only uses your location while an SOS broadcast is active. Neither Insta-SOS or YWT track, store, or sell user data.';
+      'The app only uses your location while an SOS broadcast is active. Neither Insta-SOS nor YWT track, store, or sell user data.';
 
   @override
   String get faqMissing => 'Why are some Android features missing?';
@@ -921,7 +921,7 @@ class LangEnUs extends LangEn {
 
   @override
   String get rvHomeWarrant =>
-      'Keep you door shut. If they have a warrant, ask them to slip it under the door first. If a \"warrant\" is not signed by a judge, it\'s not valid. Keep your door shut.';
+      'Keep your door shut. If they have a warrant, ask them to slip it under the door first. If a \"warrant\" is not signed by a judge, it\'s not valid. Keep your door shut.';
 
   @override
   String get rvMobileLeave => 'Leave if you are not being detained.';
@@ -950,7 +950,7 @@ class LangEnUs extends LangEn {
 
   @override
   String get rvSharedLawyer =>
-      'To consult a lawyer. If you have been formally arrested, your are entitled to a court appointed lawyer.';
+      'To consult a lawyer. If you have been formally arrested, you are entitled to a court appointed lawyer.';
 
   @override
   String get rvSharedRemainSilent =>
