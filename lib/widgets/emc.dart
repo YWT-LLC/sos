@@ -155,12 +155,12 @@ class _ContactTile extends StatelessWidget {
               fauxDisabled
                   ? CircleAvatar(
                       radius: config.padding + config.iconSize / 2,
-                      foregroundColor: config.colors.onSurface,
+                      foregroundColor: config.onSurface,
                       backgroundColor: config.colors.outline,
                       child: Text(
                         initials!,
                         style: config.bodyStyle?.copyWith(
-                          color: config.colors.onSurface,
+                          color: config.onSurface,
                           fontWeight: FontWeight.bold,
                         ),
                         textAlign: TextAlign.start,
@@ -168,12 +168,12 @@ class _ContactTile extends StatelessWidget {
                     )
                   : CircleAvatar(
                       radius: config.padding + config.iconSize / 2,
-                      foregroundColor: config.colors.onSecondary,
+                      foregroundColor: config.onSecondary,
                       backgroundColor: config.colors.secondary,
                       child: Text(
                         initials!,
                         style: config.bodyStyle?.copyWith(
-                          color: config.colors.onSecondary,
+                          color: config.onSecondary,
                           fontWeight: FontWeight.bold,
                         ),
                         textAlign: TextAlign.start,

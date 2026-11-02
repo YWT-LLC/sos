@@ -325,7 +325,7 @@ class _HomeScreenState extends State<HomeScreen>
                           config.marginVal,
                       left: 0,
                       right: 0,
-                      title: EzIcon(config, Icons.arrow_upward, color: config.colors.onSurface),
+                      title: EzIcon(config, Icons.arrow_upward, color: config.onSurface),
                       content: kIsWeb
                           ? l10n(config).hsNoWebSOS
                           : (isIOS
@@ -383,7 +383,7 @@ class _HomeScreenState extends State<HomeScreen>
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
-                        EzIcon(config, Icons.arrow_forward, color: config.colors.onSurface),
+                        EzIcon(config, Icons.arrow_forward, color: config.onSurface),
                       ],
                     ),
                     content: kIsWeb
@@ -487,7 +487,7 @@ class _HomeScreenState extends State<HomeScreen>
                           title: EzIcon(
                             config,
                             Icons.arrow_downward,
-                            color: config.colors.onSurface,
+                            color: config.onSurface,
                           ),
                           content: (kIsWeb || isIOS)
                               ? l10n(config).hsIOSVideoTutorial
@@ -567,7 +567,7 @@ class _HomeScreenState extends State<HomeScreen>
                                       )
                                     : IconButton.styleFrom(
                                         foregroundColor: videoColor(config),
-                                        side: config.borderSide(color: config.colors.onSurface),
+                                        side: config.borderSide(color: config.onSurface),
                                       ),
                                 icon: const Icon(Icons.circle),
                                 tooltip: l10n(config).hsStartRecord,
