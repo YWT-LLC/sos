@@ -103,7 +103,7 @@ class SettingsHomeScreen extends StatelessWidget {
                   icon: EzIcon(config, Icons.navigate_next),
                   label: l10n(config).ssAppearance,
                 ),
-                kIsWeb ? config.spacer : config.divider,
+                kIsWeb ? config.spacer : EzDivider(config),
 
                 // Permissions
                 EzElevatedIconButton(
@@ -150,7 +150,7 @@ class SettingsHomeScreen extends StatelessWidget {
                               style: config.bodyStyle,
                               textAlign: TextAlign.center,
                             ),
-                            config.divider,
+                            EzDivider(config),
 
                             // Setup cards
                             CameraSetup(
@@ -316,7 +316,7 @@ class SettingsHomeScreen extends StatelessWidget {
                           backgroundColor: Colors.transparent,
                           textAlign: TextAlign.center,
                         ),
-                        config.divider,
+                        EzDivider(config),
 
                         // Gov resources //
                         Center(
@@ -343,7 +343,7 @@ class SettingsHomeScreen extends StatelessWidget {
                           backgroundColor: Colors.transparent,
                           textAlign: TextAlign.center,
                         ),
-                        config.divider,
+                        EzDivider(config),
 
                         // Disclaimers
                         Text(

@@ -241,7 +241,7 @@ Future<void> appSetupModal(EzCP config, BuildContext context) async {
           ),
           config.centerLine,
           Text(l10n(config).hsYourApp, style: config.bodyStyle, textAlign: TextAlign.center),
-          config.divider,
+          EzDivider(config),
 
           // Permission checklist
           CameraSetup(

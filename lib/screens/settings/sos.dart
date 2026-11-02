@@ -118,7 +118,7 @@ class _SOSSettingsScreenState extends State<SOSSettingsScreen> with WidgetsBindi
                     if (mounted) setState(() => _linkType = selection);
                   },
                 ),
-                config.divider,
+                EzDivider(config),
 
                 // SOS on open
                 EzSwitchPair(
