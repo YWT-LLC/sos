@@ -6,9 +6,9 @@
 import '../utils/export.dart';
 
 import 'dart:math';
-import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:open_ui/open_ui.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class ContactList extends StatefulWidget {
   final EzCP config;
@@ -68,9 +68,8 @@ class _ContactListState extends State<ContactList> {
                     side: widget.fauxDisabled
                         ? null
                         : widget.config.borderSide(
-                            color: widget.config.colors.primaryContainer.withValues(
-                              alpha: focusOpacity,
-                            ),
+                            fill: widget.config.primaryContainerFill,
+                            opacity: focusOpacity,
                           ),
                   ),
                   textStyle: widget.config.bodyStyle,
@@ -153,10 +152,11 @@ class _ContactTile extends StatelessWidget {
             // Initials coin (if available)
             if (initials != null) ...<Widget>[
               fauxDisabled
-                  ? CircleAvatar(
-                      radius: config.padding + config.iconSize / 2,
+                  ? EzAvatar(
+                      config,
+                      fill: config.outlineFiller,
                       foregroundColor: config.onSurface,
-                      backgroundColor: config.colors.outline,
+                      radius: config.padding + config.iconSize / 2,
                       child: Text(
                         initials!,
                         style: config.bodyStyle?.copyWith(
@@ -166,10 +166,11 @@ class _ContactTile extends StatelessWidget {
                         textAlign: TextAlign.start,
                       ),
                     )
-                  : CircleAvatar(
-                      radius: config.padding + config.iconSize / 2,
+                  : EzAvatar(
+                      config,
+                      fill: config.secondaryFill,
                       foregroundColor: config.onSecondary,
-                      backgroundColor: config.colors.secondary,
+                      radius: config.padding + config.iconSize / 2,
                       child: Text(
                         initials!,
                         style: config.bodyStyle?.copyWith(
@@ -187,7 +188,7 @@ class _ContactTile extends StatelessWidget {
               child: Text(
                 number,
                 style: fauxDisabled
-                    ? config.bodyStyle?.copyWith(color: config.colors.outline)
+                    ? config.bodyStyle?.copyWith(color: config.outline)
                     : config.bodyStyle,
                 textAlign: TextAlign.center,
               ),

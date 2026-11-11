@@ -6,9 +6,9 @@
 import '../../utils/export.dart';
 import '../../widgets/export.dart';
 
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:open_ui/open_ui.dart';
+import 'package:provider/provider.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AppearanceSettingsScreen extends StatelessWidget {
   final int? target;
@@ -121,7 +121,6 @@ class _RightsOpacity extends StatelessWidget {
       config,
       onPressed: () async {
         double opacity = config.textBackgroundOpacity;
-        Color background = config.colors.surface.withValues(alpha: opacity);
 
         await ezModal(
           config,
@@ -134,7 +133,7 @@ class _RightsOpacity extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   height: heightOf(context) * 0.667,
-                  color: config.colors.surface,
+                  decoration: config.boxDeco(),
                   child: Stack(
                     children: <Widget>[
                       Center(
@@ -146,7 +145,10 @@ class _RightsOpacity extends StatelessWidget {
                       Container(
                         height: double.infinity,
                         width: double.infinity,
-                        color: background,
+                        decoration: config.boxDeco(
+                          fill: config.surfaceContainerFill,
+                          opacity: opacity,
+                        ),
                         child: RightsView(config),
                       ),
                     ],
@@ -164,10 +166,7 @@ class _RightsOpacity extends StatelessWidget {
                     label: opacity.toStringAsFixed(2),
 
                     // Slider functions
-                    onChanged: (double value) => setModal(() {
-                      opacity = value;
-                      background = config.colors.surface.withValues(alpha: opacity);
-                    }),
+                    onChanged: (double value) => setModal(() => opacity = value),
                     onChangeEnd: (double value) async {
                       if (EzCM.updateBoth || config.isDark) {
                         await EzCM.setDouble(darkTextBackgroundOpacityKey, value);
@@ -196,14 +195,9 @@ class _RightsOpacity extends StatelessWidget {
                           await EzCM.remove(lightTextBackgroundOpacityKey);
                         }
 
-                        setModal(() {
-                          opacity = EzCM.getDefault(
-                            config.isDark
-                                ? darkTextBackgroundOpacityKey
-                                : lightTextBackgroundOpacityKey,
-                          );
-                          background = config.colors.surface.withValues(alpha: opacity);
-                        });
+                        setModal(() => opacity = EzCM.getDefault(config.isDark
+                            ? darkTextBackgroundOpacityKey
+                            : lightTextBackgroundOpacityKey));
                       },
                       icon: EzIcon(config, Icons.refresh),
                       label: config.ezL10n.gReset,

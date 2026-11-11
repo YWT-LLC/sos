@@ -8,10 +8,10 @@ import '../../widgets/export.dart';
 import 'package:ywt_private/ywt_private.dart' as ywt;
 
 import 'dart:io';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:open_ui/open_ui.dart';
+import 'package:provider/provider.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class SOSSettingsScreen extends StatefulWidget {
   const SOSSettingsScreen({super.key});
@@ -84,7 +84,7 @@ class _SOSSettingsScreenState extends State<SOSSettingsScreen> with WidgetsBindi
                     text: l10n(config).gSystem,
                     onTap: openAppSettings,
                     hint: config.ezL10n.gOpenLink,
-                    backgroundColor: config.colors.surfaceContainer,
+                    backgroundColor: config.surfaceContainerFill.asColor,
                   ),
                   config.separator,
                 ],
@@ -105,9 +105,11 @@ class _SOSSettingsScreenState extends State<SOSSettingsScreen> with WidgetsBindi
                   label: l10n(config).bsLinkType,
                   widthEntry: LLType.google.label,
                   dropdownMenuEntries: LLType.values
-                      .map<DropdownMenuEntry<LLType>>(
-                        (LLType type) => DropdownMenuEntry<LLType>(value: type, label: type.label),
-                      )
+                      .map<EzDropMenuEntry<LLType>>((LLType type) => EzDropMenuEntry<LLType>(
+                            config,
+                            value: type,
+                            label: type.label,
+                          ))
                       .toList(),
                   enableSearch: false,
                   initialSelection: _linkType,

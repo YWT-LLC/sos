@@ -9,10 +9,10 @@ import '../../widgets/export.dart';
 import 'package:ywt_private/ywt_private.dart' as ywt;
 
 import 'package:open_ui/open_ui.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -182,8 +182,7 @@ class SettingsHomeScreen extends StatelessWidget {
                               icon: EzIcon(config, Icons.check),
                               textAlign: TextAlign.center,
                               style: TextButton.styleFrom(
-                                backgroundColor: config.colors.surfaceContainer,
-                              ),
+                                  backgroundColor: config.surfaceContainerFill.asColor),
                               onPressed: () => Navigator.of(mCon).pop(true),
                             ),
                             config.separator,

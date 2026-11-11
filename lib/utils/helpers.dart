@@ -9,12 +9,12 @@ import '../widgets/export.dart';
 import 'dart:async';
 import 'package:gal/gal.dart';
 import 'package:open_ui/open_ui.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:flutter_contacts/flutter_contacts.dart' as c;
+import 'package:material_ui/material_ui.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_contacts/flutter_contacts.dart' as c;
 
 // Camera //
 
@@ -272,7 +272,7 @@ Future<void> appSetupModal(EzCP config, BuildContext context) async {
             label: l10n(config).gDone,
             icon: EzIcon(config, Icons.check),
             textAlign: TextAlign.center,
-            style: TextButton.styleFrom(backgroundColor: config.colors.surfaceContainer),
+            style: TextButton.styleFrom(backgroundColor: config.surfaceContainerFill.asColor),
             onPressed: () => Navigator.of(mCon).pop(true),
           ),
 

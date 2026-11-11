@@ -12,11 +12,11 @@ import 'dart:io';
 import 'dart:async';
 import 'package:camera/camera.dart';
 import 'package:open_ui/open_ui.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen>
                   config,
                   text: config.ezL10n.gSettings,
                   onPressed: openAppSettings,
-                  style: config.bodyStyle?.copyWith(color: config.colors.primary),
+                  style: config.bodyStyle?.copyWith(color: config.primaryFill.asColor),
                 ),
               ],
             )
@@ -241,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen>
                     alignment: Alignment.topCenter,
                     height: heightOf(context) * 0.667,
                     width: double.infinity,
-                    color: config.colors.surface,
+                    decoration: config.boxDeco(fill: config.surfaceFill),
                     child: camera == null
                         ? EzAnimVis(
                             config,
@@ -269,8 +269,9 @@ class _HomeScreenState extends State<HomeScreen>
                                 kid: Container(
                                   height: double.infinity,
                                   width: double.infinity,
-                                  color: config.colors.surfaceContainer.withValues(
-                                    alpha: config.textBackgroundOpacity,
+                                  decoration: config.boxDeco(
+                                    fill: config.surfaceContainerFill,
+                                    opacity: config.textBackgroundOpacity,
                                   ),
                                   child: RightsView(config),
                                 ),
@@ -301,7 +302,7 @@ class _HomeScreenState extends State<HomeScreen>
                       builder: (_, AsyncSnapshot<int> snapshot) => EzText(
                         config,
                         text: Duration(seconds: snapshot.data ?? 0).toString().split('.').first,
-                        backgroundColor: videoColor(config),
+                        replaceFill: videoColor(config),
                         style: config.labelStyle?.copyWith(color: videoTextColor(config)),
                       ),
                     ),
@@ -325,7 +326,7 @@ class _HomeScreenState extends State<HomeScreen>
                           config.marginVal,
                       left: 0,
                       right: 0,
-                      title: EzIcon(config, Icons.arrow_upward, color: config.onSurface),
+                      title: EzIcon(config, Icons.arrow_upward, fill: config.onSurfaceFiller),
                       content: kIsWeb
                           ? l10n(config).hsNoWebSOS
                           : (isIOS
@@ -383,7 +384,11 @@ class _HomeScreenState extends State<HomeScreen>
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
-                        EzIcon(config, Icons.arrow_forward, color: config.onSurface),
+                        EzIcon(
+                          config,
+                          Icons.arrow_forward,
+                          fill: config.onSurfaceFiller,
+                        ),
                       ],
                     ),
                     content: kIsWeb
@@ -487,7 +492,7 @@ class _HomeScreenState extends State<HomeScreen>
                           title: EzIcon(
                             config,
                             Icons.arrow_downward,
-                            color: config.onSurface,
+                            fill: config.onSurfaceFiller,
                           ),
                           content: (kIsWeb || isIOS)
                               ? l10n(config).hsIOSVideoTutorial
@@ -522,8 +527,9 @@ class _HomeScreenState extends State<HomeScreen>
                             ? EzIconButton(
                                 config,
                                 style: IconButton.styleFrom(
-                                  foregroundColor: videoColor(config),
-                                  side: config.borderSide(color: videoTextColor(config)),
+                                  foregroundColor: videoColor(config).asColor,
+                                  side: config.borderSide(
+                                      fill: EzSwitchColor(color: videoTextColor(config))),
                                 ),
                                 icon: const Icon(Icons.stop),
                                 tooltip: l10n(config).hsEndRecord,
@@ -559,17 +565,17 @@ class _HomeScreenState extends State<HomeScreen>
                               )
                             : EzIconButton(
                                 config,
-                                style: (camera == null)
-                                    ? IconButton.styleFrom(
-                                        foregroundColor: config.colors.outline,
-                                        side:
-                                            config.borderSide(color: config.colors.outlineVariant),
-                                      )
-                                    : IconButton.styleFrom(
-                                        foregroundColor: videoColor(config),
-                                        side: config.borderSide(color: config.onSurface),
-                                      ),
-                                icon: const Icon(Icons.circle),
+                                style: IconButton.styleFrom(
+                                    side: config.borderSide(
+                                        fill: (camera == null)
+                                            ? config.outlineVariantFill
+                                            : config.onSurfaceFiller)),
+                                icon: EzIcon(
+                                  config,
+                                  Icons.circle,
+                                  fill:
+                                      (camera == null) ? config.outlineFiller : videoColor(config),
+                                ),
                                 tooltip: l10n(config).hsStartRecord,
                                 iconSize: config.iconSize * 2,
                                 onLongPress: camera == null

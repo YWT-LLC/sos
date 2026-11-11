@@ -38,23 +38,27 @@ class SOSCache extends EzAppCache {
   }
 }
 
-bool get isIOS => EzCM.platform == TargetPlatform.iOS;
+// Global //
 
 SOSCache _cache(EzCP config) => config.appCache! as SOSCache;
 
+bool get isIOS => EzCM.platform == TargetPlatform.iOS;
+bool get showTutorial => EzCM.get(showTutorialKey);
+
 Lang l10n(EzCP config) => _cache(config)._l10n;
 
-Color videoColor(EzCP config) => _cache(config)._videoColor;
-Color videoTextColor(EzCP config) => _cache(config)._videoTextColor;
-
-bool get showTutorial => EzCM.get(showTutorialKey);
+// SOS //
 
 bool get autoShareMedia => EzCM.get(autoShareMediaKey);
 
 List<String> get emc => EzCM.get(emcKey);
 
-LLType get linkType => LLTypeConfig.safeLookup(EzCM.get(linkTypeKey));
-
 bool get sosOnOpen => EzCM.get(sosOnOpenKey);
 bool get sosOnClose => EzCM.get(sosOnCloseKey);
 bool get sosOnInterrupt => EzCM.get(sosOnInterruptKey);
+LLType get linkType => LLTypeConfig.safeLookup(EzCM.get(linkTypeKey));
+
+// Color //
+
+EzSwitchColor videoColor(EzCP config) => EzSwitchColor(color: _cache(config)._videoColor);
+Color videoTextColor(EzCP config) => _cache(config)._videoTextColor;
