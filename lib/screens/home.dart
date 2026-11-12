@@ -241,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen>
                     alignment: Alignment.topCenter,
                     height: heightOf(context) * 0.667,
                     width: double.infinity,
-                    decoration: config.boxDeco(fill: config.surfaceFill),
+                    decoration: config.boxDeco(),
                     child: camera == null
                         ? EzAnimVis(
                             config,
