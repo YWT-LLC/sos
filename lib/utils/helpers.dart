@@ -23,7 +23,7 @@ import 'package:flutter_contacts/flutter_contacts.dart' as c;
 Future<void> saveToGallery(String path, bool image) async {
   if (kIsWeb) return;
 
-  final bool galAccess = await Gal.requestAccess();
+  final bool galAccess = await Gal.requestPermission();
   if (!galAccess) return;
 
   try {

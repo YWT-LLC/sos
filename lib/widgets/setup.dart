@@ -74,7 +74,7 @@ class _CameraSetupState extends State<CameraSetup> {
 
   Future<void> backgroundCheck() async {
     camStatus = await Permission.camera.status;
-    galStatus = kIsWeb ? true : await Gal.hasAccess();
+    galStatus = kIsWeb ? true : await Gal.hasPermission();
     micStatus = await Permission.microphone.status;
 
     if (mounted) setState(() {});
@@ -212,7 +212,7 @@ class _CameraSetupState extends State<CameraSetup> {
           widget.setLock(true);
 
           // Make it so
-          final bool result = await Gal.requestAccess();
+          final bool result = await Gal.requestPermission();
           if (galStatus != result) galStatus = result;
           if (mounted) setState(() {});
           widget.setLock(false);
