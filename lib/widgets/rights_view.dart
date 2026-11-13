@@ -76,7 +76,8 @@ class _RightsViewState extends State<RightsView> {
                 widget.config.spacer,
 
                 // Switcher
-                SegmentedButton<Situation>(
+                EzSegmentedButton<Situation>(
+                  widget.config,
                   segments: Situation.values
                       .map(
                         (Situation sitch) => ButtonSegment<Situation>(
