@@ -13,6 +13,7 @@ class SosScaffold extends StatelessWidget {
   final Widget body;
   final List<Widget>? fabs;
   final bool isHome;
+  final bool settingsA11;
 
   const SosScaffold(
     this.config, {
@@ -20,6 +21,7 @@ class SosScaffold extends StatelessWidget {
     required this.body,
     this.fabs,
     this.isHome = false,
+    this.settingsA11 = false,
   });
 
   @override
@@ -30,7 +32,7 @@ class SosScaffold extends StatelessWidget {
           footer: EzFooter(
             config,
             quiet: isHome,
-            a11howPath: ywt.sosContributeA11,
+            a11howPath: settingsA11 ? ywt.openUIContributeA11 : ywt.sosContributeA11,
           ),
           fabs: <Widget>[
             EzUpdaterFAB(

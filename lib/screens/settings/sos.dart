@@ -5,7 +5,6 @@
 
 import '../../utils/export.dart';
 import '../../widgets/export.dart';
-import 'package:ywt_private/ywt_private.dart' as ywt;
 
 import 'dart:io';
 import 'package:open_ui/open_ui.dart';
@@ -69,155 +68,151 @@ class _SOSSettingsScreenState extends State<SOSSettingsScreen> with WidgetsBindi
           config,
           safeArea: true,
           child: Center(
-            child: EzScrollView(
-              config,
-              children: <Widget>[
-                if (!canSMS) ...<Widget>[
-                  EzText(
-                    config,
-                    text: l10n(config).sosNeedSMS,
-                    style: config.bodyStyle,
-                    textAlign: TextAlign.center,
-                  ),
-                  EzLink(
-                    config,
-                    text: l10n(config).gSystem,
-                    onTap: openAppSettings,
-                    hint: config.ezL10n.gOpenLink,
-                    backgroundColor: config.surfaceContainerFill.asColor,
-                  ),
-                  config.separator,
-                ],
-
-                // EMC
-                ContactList(
+            child: EzScrollView(config, children: <Widget>[
+              if (!canSMS) ...<Widget>[
+                EzText(
                   config,
-                  onUpdate: () {
-                    if (mounted) setState(() {});
-                  },
-                  fauxDisabled: !canSMS,
+                  text: l10n(config).sosNeedSMS,
+                  style: config.bodyStyle,
+                  textAlign: TextAlign.center,
+                ),
+                EzLink(
+                  config,
+                  text: l10n(config).gSystem,
+                  onTap: openAppSettings,
+                  hint: config.ezL10n.gOpenLink,
+                  backgroundColor: config.surfaceContainerFill.asColor,
                 ),
                 config.separator,
+              ],
 
-                // Link type
-                EzDropdownMenu<LLType>(
-                  config,
-                  label: l10n(config).bsLinkType,
-                  widthEntry: LLType.google.label,
-                  dropdownMenuEntries: LLType.values
-                      .map<EzDropMenuEntry<LLType>>((LLType type) => EzDropMenuEntry<LLType>(
-                            config,
-                            value: type,
-                            label: type.label,
-                          ))
-                      .toList(),
-                  enableSearch: false,
-                  initialSelection: _linkType,
-                  onSelected: (LLType? selection) async {
-                    if (selection == null || selection == _linkType) return;
+              // EMC
+              ContactList(
+                config,
+                onUpdate: () {
+                  if (mounted) setState(() {});
+                },
+                fauxDisabled: !canSMS,
+              ),
+              config.separator,
 
-                    await EzCM.setString(linkTypeKey, selection.name);
-                    if (mounted) setState(() => _linkType = selection);
-                  },
-                ),
-                EzDivider(config),
+              // Link type
+              EzDropdownMenu<LLType>(
+                config,
+                label: l10n(config).bsLinkType,
+                widthEntry: LLType.google.label,
+                dropdownMenuEntries: LLType.values
+                    .map<EzDropMenuEntry<LLType>>((LLType type) => EzDropMenuEntry<LLType>(
+                          config,
+                          value: type,
+                          label: type.label,
+                        ))
+                    .toList(),
+                enableSearch: false,
+                initialSelection: _linkType,
+                onSelected: (LLType? selection) async {
+                  if (selection == null || selection == _linkType) return;
 
-                // SOS on open
+                  await EzCM.setString(linkTypeKey, selection.name);
+                  if (mounted) setState(() => _linkType = selection);
+                },
+              ),
+              EzDivider(config),
+
+              // SOS on open
+              EzSwitchPair(
+                config,
+                enabled: emc.isNotEmpty,
+                fauxDisabled: !canSMS,
+                text: l10n(config).bsSOSOnOpen,
+                valueKey: sosOnOpenKey,
+                canChange: (bool choice) => canSet(sosOnOpenKey, choice),
+              ),
+
+              if (!isIOS) ...<Widget>[
+                // SOS on close
+                config.spacer,
                 EzSwitchPair(
                   config,
                   enabled: emc.isNotEmpty,
                   fauxDisabled: !canSMS,
-                  text: l10n(config).bsSOSOnOpen,
-                  valueKey: sosOnOpenKey,
-                  canChange: (bool choice) => canSet(sosOnOpenKey, choice),
+                  text: l10n(config).bsSOSOnClose,
+                  valueKey: sosOnCloseKey,
+                  canChange: (bool choice) async {
+                    final bool check1 = await canSet(sosOnCloseKey, choice);
+                    final bool? check2 = (choice == false)
+                        ? context.mounted
+                            // Confirm immediate closure to prevent accidental broadcasts
+                            ? await showDialog<bool>(
+                                context: context,
+                                builder: (BuildContext dCon) => EzAlertDialog(
+                                  config,
+                                  title: Text(
+                                    config.ezL10n.gAttention,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  content: Text(
+                                    l10n(config).bsCloseOffWarning,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  actions: ezActionPair(
+                                    config,
+                                    confirmMsg: l10n(config).gOk,
+                                    confirmIsDefault: true,
+                                    onConfirm: () => Navigator.of(dCon).pop(true),
+                                    denyMsg: config.ezL10n.gCancel,
+                                    onDeny: () => Navigator.of(dCon).pop(false),
+                                  ),
+                                  needsClose: false,
+                                ),
+                              )
+                            : true
+                        : context.mounted
+                            // Confirm the user wants to enable this setting
+                            ? await showDialog<bool>(
+                                context: context,
+                                builder: (BuildContext dCon) => EzAlertDialog(
+                                  config,
+                                  title:
+                                      Text(config.ezL10n.gAttention, textAlign: TextAlign.center),
+                                  content: Text(
+                                    l10n(config).bsSOSOnCloseHint,
+                                    semanticsLabel: l10n(config).bsSOSOnCloseHintFix,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  actions: ezActionPair(
+                                    config,
+                                    confirmMsg: l10n(config).gOk,
+                                    confirmIsDefault: true,
+                                    onConfirm: () => Navigator.of(dCon).pop(true),
+                                    denyMsg: config.ezL10n.gCancel,
+                                    onDeny: () => Navigator.of(dCon).pop(false),
+                                  ),
+                                  needsClose: false,
+                                ),
+                              )
+                            : false;
+
+                    return check1 && (check2 ?? false);
+                  },
+                  afterChanged: (bool? value) {
+                    // Exit the app when turning off to avoid accidental broadcasts
+                    if (value == false) exit(0);
+                  },
                 ),
+                config.spacer,
 
-                if (!isIOS) ...<Widget>[
-                  // SOS on close
-                  config.spacer,
-                  EzSwitchPair(
-                    config,
-                    enabled: emc.isNotEmpty,
-                    fauxDisabled: !canSMS,
-                    text: l10n(config).bsSOSOnClose,
-                    valueKey: sosOnCloseKey,
-                    canChange: (bool choice) async {
-                      final bool check1 = await canSet(sosOnCloseKey, choice);
-                      final bool? check2 = (choice == false)
-                          ? context.mounted
-                              // Confirm immediate closure to prevent accidental broadcasts
-                              ? await showDialog<bool>(
-                                  context: context,
-                                  builder: (BuildContext dCon) => EzAlertDialog(
-                                    config,
-                                    title: Text(
-                                      config.ezL10n.gAttention,
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    content: Text(
-                                      l10n(config).bsCloseOffWarning,
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    actions: ezActionPair(
-                                      config,
-                                      confirmMsg: l10n(config).gOk,
-                                      confirmIsDefault: true,
-                                      onConfirm: () => Navigator.of(dCon).pop(true),
-                                      denyMsg: config.ezL10n.gCancel,
-                                      onDeny: () => Navigator.of(dCon).pop(false),
-                                    ),
-                                    needsClose: false,
-                                  ),
-                                )
-                              : true
-                          : context.mounted
-                              // Confirm the user wants to enable this setting
-                              ? await showDialog<bool>(
-                                  context: context,
-                                  builder: (BuildContext dCon) => EzAlertDialog(
-                                    config,
-                                    title:
-                                        Text(config.ezL10n.gAttention, textAlign: TextAlign.center),
-                                    content: Text(
-                                      l10n(config).bsSOSOnCloseHint,
-                                      semanticsLabel: l10n(config).bsSOSOnCloseHintFix,
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    actions: ezActionPair(
-                                      config,
-                                      confirmMsg: l10n(config).gOk,
-                                      confirmIsDefault: true,
-                                      onConfirm: () => Navigator.of(dCon).pop(true),
-                                      denyMsg: config.ezL10n.gCancel,
-                                      onDeny: () => Navigator.of(dCon).pop(false),
-                                    ),
-                                    needsClose: false,
-                                  ),
-                                )
-                              : false;
-
-                      return check1 && (check2 ?? false);
-                    },
-                    afterChanged: (bool? value) {
-                      // Exit the app when turning off to avoid accidental broadcasts
-                      if (value == false) exit(0);
-                    },
-                  ),
-                  config.spacer,
-
-                  // SOS on interrupt
-                  EzSwitchPair(
-                    config,
-                    enabled: emc.isNotEmpty,
-                    fauxDisabled: !canSMS,
-                    text: l10n(config).bsSOSOnVideo,
-                    valueKey: sosOnInterruptKey,
-                    canChange: (bool choice) => canSet(sosOnInterruptKey, choice),
-                  ),
-                ],
-                EzFooter(config, a11howPath: ywt.sosContributeA11),
+                // SOS on interrupt
+                EzSwitchPair(
+                  config,
+                  enabled: emc.isNotEmpty,
+                  fauxDisabled: !canSMS,
+                  text: l10n(config).bsSOSOnVideo,
+                  valueKey: sosOnInterruptKey,
+                  canChange: (bool choice) => canSet(sosOnInterruptKey, choice),
+                ),
               ],
-            ),
+            ]),
           ),
         ),
       ),
