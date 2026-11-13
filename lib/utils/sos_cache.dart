@@ -60,5 +60,8 @@ LLType get linkType => LLTypeConfig.safeLookup(EzCM.get(linkTypeKey));
 
 // Color //
 
-EzSwitchColor videoColor(EzCP config) => EzSwitchColor(color: _cache(config)._videoColor);
+Color videoColor(EzCP config) => _cache(config)._videoColor;
+EzSwitchColor videoFill(EzCP config) => EzSwitchColor(color: videoColor(config));
+
 Color videoTextColor(EzCP config) => _cache(config)._videoTextColor;
+EzSwitchColor videoTextFiller(EzCP config) => EzSwitchColor(color: videoTextColor(config));

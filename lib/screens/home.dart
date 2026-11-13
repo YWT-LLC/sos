@@ -302,7 +302,7 @@ class _HomeScreenState extends State<HomeScreen>
                       builder: (_, AsyncSnapshot<int> snapshot) => EzText(
                         config,
                         text: Duration(seconds: snapshot.data ?? 0).toString().split('.').first,
-                        replaceFill: videoColor(config),
+                        replaceFill: videoFill(config),
                         style: config.labelStyle?.copyWith(color: videoTextColor(config)),
                       ),
                     ),
@@ -527,11 +527,13 @@ class _HomeScreenState extends State<HomeScreen>
                             ? EzIconButton(
                                 config,
                                 style: IconButton.styleFrom(
-                                  foregroundColor: videoColor(config).asColor,
-                                  side: config.borderSide(
-                                      fill: EzSwitchColor(color: videoTextColor(config))),
+                                  side: config.borderSide(fill: videoTextFiller(config)),
                                 ),
-                                icon: EzIcon(config, Icons.stop),
+                                icon: EzIcon(
+                                  config,
+                                  Icons.stop,
+                                  fill: videoFill(config),
+                                ),
                                 tooltip: l10n(config).hsEndRecord,
                                 iconSize: config.iconSize * 2,
                                 onPressed: () async {
@@ -569,12 +571,11 @@ class _HomeScreenState extends State<HomeScreen>
                                     side: config.borderSide(
                                         fill: (camera == null)
                                             ? config.outlineVariantFill
-                                            : config.onSurfaceFiller)),
+                                            : videoTextFiller(config))),
                                 icon: EzIcon(
                                   config,
                                   Icons.circle,
-                                  fill:
-                                      (camera == null) ? config.outlineFiller : videoColor(config),
+                                  fill: (camera == null) ? config.outlineFiller : videoFill(config),
                                 ),
                                 tooltip: l10n(config).hsStartRecord,
                                 iconSize: config.iconSize * 2,
