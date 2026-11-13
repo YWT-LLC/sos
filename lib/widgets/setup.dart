@@ -49,8 +49,10 @@ Widget lStatusIcon(EzCP config, LocationPermission? status) => switch (status) {
 
 // Setting cards //
 
-OutlinedBorder cardShape(EzCP config) =>
-    RoundedRectangleBorder(side: config.borderSide(), borderRadius: EzButtonShape.roundRect.radius);
+OutlinedBorder cardShape(EzCP config) => RoundedRectangleBorder(
+      side: config.borderSide(),
+      borderRadius: config.buttonShape.textRadius,
+    );
 
 class CameraSetup extends StatefulWidget {
   final EzCP config;
