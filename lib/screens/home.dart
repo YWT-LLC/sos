@@ -355,7 +355,7 @@ class _HomeScreenState extends State<HomeScreen>
                         : EzIconButton(
                             config,
                             fauxDisabled: emc.isEmpty,
-                            icon: const Icon(Icons.sos),
+                            icon: EzIcon(config, Icons.sos),
                             tooltip: l10n(config).hsStartSOS,
                             iconSize: config.iconSize * 1.5,
                             onPressed: () => kIsWeb
@@ -406,7 +406,7 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                   child: EzIconButton(
                     config,
-                    icon: const Icon(Icons.settings),
+                    icon: EzIcon(config, Icons.settings),
                     tooltip: config.ezL10n.gSettings,
                     enabled: !recording,
                     onPressed: () => context.goNamed(settingsHomeScreenName),
@@ -422,7 +422,7 @@ class _HomeScreenState extends State<HomeScreen>
                   left: config.isLefty ? null : config.marginVal,
                   child: EzIconButton(
                     config,
-                    icon: const Icon(Icons.thumb_up),
+                    icon: EzIcon(config, Icons.thumb_up),
                     tooltip: l10n(config).hsSafeCloseHint,
                     enabled: !recording,
                     onPressed: () {
@@ -450,8 +450,8 @@ class _HomeScreenState extends State<HomeScreen>
                           ? EzIconButton(
                               config,
                               icon: showRights
-                                  ? const Icon(Icons.visibility_off)
-                                  : const Icon(Icons.gavel),
+                                  ? EzIcon(config, Icons.visibility_off)
+                                  : EzIcon(config, Icons.gavel),
                               tooltip: showRights
                                   ? l10n(config).hsHideRights
                                   : l10n(config).hsShowRights,
@@ -463,7 +463,7 @@ class _HomeScreenState extends State<HomeScreen>
                             )
                           : EzIconButton(
                               config,
-                              icon: const Icon(Icons.camera_alt),
+                              icon: EzIcon(config, Icons.camera_alt),
                               tooltip: l10n(config).hsCameraHint,
                               onPressed: () async {
                                 try {
@@ -531,7 +531,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   side: config.borderSide(
                                       fill: EzSwitchColor(color: videoTextColor(config))),
                                 ),
-                                icon: const Icon(Icons.stop),
+                                icon: EzIcon(config, Icons.stop),
                                 tooltip: l10n(config).hsEndRecord,
                                 iconSize: config.iconSize * 2,
                                 onPressed: () async {
@@ -623,7 +623,7 @@ class _HomeScreenState extends State<HomeScreen>
                           ? EzIconButton(
                               config,
                               fauxDisabled: true,
-                              icon: const Icon(Icons.flash_off),
+                              icon: EzIcon(config, Icons.flash_off),
                               tooltip: l10n(config).hsFlashAuto,
                               onPressed: () async {
                                 final bool worked = await initCamera(config);

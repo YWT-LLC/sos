@@ -48,7 +48,11 @@ class _ContactListState extends State<ContactList> {
               EzIconButton(
                 widget.config,
                 fauxDisabled: widget.fauxDisabled,
-                icon: Icon(Icons.add_circle_outline, semanticLabel: l10n(widget.config).bsAddHint),
+                icon: EzIcon(
+                  widget.config,
+                  Icons.add_circle_outline,
+                  semanticLabel: l10n(widget.config).bsAddHint,
+                ),
                 onPressed: addContact,
                 onLongPress: widget.fauxDisabled ? openAppSettings : null,
                 tooltip: l10n(widget.config).bsAddHint,
@@ -198,7 +202,11 @@ class _ContactTile extends StatelessWidget {
             config.rowSpacer,
             EzIconButton(
               config,
-              icon: Icon(Icons.remove_circle_outline, semanticLabel: l10n(config).bsRemoveHint),
+              icon: EzIcon(
+                config,
+                Icons.remove_circle_outline,
+                semanticLabel: l10n(config).bsRemoveHint,
+              ),
               onPressed: onRemove,
               tooltip: l10n(config).bsRemoveHint,
             ),
