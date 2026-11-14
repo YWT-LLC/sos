@@ -160,6 +160,7 @@ class _PulsingIconWidgetState extends State<SOSIcon> with SingleTickerProviderSt
       builder: (_, __) => EzIcon(
             widget.config,
             ping.value < 0.5 ? Icons.notifications : Icons.notifications_active,
+            size: widget.config.iconSize * 1.5,
           ));
 
   @override

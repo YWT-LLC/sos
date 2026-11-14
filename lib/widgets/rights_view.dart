@@ -79,13 +79,11 @@ class _RightsViewState extends State<RightsView> {
                 EzSegmentedButton<Situation>(
                   widget.config,
                   segments: Situation.values
-                      .map(
-                        (Situation sitch) => ButtonSegment<Situation>(
-                          value: sitch,
-                          label: EzIcon(widget.config, sitch.icon),
-                          tooltip: sitch.tooltip(sosL10n),
-                        ),
-                      )
+                      .map((Situation sitch) => ButtonSegment<Situation>(
+                            value: sitch,
+                            label: EzIcon(widget.config, sitch.icon),
+                            tooltip: sitch.tooltip(sosL10n),
+                          ))
                       .toList(),
                   selected: <Situation>{currTab},
                   showSelectedIcon: false,
@@ -102,21 +100,14 @@ class _RightsViewState extends State<RightsView> {
             animMod: 0.5,
             position: currTab.position,
             delta: delta,
-            child: GestureDetector(
-              onHorizontalDragEnd: (DragEndDetails details) async {
-                if (details.primaryVelocity == null) return;
-
-                if (details.primaryVelocity! < -ezSwipeV) {
-                  // RTL -> nav right
-                  if (currTab.position >= (Situation.values.length - 1)) return;
-                  await _nav(Situation.values[currTab.position + 1]);
-                }
-
-                if (details.primaryVelocity! > ezSwipeV) {
-                  // LTR -> nav left
-                  if (currTab.position <= 0) return;
-                  await _nav(Situation.values[currTab.position - 1]);
-                }
+            child: EzSwipeDetector(
+              rtl: () async {
+                if (currTab.position >= (Situation.values.length - 1)) return;
+                await _nav(Situation.values[currTab.position + 1]);
+              },
+              ltr: () async {
+                if (currTab.position <= 0) return;
+                await _nav(Situation.values[currTab.position - 1]);
               },
               child: EzCol(
                 crossAxisAlignment: CrossAxisAlignment.start,

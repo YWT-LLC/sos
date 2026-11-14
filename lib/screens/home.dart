@@ -241,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen>
                     alignment: Alignment.topCenter,
                     height: heightOf(context) * 0.667,
                     width: double.infinity,
-                    decoration: config.boxDeco(),
+                    decoration: config.boxDeco(borderRadius: BorderRadius.zero),
                     child: camera == null
                         ? EzAnimVis(
                             config,
@@ -271,6 +271,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   width: double.infinity,
                                   decoration: config.boxDeco(
                                     fill: config.surfaceContainerFill,
+                                    borderRadius: BorderRadius.zero,
                                     opacity: config.textBackgroundOpacity,
                                   ),
                                   child: RightsView(config),
@@ -348,16 +349,18 @@ class _HomeScreenState extends State<HomeScreen>
                         ? EzIconButton(
                             config,
                             icon: SOSIcon(config),
-                            iconSize: config.iconSize * 1.5,
                             tooltip: l10n(config).hsEndSOS,
                             onPressed: stopForegroundSOS,
                           )
                         : EzIconButton(
                             config,
                             fauxDisabled: emc.isEmpty,
-                            icon: EzIcon(config, Icons.sos),
+                            icon: EzIcon(
+                              config,
+                              Icons.sos,
+                              size: config.iconSize * 1.5,
+                            ),
                             tooltip: l10n(config).hsStartSOS,
-                            iconSize: config.iconSize * 1.5,
                             onPressed: () => kIsWeb
                                 ? launchUrl(Uri.parse((EzCM.platform == TargetPlatform.iOS ||
                                         EzCM.platform == TargetPlatform.macOS)
@@ -527,15 +530,15 @@ class _HomeScreenState extends State<HomeScreen>
                             ? EzIconButton(
                                 config,
                                 style: IconButton.styleFrom(
-                                  side: config.borderSide(fill: videoTextFiller(config)),
+                                  side: config.borderSide(fill: config.outlineFiller),
                                 ),
                                 icon: EzIcon(
                                   config,
                                   Icons.stop,
                                   fill: videoFill(config),
+                                  size: config.iconSize * 2,
                                 ),
                                 tooltip: l10n(config).hsEndRecord,
-                                iconSize: config.iconSize * 2,
                                 onPressed: () async {
                                   late final XFile video;
                                   bool fileSuccess = true;
@@ -568,17 +571,18 @@ class _HomeScreenState extends State<HomeScreen>
                             : EzIconButton(
                                 config,
                                 style: IconButton.styleFrom(
-                                    side: config.borderSide(
-                                        fill: (camera == null)
-                                            ? config.outlineVariantFill
-                                            : videoTextFiller(config))),
+                                  side: config.borderSide(
+                                      fill: (camera == null)
+                                          ? config.outlineVariantFill
+                                          : config.outlineFiller),
+                                ),
                                 icon: EzIcon(
                                   config,
                                   Icons.circle,
                                   fill: (camera == null) ? config.outlineFiller : videoFill(config),
+                                  size: config.iconSize * 2,
                                 ),
                                 tooltip: l10n(config).hsStartRecord,
-                                iconSize: config.iconSize * 2,
                                 onLongPress: camera == null
                                     ? () => context.goNamed(settingsHomeScreenName)
                                     : null,
