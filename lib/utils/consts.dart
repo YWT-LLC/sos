@@ -223,7 +223,6 @@ final Map<String, Object> sosConfig = <String, Object>{
   lightVideoColorKey: 0xFFFF0000,
 };
 
-/// For [EzCM.init]
 const Map<String, Type> allSOSKeys = <String, Type>{
   ...allEZConfigKeys,
   ...sosBTSKeys,
@@ -231,8 +230,16 @@ const Map<String, Type> allSOSKeys = <String, Type>{
   ...sosColorKeys,
 };
 
-/// For [EzResetButton]s
-final Set<String> neverResetKeys = <String>{...sosBTSKeys.keys, ...sosBroadcastKeys.keys};
+final Set<String> uniqueKeys = <String>{
+  ...sosBTSKeys.keys,
+  ...sosBroadcastKeys.keys,
+  ...sosColorKeys.keys,
+};
+
+final Set<String> neverResetKeys = <String>{
+  ...sosBTSKeys.keys,
+  ...sosBroadcastKeys.keys,
+};
 
 //* Runtime *//
 
