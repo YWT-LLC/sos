@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.1] - 2026-11-17
+### Added
+- New a11how footer
+- Gradient colors
+
 ## [3.1.0] - 2026-09-27
 ### Updated
 - EFUI

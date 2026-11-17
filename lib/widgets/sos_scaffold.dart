@@ -38,7 +38,7 @@ class SosScaffold extends StatelessWidget {
           fabs: <Widget>[
             EzUpdaterFAB(
               config,
-              appVersion: '3.1.0',
+              appVersion: '3.1.1',
               versionSource:
                   'https://raw.githubusercontent.com/YWT-LLC/sos/refs/heads/main/APP_VERSION',
               gPlay: ywt.sosGPlay,
