@@ -188,8 +188,8 @@ const String lightVideoColorKey = 'lightVideoColor';
 
 /// [darkVideoColorKey], [lightVideoColorKey]
 const Map<String, Type> sosColorKeys = <String, Type>{
-  darkVideoColorKey: int,
-  lightVideoColorKey: int,
+  darkVideoColorKey: String,
+  lightVideoColorKey: String,
 };
 
 // EzConfig default //
