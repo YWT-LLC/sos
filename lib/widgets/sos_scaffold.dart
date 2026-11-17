@@ -29,11 +29,12 @@ class SosScaffold extends StatelessWidget {
         small: EzScaffold(
           config,
           body: body,
-          footer: EzFooter(
-            config,
-            quiet: isHome,
-            a11howPath: settingsA11 ? ywt.openUIContributeA11 : ywt.sosContributeA11,
-          ),
+          footer: isHome
+              ? null
+              : EzFooter(
+                  config,
+                  a11howPath: settingsA11 ? ywt.openUIContributeA11 : ywt.sosContributeA11,
+                ),
           fabs: <Widget>[
             EzUpdaterFAB(
               config,
