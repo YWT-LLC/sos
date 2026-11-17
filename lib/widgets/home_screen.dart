@@ -7,7 +7,7 @@ import '../utils/export.dart';
 
 import 'package:camera/camera.dart';
 import 'package:open_ui/open_ui.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FlashButton extends StatefulWidget {
   final EzCP config;
@@ -33,10 +33,10 @@ class _FlashButtonState extends State<FlashButton> {
         widget.config,
         enabled: working.values.contains(true),
         icon: switch (widget.camera.value.flashMode) {
-          FlashMode.off => const Icon(Icons.flash_off),
-          FlashMode.auto => const Icon(Icons.flash_auto),
-          FlashMode.always => const Icon(Icons.flash_on),
-          FlashMode.torch => const Icon(Icons.flashlight_on),
+          FlashMode.off => EzIcon(widget.config, Icons.flash_off),
+          FlashMode.auto => EzIcon(widget.config, Icons.flash_auto),
+          FlashMode.always => EzIcon(widget.config, Icons.flash_on),
+          FlashMode.torch => EzIcon(widget.config, Icons.flashlight_on),
         },
         tooltip: switch (widget.camera.value.flashMode) {
           FlashMode.off => l10n(widget.config).hsFlashOff,
@@ -156,10 +156,12 @@ class _PulsingIconWidgetState extends State<SOSIcon> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) => AnimatedBuilder(
-        animation: ping,
-        builder: (_, __) =>
-            Icon(ping.value < 0.5 ? Icons.notifications : Icons.notifications_active),
-      );
+      animation: ping,
+      builder: (_, __) => EzIcon(
+            widget.config,
+            ping.value < 0.5 ? Icons.notifications : Icons.notifications_active,
+            size: widget.config.iconSize * 1.5,
+          ));
 
   @override
   void dispose() {

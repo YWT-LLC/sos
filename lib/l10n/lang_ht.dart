@@ -122,11 +122,11 @@ class LangHt extends Lang {
 
   @override
   String get faqOnInterruptA =>
-      ' si yon videyo ap anrejistre epi InstaSOS pèdi fokalizasyon, yon difizyon SOS ap kòmanse. Pèdi fokalizasyon vle di: minimize aplikasyon an, chanje aplikasyon, ak/oswa fèmen ekran an. Nou rekòmande pou aktive sa a oswa \"SOS lè ou fèmen\" (oswa toulede).';
+      ' si yon videyo ap anrejistre epi InstaSOS pèdi fokalizasyon, yon difizyon SOS ap kòmanse. Pèdi fokalizasyon vle di: minimize aplikasyon an, chanje aplikasyon, ak/oswa fèmen ekran an. Nou rekòmande pou aktive sa a oswa \"SOS lè aplikasyon an fèmen\" (oswa toulede).';
 
   @override
   String get faqOnInterruptAFix =>
-      ' si yon videyo ap anrejistre epi Insta-SOS pèdi fokalizasyon, yon difizyon SOS ap kòmanse. Pèdi fokalizasyon vle di: minimize aplikasyon an, chanje aplikasyon, ak/oswa fèmen ekran an. Nou rekòmande pou aktive sa a oswa \"SOS lè ou fèmen\" (oswa toulede).';
+      ' si yon videyo ap anrejistre epi Insta-SOS pèdi fokalizasyon, yon difizyon SOS ap kòmanse. Pèdi fokalizasyon vle di: minimize aplikasyon an, chanje aplikasyon, ak/oswa fèmen ekran an. Nou rekòmande pou aktive sa a oswa \"SOS lè aplikasyon an fèmen\" (oswa toulede).';
 
   @override
   String get faqOnOpenA =>
@@ -145,7 +145,7 @@ class LangHt extends Lang {
 
   @override
   String get faqRestricted =>
-      'Fonksyon ki pa la yo bezwen yon automatizasyon SMS, epi Apple pa pèmèt devlopè yo otomatize mesaj tèks (san yon sèvis peye).';
+      'Fonksyon ki pa la yo bezwen yon otomatizasyon SMS, epi Apple pa pèmèt devlopè yo otomatize mesaj tèks (san yon sèvis peye).';
 
   @override
   String get faqSettings => 'Kijan anviwònman yo fonksyone?';
@@ -179,7 +179,7 @@ class LangHt extends Lang {
 
   @override
   String get gOnCloseWarning =>
-      '\"SOS lè ou fèmen\" aktive. Sa pral kòmanse yon difizyon.';
+      '\"SOS lè aplikasyon an fèmen\" aktive. Sa pral kòmanse yon difizyon.';
 
   @override
   String get gReminder => 'Rapèl';
@@ -189,7 +189,7 @@ class LangHt extends Lang {
 
   @override
   String get hsAddAlways =>
-      'Li rekòmande pou aktive l tout tan. Peze ankò pou ouvri Paramèt Sistèm nan.';
+      'Li rekòmande pou aktive l tout tan. Peze ankò pou ouvri anviwònman sistèm nan.';
 
   @override
   String get hsAddContacts => 'Pèmèt mesaj SOS';
@@ -249,7 +249,7 @@ class LangHt extends Lang {
 
   @override
   String get hsCameraSnack =>
-      'Tanpri aktive kamera a nan paramèt yo (anwo a)\nepi eseye ankò';
+      'Tanpri aktive kamera a nan anviwònman yo (anwo a)\nepi eseye ankò';
 
   @override
   String get hsContacts => 'Kontak';
@@ -337,7 +337,7 @@ class LangHt extends Lang {
 
   @override
   String get hsSettingsTutorialWeb =>
-      '- Pèsonalize aparans aplikasyon an\n- Jwenn aksè a plis resous ak sipò\n\nnan paramèt yo.';
+      '- Pèsonalize aparans aplikasyon an\n- Jwenn aksè a plis resous ak sipò\n\nnan anviwònman yo.';
 
   @override
   String get hsSettingsTutorialWebFix =>

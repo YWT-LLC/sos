@@ -12,11 +12,11 @@ import 'dart:io';
 import 'dart:async';
 import 'package:camera/camera.dart';
 import 'package:open_ui/open_ui.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -86,6 +86,27 @@ class _HomeScreenState extends State<HomeScreen>
     }
   }
 
+  Future<void> saveNShare(EzCP config, XFile file, bool image) async {
+    await saveToGallery(file.path, image);
+
+    if (autoShareMedia && mounted) {
+      if (isIOS) {
+        final RenderBox box = context.findRenderObject() as RenderBox;
+
+        await SharePlus.instance.share(ShareParams(
+          text: kIsWeb ? null : await getCoordinates(l10n(config)),
+          files: <XFile>[file],
+          sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
+        ));
+      } else {
+        await SharePlus.instance.share(ShareParams(
+          text: kIsWeb ? null : await getCoordinates(l10n(config)),
+          files: <XFile>[file],
+        ));
+      }
+    }
+  }
+
   Future<bool> sosChecks(EzCP config) async {
     // Check permissions
     if (!isIOS && deniedPermCheck(await Permission.sms.status)) {
@@ -99,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen>
                   config,
                   text: config.ezL10n.gSettings,
                   onPressed: openAppSettings,
-                  style: config.bodyStyle?.copyWith(color: config.colors.primary),
+                  style: config.bodyStyle?.copyWith(color: config.primaryFill.asColor),
                 ),
               ],
             )
@@ -111,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen>
     if (emc.isEmpty) {
       if (mounted) {
         ezSnackBar(config, context: context, message: l10n(config).bsSnackRequest);
-        await context.pushNamed(sosSettingsPath);
+        await context.pushNamed(sosSettingsScreenName);
         if (mounted) setState(() {});
       }
       return false;
@@ -220,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen>
                     alignment: Alignment.topCenter,
                     height: heightOf(context) * 0.667,
                     width: double.infinity,
-                    color: config.colors.surface,
+                    decoration: config.boxDeco(borderRadius: BorderRadius.zero),
                     child: camera == null
                         ? EzAnimVis(
                             config,
@@ -248,8 +269,10 @@ class _HomeScreenState extends State<HomeScreen>
                                 kid: Container(
                                   height: double.infinity,
                                   width: double.infinity,
-                                  color: config.colors.surfaceContainer.withValues(
-                                    alpha: config.textBackgroundOpacity,
+                                  decoration: config.boxDeco(
+                                    fill: config.surfaceContainerFill,
+                                    borderRadius: BorderRadius.zero,
+                                    opacity: config.textBackgroundOpacity,
                                   ),
                                   child: RightsView(config),
                                 ),
@@ -280,7 +303,7 @@ class _HomeScreenState extends State<HomeScreen>
                       builder: (_, AsyncSnapshot<int> snapshot) => EzText(
                         config,
                         text: Duration(seconds: snapshot.data ?? 0).toString().split('.').first,
-                        backgroundColor: videoColor(config),
+                        replaceFill: videoFill(config),
                         style: config.labelStyle?.copyWith(color: videoTextColor(config)),
                       ),
                     ),
@@ -304,7 +327,7 @@ class _HomeScreenState extends State<HomeScreen>
                           config.marginVal,
                       left: 0,
                       right: 0,
-                      title: EzIcon(config, Icons.arrow_upward, color: config.colors.onSurface),
+                      title: EzIcon(config, Icons.arrow_upward, fill: config.onSurfaceFiller),
                       content: kIsWeb
                           ? l10n(config).hsNoWebSOS
                           : (isIOS
@@ -326,16 +349,18 @@ class _HomeScreenState extends State<HomeScreen>
                         ? EzIconButton(
                             config,
                             icon: SOSIcon(config),
-                            iconSize: config.iconSize * 1.5,
                             tooltip: l10n(config).hsEndSOS,
                             onPressed: stopForegroundSOS,
                           )
                         : EzIconButton(
                             config,
                             fauxDisabled: emc.isEmpty,
-                            icon: const Icon(Icons.sos),
+                            icon: EzIcon(
+                              config,
+                              Icons.sos,
+                              size: config.iconSize * 1.5,
+                            ),
                             tooltip: l10n(config).hsStartSOS,
-                            iconSize: config.iconSize * 1.5,
                             onPressed: () => kIsWeb
                                 ? launchUrl(Uri.parse((EzCM.platform == TargetPlatform.iOS ||
                                         EzCM.platform == TargetPlatform.macOS)
@@ -362,7 +387,11 @@ class _HomeScreenState extends State<HomeScreen>
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
-                        EzIcon(config, Icons.arrow_forward, color: config.colors.onSurface),
+                        EzIcon(
+                          config,
+                          Icons.arrow_forward,
+                          fill: config.onSurfaceFiller,
+                        ),
                       ],
                     ),
                     content: kIsWeb
@@ -380,10 +409,10 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                   child: EzIconButton(
                     config,
-                    icon: const Icon(Icons.settings),
+                    icon: EzIcon(config, Icons.settings),
                     tooltip: config.ezL10n.gSettings,
                     enabled: !recording,
-                    onPressed: () => context.goNamed(settingsHomePath),
+                    onPressed: () => context.goNamed(settingsHomeScreenName),
                   ),
                 ),
               ),
@@ -396,7 +425,7 @@ class _HomeScreenState extends State<HomeScreen>
                   left: config.isLefty ? null : config.marginVal,
                   child: EzIconButton(
                     config,
-                    icon: const Icon(Icons.thumb_up),
+                    icon: EzIcon(config, Icons.thumb_up),
                     tooltip: l10n(config).hsSafeCloseHint,
                     enabled: !recording,
                     onPressed: () {
@@ -424,8 +453,8 @@ class _HomeScreenState extends State<HomeScreen>
                           ? EzIconButton(
                               config,
                               icon: showRights
-                                  ? const Icon(Icons.visibility_off)
-                                  : const Icon(Icons.gavel),
+                                  ? EzIcon(config, Icons.visibility_off)
+                                  : EzIcon(config, Icons.gavel),
                               tooltip: showRights
                                   ? l10n(config).hsHideRights
                                   : l10n(config).hsShowRights,
@@ -437,37 +466,15 @@ class _HomeScreenState extends State<HomeScreen>
                             )
                           : EzIconButton(
                               config,
-                              icon: const Icon(Icons.camera_alt),
+                              icon: EzIcon(config, Icons.camera_alt),
                               tooltip: l10n(config).hsCameraHint,
                               onPressed: () async {
                                 try {
                                   final XFile image = await camera!.takePicture();
-                                  await saveToGallery(image.path, true);
-
-                                  // Attempt to share (config based)
-                                  if (autoShareMedia && context.mounted) {
-                                    final RenderBox? box = context.findRenderObject() as RenderBox?;
-
-                                    await SharePlus.instance.share(ShareParams(
-                                      text: kIsWeb
-                                          ? null
-                                          : await getCoordinates(
-                                              l10n(config),
-                                              linkBase: linkType.base,
-                                              nullable: true,
-                                            ),
-                                      files: <XFile>[image],
-                                      sharePositionOrigin:
-                                          box!.localToGlobal(Offset.zero) & box.size,
-                                    ));
-                                  }
+                                  await saveNShare(config, image, true);
                                 } catch (e) {
-                                  (context.mounted)
-                                      ? ezLogAlert(
-                                          config,
-                                          context: context,
-                                          message: e.toString(),
-                                        )
+                                  context.mounted
+                                      ? ezLogAlert(config, context: context, message: e.toString())
                                       : ezLog(e.toString());
                                 }
                               },
@@ -488,7 +495,7 @@ class _HomeScreenState extends State<HomeScreen>
                           title: EzIcon(
                             config,
                             Icons.arrow_downward,
-                            color: config.colors.onSurface,
+                            fill: config.onSurfaceFiller,
                           ),
                           content: (kIsWeb || isIOS)
                               ? l10n(config).hsIOSVideoTutorial
@@ -523,26 +530,25 @@ class _HomeScreenState extends State<HomeScreen>
                             ? EzIconButton(
                                 config,
                                 style: IconButton.styleFrom(
-                                  foregroundColor: videoColor(config),
-                                  side: config.borderSide(color: videoTextColor(config)),
+                                  side: config.borderSide(fill: config.outlineFiller),
                                 ),
-                                icon: const Icon(Icons.stop),
+                                icon: EzIcon(
+                                  config,
+                                  Icons.stop,
+                                  fill: videoFill(config),
+                                  size: config.iconSize * 2,
+                                ),
                                 tooltip: l10n(config).hsEndRecord,
-                                iconSize: config.iconSize * 2,
                                 onPressed: () async {
                                   late final XFile video;
                                   bool fileSuccess = true;
 
-                                  // Stop recording
                                   try {
                                     video = await camera!.stopVideoRecording();
                                   } catch (e) {
                                     (context.mounted)
-                                        ? ezLogAlert(
-                                            config,
-                                            context: context,
-                                            message: e.toString(),
-                                          )
+                                        ? ezLogAlert(config,
+                                            context: context, message: e.toString())
                                         : ezLog(e.toString());
                                     fileSuccess = false;
                                   } finally {
@@ -553,56 +559,33 @@ class _HomeScreenState extends State<HomeScreen>
                                   if (!fileSuccess) return;
 
                                   try {
-                                    await saveToGallery(video.path, false);
-
-                                    // Attempt to share the video (config based)
-                                    if (autoShareMedia && context.mounted) {
-                                      final RenderBox? box =
-                                          context.findRenderObject() as RenderBox?;
-
-                                      await SharePlus.instance.share(
-                                        ShareParams(
-                                          text: kIsWeb
-                                              ? null
-                                              : await getCoordinates(
-                                                  l10n(config),
-                                                  linkBase: linkType.base,
-                                                  nullable: true,
-                                                ),
-                                          files: <XFile>[video],
-                                          sharePositionOrigin:
-                                              box!.localToGlobal(Offset.zero) & box.size,
-                                        ),
-                                      );
-                                    }
+                                    await saveNShare(config, video, false);
                                   } catch (e) {
                                     (context.mounted)
-                                        ? ezLogAlert(
-                                            config,
-                                            context: context,
-                                            message: e.toString(),
-                                          )
+                                        ? ezLogAlert(config,
+                                            context: context, message: e.toString())
                                         : ezLog(e.toString());
                                   }
                                 },
                               )
                             : EzIconButton(
                                 config,
-                                style: (camera == null)
-                                    ? IconButton.styleFrom(
-                                        foregroundColor: config.colors.outline,
-                                        side:
-                                            config.borderSide(color: config.colors.outlineVariant),
-                                      )
-                                    : IconButton.styleFrom(
-                                        foregroundColor: videoColor(config),
-                                        side: config.borderSide(color: config.colors.onSurface),
-                                      ),
-                                icon: const Icon(Icons.circle),
+                                style: IconButton.styleFrom(
+                                  side: config.borderSide(
+                                      fill: (camera == null)
+                                          ? config.outlineVariantFill
+                                          : config.outlineFiller),
+                                ),
+                                icon: EzIcon(
+                                  config,
+                                  Icons.circle,
+                                  fill: (camera == null) ? config.outlineFiller : videoFill(config),
+                                  size: config.iconSize * 2,
+                                ),
                                 tooltip: l10n(config).hsStartRecord,
-                                iconSize: config.iconSize * 2,
-                                onLongPress:
-                                    camera == null ? () => context.goNamed(settingsHomePath) : null,
+                                onLongPress: camera == null
+                                    ? () => context.goNamed(settingsHomeScreenName)
+                                    : null,
                                 onPressed: () async {
                                   if (camera == null) {
                                     final bool worked = await initCamera(config);
@@ -645,7 +628,7 @@ class _HomeScreenState extends State<HomeScreen>
                           ? EzIconButton(
                               config,
                               fauxDisabled: true,
-                              icon: const Icon(Icons.flash_off),
+                              icon: EzIcon(config, Icons.flash_off),
                               tooltip: l10n(config).hsFlashAuto,
                               onPressed: () async {
                                 final bool worked = await initCamera(config);
@@ -662,7 +645,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   }
                                 }
                               },
-                              onLongPress: () => context.goNamed(settingsHomePath),
+                              onLongPress: () => context.goNamed(settingsHomeScreenName),
                             )
                           : FlashButton(config, camera: camera!),
                     ],

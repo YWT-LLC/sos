@@ -3,27 +3,42 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:open_ui/open_ui.dart';
-import 'package:flutter/material.dart';
 import 'package:ywt_private/ywt_private.dart' as ywt;
+
+import 'package:open_ui/open_ui.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SosScaffold extends StatelessWidget {
   final EzCP config;
   final Widget body;
   final List<Widget>? fabs;
   final bool isHome;
+  final bool settingsA11;
 
-  const SosScaffold(this.config, {super.key, required this.body, this.fabs, this.isHome = false});
+  const SosScaffold(
+    this.config, {
+    super.key,
+    required this.body,
+    this.fabs,
+    this.isHome = false,
+    this.settingsA11 = false,
+  });
 
   @override
   Widget build(BuildContext context) => EzAdaptiveParent(
         small: EzScaffold(
           config,
           body: body,
+          footer: isHome
+              ? null
+              : EzFooter(
+                  config,
+                  a11howPath: settingsA11 ? ywt.openUIContributeA11 : ywt.sosContributeA11,
+                ),
           fabs: <Widget>[
             EzUpdaterFAB(
               config,
-              appVersion: '3.1.0',
+              appVersion: '3.1.1',
               versionSource:
                   'https://raw.githubusercontent.com/YWT-LLC/sos/refs/heads/main/APP_VERSION',
               gPlay: ywt.sosGPlay,
@@ -31,7 +46,7 @@ class SosScaffold extends StatelessWidget {
               github: ywt.sosReleases,
             ),
             if (fabs != null) ...fabs!,
-            ...config.backFABs(isHome),
+            ...config.backFABs(isHome: isHome),
           ],
         ),
       );

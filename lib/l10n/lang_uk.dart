@@ -157,7 +157,7 @@ class LangUk extends Lang {
 
   @override
   String get faqSplitClarity1 =>
-      'Надання доступу до контакту не робить його екстреним контактом. Лише номери, вказані в ';
+      'Надання доступу до контакту не робить його екстреним контактом. Лише номери, вказані в розділі ';
 
   @override
   String get faqSplitClarity2 =>
@@ -168,7 +168,7 @@ class LangUk extends Lang {
 
   @override
   String get faqUpdateContacts =>
-      'Ви можете надати доступ до більшої кількості (або всіх) контактів у ';
+      'Ви можете надати доступ до більшої кількості (або всіх) контактів у розділі ';
 
   @override
   String get gDone => 'Готово';
@@ -219,7 +219,7 @@ class LangUk extends Lang {
 
   @override
   String get hsAppleContacts =>
-      'Цей крок стосується лише дозволів програми.\nВи ще не вибираєте екстрені контакти.\n\nРекомендується дозволити всі, щоб уникнути зайвого клопоту.';
+      'Цей крок стосується лише дозволів додатка.\nВи ще не вибираєте екстрені контакти.\n\nРекомендується дозволити всі, щоб уникнути зайвого клопоту.';
 
   @override
   String get hsBroadcastTutorial =>
@@ -312,7 +312,7 @@ class LangUk extends Lang {
 
   @override
   String get hsNoWebSOS =>
-      'Функції екстреної допомоги недоступні у вебверсії.\nСкористайтеся кнопкою SOS, щоб завантажити застосунок InstaSOS.';
+      'Функції екстреної допомоги недоступні у вебверсії.\nСкористайтеся кнопкою SOS, щоб завантажити додаток InstaSOS.';
 
   @override
   String get hsOneOfFour => 'Перше з чотирьох. Продовжити...';
@@ -341,7 +341,7 @@ class LangUk extends Lang {
 
   @override
   String get hsSettingsTutorialWeb =>
-      '- Налаштуйте зовнішній вигляд застосунку\n- Отримайте доступ до додаткових ресурсів і підтримки\n\nу налаштуваннях.';
+      '- Налаштуйте зовнішній вигляд додатка\n- Отримайте доступ до додаткових ресурсів і підтримки\n\nу налаштуваннях.';
 
   @override
   String get hsSettingsTutorialWebFix =>
@@ -384,7 +384,7 @@ class LangUk extends Lang {
 
   @override
   String get hsWebIntro =>
-      'Вебверсія — це лише KYR-камера.\n\nВам потрібно буде встановити застосунок InstaSOS, щоб користуватися функціями екстреної допомоги.';
+      'Вебверсія — це лише KYR-камера.\n\nВам потрібно буде встановити додаток InstaSOS, щоб користуватися функціями екстреної допомоги.';
 
   @override
   String get hsWelcome => 'Ласкаво просимо до InstaSOS';
@@ -404,7 +404,7 @@ class LangUk extends Lang {
   String get pmOnlyAdd => 'Цей інструмент допомагає лише додавати дозволи.';
 
   @override
-  String get pmRemoveIn => 'Ви можете скасувати дозволи в ';
+  String get pmRemoveIn => 'Ви можете скасувати дозволи в розділі ';
 
   @override
   String get rmAffiliate => 'Жоден з них не пов\'язаний з YWT';

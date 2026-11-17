@@ -87,7 +87,7 @@ class LangRu extends Lang {
   String get faqContributing => 'сделать свой вклад';
 
   @override
-  String get faqExpand => ' , чтобы помочь расширить доступные языки.';
+  String get faqExpand => ', чтобы помочь расширить доступные языки.';
 
   @override
   String get faqLanguages => 'Почему язык X недоступен?';
@@ -156,7 +156,7 @@ class LangRu extends Lang {
 
   @override
   String get faqSplitClarity1 =>
-      'Предоставление доступа к контакту не делает его экстренным. Только номера, указанные в ';
+      'Предоставление доступа к контакту не делает его экстренным. Только номера, указанные в разделе ';
 
   @override
   String get faqSplitClarity2 => ' получат сообщение во время трансляции SOS.';
@@ -166,7 +166,7 @@ class LangRu extends Lang {
 
   @override
   String get faqUpdateContacts =>
-      'Вы можете дать доступ к большему количеству (или всем) контактам в ';
+      'Вы можете дать доступ к большему количеству (или всем) контактам в разделе ';
 
   @override
   String get gDone => 'Готово';
@@ -179,7 +179,7 @@ class LangRu extends Lang {
 
   @override
   String get gOnCloseWarning =>
-      '\"SOS при закрытии\" включен. Это запустит трансляцию.';
+      '«SOS при закрытии» включено. Это запустит трансляцию.';
 
   @override
   String get gReminder => 'Напоминание';
@@ -209,11 +209,11 @@ class LangRu extends Lang {
 
   @override
   String get hsAppIntro =>
-      'Для начала, это просто приложение для знания своих прав.\nВы можете включить больше инструментов, предоставив им разрешения в списке ниже.';
+      'Для начала, это просто приложение «Знай свои права».\nВы можете включить больше инструментов, предоставив им разрешения в списке ниже.';
 
   @override
   String get hsAppIntroAlt =>
-      'Последнее обновление было крупным, давайте убедимся, что всё готово, ниже.';
+      'Последнее обновление было крупным. Давайте убедимся, что всё ниже готово.';
 
   @override
   String get hsAppleContacts =>
@@ -405,7 +405,7 @@ class LangRu extends Lang {
       'Этот инструмент помогает только добавлять разрешения.';
 
   @override
-  String get pmRemoveIn => 'Вы можете удалить разрешения в ';
+  String get pmRemoveIn => 'Вы можете удалить разрешения в разделе ';
 
   @override
   String get rmAffiliate => 'Ни один из них не связан с YWT';

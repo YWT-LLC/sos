@@ -8,59 +8,51 @@ import '../utils/export.dart';
 import 'dart:async';
 import 'package:gal/gal.dart';
 import 'package:open_ui/open_ui.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:flutter_contacts/flutter_contacts.dart' as fc;
+import 'package:material_ui/material_ui.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_contacts/flutter_contacts.dart' as fc;
 
 // Icon generators //
 
 Widget boolIcon(EzCP config, bool? status) => switch (status) {
-      true => EzIcon(config, Icons.check, color: config.colors.primary),
-      false => EzIcon(config, Icons.cancel_outlined, color: config.colors.error),
-      null => EzIcon(config, Icons.help_outline, color: config.colors.primary),
+      true => EzIcon(config, Icons.check, fill: config.primaryFill),
+      false => EzIcon(config, Icons.cancel_outlined, fill: config.errorFill),
+      null => EzIcon(config, Icons.help_outline, fill: config.primaryFill),
     };
 
 Widget pStatusIcon(EzCP config, PermissionStatus? status) => switch (status) {
       PermissionStatus.granted ||
       PermissionStatus.limited ||
       PermissionStatus.provisional =>
-        EzIcon(config, Icons.check, color: config.colors.primary),
-      PermissionStatus.restricted => EzIcon(
-          config,
-          Icons.cancel_outlined,
-          color: config.colors.outline,
-        ),
-      PermissionStatus.denied || PermissionStatus.permanentlyDenied => EzIcon(
-          config,
-          Icons.cancel_outlined,
-          color: config.colors.error,
-        ),
-      null => EzIcon(config, Icons.help_outline, color: config.colors.primary),
+        EzIcon(config, Icons.check, fill: config.primaryFill),
+      PermissionStatus.restricted =>
+        EzIcon(config, Icons.cancel_outlined, fill: config.outlineFiller),
+      PermissionStatus.denied ||
+      PermissionStatus.permanentlyDenied =>
+        EzIcon(config, Icons.cancel_outlined, fill: config.errorFill),
+      null => EzIcon(config, Icons.help_outline, fill: config.primaryFill),
     };
 
 Widget lStatusIcon(EzCP config, LocationPermission? status) => switch (status) {
-      LocationPermission.always => EzIcon(config, Icons.check, color: config.colors.primary),
-      LocationPermission.denied || LocationPermission.deniedForever => EzIcon(
-          config,
-          Icons.cancel_outlined,
-          color: config.colors.error,
-        ),
-      null => EzIcon(config, Icons.help_outline, color: config.colors.primary),
+      LocationPermission.always => EzIcon(config, Icons.check, fill: config.primaryFill),
+      LocationPermission.denied ||
+      LocationPermission.deniedForever =>
+        EzIcon(config, Icons.cancel_outlined, fill: config.errorFill),
+      null => EzIcon(config, Icons.help_outline, fill: config.primaryFill),
       LocationPermission.unableToDetermine =>
-        EzIcon(config, Icons.check, color: config.colors.outline),
-      LocationPermission.whileInUse => EzIcon(
-          config,
-          isIOS ? Icons.check : Icons.help_outline,
-          color: config.colors.primary,
-        ),
+        EzIcon(config, Icons.check, fill: config.outlineFiller),
+      LocationPermission.whileInUse =>
+        EzIcon(config, isIOS ? Icons.check : Icons.help_outline, fill: config.primaryFill),
     };
 
 // Setting cards //
 
-OutlinedBorder cardShape(EzCP config) =>
-    RoundedRectangleBorder(side: config.borderSide(), borderRadius: EzButtonShape.roundRect.radius);
+OutlinedBorder cardShape(EzCP config) => RoundedRectangleBorder(
+      side: config.borderSide(),
+      borderRadius: config.buttonShape.textRadius,
+    );
 
 class CameraSetup extends StatefulWidget {
   final EzCP config;
@@ -84,7 +76,7 @@ class _CameraSetupState extends State<CameraSetup> {
 
   Future<void> backgroundCheck() async {
     camStatus = await Permission.camera.status;
-    galStatus = kIsWeb ? true : await Gal.hasAccess();
+    galStatus = kIsWeb ? true : await Gal.hasPermission();
     micStatus = await Permission.microphone.status;
 
     if (mounted) setState(() {});
@@ -222,7 +214,7 @@ class _CameraSetupState extends State<CameraSetup> {
           widget.setLock(true);
 
           // Make it so
-          final bool result = await Gal.requestAccess();
+          final bool result = await Gal.requestPermission();
           if (galStatus != result) galStatus = result;
           if (mounted) setState(() {});
           widget.setLock(false);

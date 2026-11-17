@@ -6,7 +6,7 @@
 import './export.dart';
 
 import 'package:open_ui/open_ui.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SOSCache extends EzAppCache {
   Locale _locale;
@@ -34,27 +34,34 @@ class SOSCache extends EzAppCache {
 
   void _setVideoColors(bool isDark) {
     _videoColor = Color(EzCM.get(isDark ? darkVideoColorKey : lightVideoColorKey) as int);
-    _videoTextColor = getTextColor(_videoColor);
+    _videoTextColor = ezTextColor(_videoColor);
   }
 }
 
-bool get isIOS => EzCM.platform == TargetPlatform.iOS;
+// Global //
 
 SOSCache _cache(EzCP config) => config.appCache! as SOSCache;
 
+bool get isIOS => EzCM.platform == TargetPlatform.iOS;
+bool get showTutorial => EzCM.get(showTutorialKey);
+
 Lang l10n(EzCP config) => _cache(config)._l10n;
 
-Color videoColor(EzCP config) => _cache(config)._videoColor;
-Color videoTextColor(EzCP config) => _cache(config)._videoTextColor;
-
-bool get showTutorial => EzCM.get(showTutorialKey);
+// SOS //
 
 bool get autoShareMedia => EzCM.get(autoShareMediaKey);
 
 List<String> get emc => EzCM.get(emcKey);
 
-LLType get linkType => LLTypeConfig.safeLookup(EzCM.get(linkTypeKey));
-
 bool get sosOnOpen => EzCM.get(sosOnOpenKey);
 bool get sosOnClose => EzCM.get(sosOnCloseKey);
 bool get sosOnInterrupt => EzCM.get(sosOnInterruptKey);
+LLType get linkType => LLTypeConfig.safeLookup(EzCM.get(linkTypeKey));
+
+// Color //
+
+Color videoColor(EzCP config) => _cache(config)._videoColor;
+EzSwitchColor videoFill(EzCP config) => EzSwitchColor(color: videoColor(config));
+
+Color videoTextColor(EzCP config) => _cache(config)._videoTextColor;
+EzSwitchColor videoTextFiller(EzCP config) => EzSwitchColor(color: videoTextColor(config));

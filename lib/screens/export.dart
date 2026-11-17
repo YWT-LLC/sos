@@ -14,11 +14,14 @@ export 'home.dart';
 
 // Route names //
 
-/// settings-home
-const String settingsHomePath = 'settings-home';
+const String homePath = '/';
+const String homeName = 'sos-home';
 
-/// sos-settings
-const String sosSettingsPath = 'sos-settings';
+const String settingsHomeScreenPath = 'settings';
+const String settingsHomeScreenName = 'sos-settings-home';
 
-/// appearance-home
-const String appearanceSettingsPath = 'appearance-settings';
+const String sosSettingsScreenPath = 'sos';
+const String sosSettingsScreenName = 'sos-sos-settings';
+
+const String appearanceSettingsScreenPath = 'appearance';
+const String appearanceSettingsScreenName = 'sos-appearance-settings';

@@ -5,9 +5,9 @@
 
 import './export.dart';
 
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:open_ui/open_ui.dart';
+import 'package:flutter/services.dart';
+import 'package:material_ui/material_ui.dart';
 
 //* Enums *//
 // Location Link Type //
@@ -188,8 +188,8 @@ const String lightVideoColorKey = 'lightVideoColor';
 
 /// [darkVideoColorKey], [lightVideoColorKey]
 const Map<String, Type> sosColorKeys = <String, Type>{
-  darkVideoColorKey: int,
-  lightVideoColorKey: int,
+  darkVideoColorKey: String,
+  lightVideoColorKey: String,
 };
 
 // EzConfig default //
@@ -223,7 +223,6 @@ final Map<String, Object> sosConfig = <String, Object>{
   lightVideoColorKey: 0xFFFF0000,
 };
 
-/// For [EzCM.init]
 const Map<String, Type> allSOSKeys = <String, Type>{
   ...allEZConfigKeys,
   ...sosBTSKeys,
@@ -231,8 +230,16 @@ const Map<String, Type> allSOSKeys = <String, Type>{
   ...sosColorKeys,
 };
 
-/// For [EzResetButton]s
-final Set<String> neverResetKeys = <String>{...sosBTSKeys.keys, ...sosBroadcastKeys.keys};
+final Set<String> uniqueKeys = <String>{
+  ...sosBTSKeys.keys,
+  ...sosBroadcastKeys.keys,
+  ...sosColorKeys.keys,
+};
+
+final Set<String> neverResetKeys = <String>{
+  ...sosBTSKeys.keys,
+  ...sosBroadcastKeys.keys,
+};
 
 //* Runtime *//
 

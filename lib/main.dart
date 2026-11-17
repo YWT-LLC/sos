@@ -6,39 +6,42 @@
 import './screens/export.dart';
 import './utils/export.dart';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:open_ui/open_ui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() async {
-  // Configure the app //
+// Define the router //
 
-  WidgetsFlutterBinding.ensureInitialized();
+final List<RouteBase> routes = <RouteBase>[
+  // Settings home
+  GoRoute(
+    path: settingsHomeScreenPath,
+    name: settingsHomeScreenName,
+    pageBuilder: (BuildContext pbc, GoRouterState pbs) =>
+        ezPageBuilder(configWatcher(pbc), pbc, pbs, const SettingsHomeScreen()),
+    routes: <RouteBase>[
+      // SOS settings
+      GoRoute(
+        path: sosSettingsScreenPath,
+        name: sosSettingsScreenName,
+        pageBuilder: (BuildContext pbc, GoRouterState pbs) =>
+            ezPageBuilder(configWatcher(pbc), pbc, pbs, const SOSSettingsScreen()),
+      ),
 
-  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[DeviceOrientation.portraitUp]);
+      // Appearance settings
+      GoRoute(
+        path: appearanceSettingsScreenPath,
+        name: appearanceSettingsScreenName,
+        pageBuilder: (BuildContext pbc, GoRouterState pbs) =>
+            ezPageBuilder(configWatcher(pbc), pbc, pbs, const AppearanceSettingsScreen()),
+      ),
+    ],
+  ),
+];
 
-  EzCM.init(
-    appName: 'InstaSOS',
-    androidPackage: androidPackage,
-    assetPaths: assetPaths,
-    orientations: <DeviceOrientation>[DeviceOrientation.portraitUp],
-    localeFallback: americanEnglish,
-    l10nFallback: await OUILang.delegate.load(americanEnglish),
-    preferences: await SharedPreferencesWithCache.create(
-      cacheOptions: SharedPreferencesWithCacheOptions(allowList: allSOSKeys.keys.toSet()),
-    ),
-    defaults: sosConfig,
-    neverReset: neverResetKeys,
-  );
-
-  // Run the app //
-
-  final (Locale storedLocale, OUILang storedOUILang) = await ezStoredL10n();
-
-  runApp(SOS(storedLocale, storedOUILang, await Lang.delegate.load(storedLocale)));
-}
+// Define the app //
 
 class SOS extends StatelessWidget {
   final Locale storedLocale;
@@ -62,37 +65,45 @@ class SOS extends StatelessWidget {
             // Home
             GoRoute(
               path: homePath,
-              name: homePath,
+              name: homeName,
               pageBuilder: (BuildContext pbc, GoRouterState pbs) =>
                   ezPageBuilder(configWatcher(pbc), pbc, pbs, const HomeScreen()),
-              routes: <RouteBase>[
-                // Settings home
-                GoRoute(
-                  path: settingsHomePath,
-                  name: settingsHomePath,
-                  pageBuilder: (BuildContext pbc, GoRouterState pbs) =>
-                      ezPageBuilder(configWatcher(pbc), pbc, pbs, const SettingsHomeScreen()),
-                  routes: <RouteBase>[
-                    // SOS settings
-                    GoRoute(
-                      path: sosSettingsPath,
-                      name: sosSettingsPath,
-                      pageBuilder: (BuildContext pbc, GoRouterState pbs) =>
-                          ezPageBuilder(configWatcher(pbc), pbc, pbs, const SOSSettingsScreen()),
-                    ),
-
-                    // Appearance settings
-                    GoRoute(
-                      path: appearanceSettingsPath,
-                      name: appearanceSettingsPath,
-                      pageBuilder: (BuildContext pbc, GoRouterState pbs) => ezPageBuilder(
-                          configWatcher(pbc), pbc, pbs, const AppearanceSettingsScreen()),
-                    ),
-                  ],
-                ),
-              ],
+              routes: routes,
             ),
           ],
         ),
       );
+}
+
+void main() async {
+  // Configure the environment //
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[DeviceOrientation.portraitUp]);
+
+  EzCM.init(
+    appName: 'InstaSOS',
+    androidPackage: androidPackage,
+    assetPaths: assetPaths,
+    orientations: <DeviceOrientation>[DeviceOrientation.portraitUp],
+    localeFallback: americanEnglish,
+    l10nFallback: await OUILang.delegate.load(americanEnglish),
+    preferences: await SharedPreferencesWithCache.create(
+      cacheOptions: SharedPreferencesWithCacheOptions(
+        allowList: allSOSKeys.keys.toSet(),
+      ),
+    ),
+    defaults: sosConfig,
+    neverReset: neverResetKeys,
+  );
+
+  // Run the app //
+
+  final (Locale storedLocale, OUILang storedOUILang) = await ezStoredL10n();
+
+  runApp(SOS(
+    storedLocale,
+    storedOUILang,
+    await Lang.delegate.load(storedLocale),
+  ));
 }

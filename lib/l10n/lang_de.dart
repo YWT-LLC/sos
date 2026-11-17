@@ -89,7 +89,7 @@ class LangDe extends Lang {
   String get faqContributing => 'dazu beizutragen';
 
   @override
-  String get faqExpand => ' , um zu helfen, die Sprachoptionen zu erweitern.';
+  String get faqExpand => ', um zu helfen, die Sprachoptionen zu erweitern.';
 
   @override
   String get faqLanguages => 'Warum ist die Sprache X nicht verfügbar?';
@@ -158,11 +158,11 @@ class LangDe extends Lang {
 
   @override
   String get faqSplitClarity1 =>
-      'Den Zugriff auf einen Kontakt zu gewähren, macht ihn nicht zu einem Notfallkontakt. Nur die Nummern, die aufgeführt sind in den ';
+      'Den Zugriff auf einen Kontakt zu gewähren, macht ihn nicht zu einem Notfallkontakt. Nur die in den ';
 
   @override
   String get faqSplitClarity2 =>
-      ' werden während eines SOS-Notrufs kontaktiert.';
+      ' aufgeführten Nummern werden während eines SOS-Notrufs kontaktiert.';
 
   @override
   String get faqUnavailable => 'SOS meldet \"Standort nicht verfügbar\"?';
@@ -202,17 +202,17 @@ class LangDe extends Lang {
       'Wenn du SOS-Warnungen verwendest, gehe bitte zu den Einstellungen und füge deine Notfallkontakte hinzu.';
 
   @override
-  String get hsAddLocation => 'Fügt Ihren Standort zu SOS-Nachrichten hinzu';
+  String get hsAddLocation => 'Fügt deinen Standort zu SOS-Nachrichten hinzu';
 
   @override
   String get hsAddRecording => 'Ermöglicht Videoaufnahmen';
 
   @override
-  String get hsAddSave => 'Erforderlich, um Ihre Aufnahmen zu speichern';
+  String get hsAddSave => 'Erforderlich, um deine Aufnahmen zu speichern';
 
   @override
   String get hsAppIntro =>
-      'Zu Beginn: Dies ist nur eine App zum Kennen deiner Rechte.\nDu kannst weitere Tools aktivieren, indem du ihnen in der Liste unten die Berechtigung erteilst.';
+      'Zu Beginn ist dies nur eine „Kenne deine Rechte“-App.\nDu kannst weitere Tools aktivieren, indem du ihnen in der Liste unten die Berechtigung erteilst.';
 
   @override
   String get hsAppIntroAlt =>
@@ -220,7 +220,7 @@ class LangDe extends Lang {
 
   @override
   String get hsAppleContacts =>
-      'Dieser Schritt betrifft nur App-Berechtigungen.\nSie wählen noch keine Notfallkontakte aus.\n\nEs wird empfohlen, alle zuzulassen, um Probleme zu vermeiden.';
+      'Dieser Schritt betrifft nur App-Berechtigungen.\nDu wählst noch keine Notfallkontakte aus.\n\nEs wird empfohlen, alle zuzulassen, um Probleme zu vermeiden.';
 
   @override
   String get hsBroadcastTutorial =>
@@ -252,14 +252,14 @@ class LangDe extends Lang {
 
   @override
   String get hsCameraSnack =>
-      'Bitte aktivieren Sie die Kamera in den Einstellungen (oben)\nund versuchen Sie es dann erneut';
+      'Bitte aktiviere die Kamera in den Einstellungen (oben)\nund versuche es dann erneut';
 
   @override
   String get hsContacts => 'Kontakte';
 
   @override
   String get hsContactsSetupHint =>
-      'Aktivieren, um Insta-SOS die Berechtigung zum Anzeigen Ihrer Kontakte zu erteilen.';
+      'Aktivieren, um Insta-SOS die Berechtigung zum Anzeigen deiner Kontakte zu erteilen.';
 
   @override
   String get hsEndRecord => 'Die Aufnahme beenden.';
@@ -304,7 +304,7 @@ class LangDe extends Lang {
 
   @override
   String get hsLocationSetupHint =>
-      'Aktivieren, um Insta-SOS die Berechtigung zum Anzeigen Ihres Standorts zu erteilen.';
+      'Aktivieren, um Insta-SOS die Berechtigung zum Anzeigen deines Standorts zu erteilen.';
 
   @override
   String get hsMic => 'Mikrofon';
@@ -426,7 +426,7 @@ class LangDe extends Lang {
       'Sich zu weigern, als Fahrgast einen Ausweis vorzulegen. Nur der Fahrer ist verpflichtet, einen Ausweis vorzulegen.';
 
   @override
-  String get rvDriveSearch => 'Die Durchsuchung Ihres Fahrzeugs zu verhindern.';
+  String get rvDriveSearch => 'Die Durchsuchung Ihres Fahrzeugs zu verweigern.';
 
   @override
   String get rvDriveWarrant =>

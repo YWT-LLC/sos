@@ -109,11 +109,11 @@ class LangSw extends Lang {
 
   @override
   String get faqLocationTrust =>
-      'Programu inatumia tu eneo lako wakati tangazo la SOS linaendelea. Wala InstaSOS au YWT haifuatilii, haihifadhi, au kuuza data ya mtumiaji.';
+      'Programu inatumia tu eneo lako wakati tangazo la SOS linaendelea. Wala InstaSOS wala YWT hazifuatilii, hazihifadhi, wala haziuzi data ya mtumiaji.';
 
   @override
   String get faqLocationTrustFix =>
-      'Programu inatumia tu eneo lako wakati tangazo la SOS linaendelea. Wala Insta-SOS au YWT haifuatilii, haihifadhi, au kuuza data ya mtumiaji.';
+      'Programu inatumia tu eneo lako wakati tangazo la SOS linaendelea. Wala Insta-SOS wala YWT hazifuatilii, hazihifadhi, wala haziuzi data ya mtumiaji.';
 
   @override
   String get faqMissing => 'Kwa nini baadhi ya vipengele vya Android havipo?';
@@ -157,11 +157,11 @@ class LangSw extends Lang {
 
   @override
   String get faqSplitClarity1 =>
-      'Kutoa idhini ya kufikia mwasiliani hakumfanyi kuwa mwasiliani wa dharura. Ni nambari tu zilizoorodheshwa katika ';
+      'Kutoa idhini ya kufikia mwasiliani hakumfanyi kuwa mwasiliani wa dharura. Ni nambari zilizoorodheshwa katika ';
 
   @override
   String get faqSplitClarity2 =>
-      ' zitawasiliana nazo wakati wa tangazo la SOS.';
+      ' pekee ndizo zitakazotumiwa ujumbe wakati wa tangazo la SOS.';
 
   @override
   String get faqUnavailable => 'SOS inasema \"Eneo halipatikani\"?';
@@ -171,7 +171,7 @@ class LangSw extends Lang {
       'Unaweza kutoa idhini ya kufikia wasiliani zaidi (au wote) katika ';
 
   @override
-  String get gDone => 'Tayari';
+  String get gDone => 'Nimemaliza';
 
   @override
   String get gNotAgain => 'Usionyeshe tena';
@@ -219,7 +219,7 @@ class LangSw extends Lang {
 
   @override
   String get hsAppleContacts =>
-      'Hatua hii ni kwa ruhusa za programu pekee.\nHujachagua anwani za dharura bado.\n\nInapendekezwa kuruhusu zote ili kupunguza usumbufu.';
+      'Hatua hii ni kwa ruhusa za programu pekee.\nHujachagua wasiliani wa dharura bado.\n\nInapendekezwa kuruhusu zote ili kupunguza usumbufu.';
 
   @override
   String get hsBroadcastTutorial =>
@@ -253,11 +253,11 @@ class LangSw extends Lang {
       'Tafadhali washa kamera kwenye mipangilio (hapo juu)\nkisha ujaribu tena';
 
   @override
-  String get hsContacts => 'Anwani';
+  String get hsContacts => 'Wasiliani';
 
   @override
   String get hsContactsSetupHint =>
-      'Washa ili kuruhusu Insta-SOS kutazama anwani zako.';
+      'Washa ili kuruhusu Insta-SOS kutazama wasiliani wako.';
 
   @override
   String get hsEndRecord => 'Maliza kurekodi.';
@@ -270,7 +270,7 @@ class LangSw extends Lang {
 
   @override
   String get hsFlashOff =>
-      'Mwangaza Umezimwa. Washa ili kuwasha mwangaza kiotomatiki.';
+      'Mwangaza umezimwa. Washa ili kuwasha mwangaza kiotomatiki.';
 
   @override
   String get hsFlashOn => 'Mwangaza umewashwa. Washa ili kuzima mwangaza.';
@@ -434,7 +434,7 @@ class LangSw extends Lang {
 
   @override
   String get rvMobilePockets =>
-      'Kataa utafutaji wa mifuko yako. ICE inaweza kujibu, lakini sio utafutaji.';
+      'Kataa utafutaji wa mifuko yako. ICE inaweza kukupapasa juu ya nguo, lakini sio kukupekua.';
 
   @override
   String get rvMobileQuestion => 'Uliza maswali. Jua kwa nini unazuiwa.';

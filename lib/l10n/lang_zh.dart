@@ -152,7 +152,7 @@ class LangZh extends Lang {
   String get faqSplitClarity1 => '授予对某位联系人的访问权限并不会使其成为紧急联系人。只有列在';
 
   @override
-  String get faqSplitClarity2 => ' 中的号码才会在 SOS 广播期间收到联系。';
+  String get faqSplitClarity2 => ' 中的号码才会在 SOS 广播期间被联系。';
 
   @override
   String get faqUnavailable => 'SOS 显示“位置不可用”？';
@@ -423,7 +423,7 @@ class LangZh extends Lang {
   String get rvSharedLawyer => '您有权联系律师。如您已被正式逮捕，则有权请求法院为您指派律师。';
 
   @override
-  String get rvSharedRemainSilent => '保持沉默。无需撒谎，但您不必回答任何问题。';
+  String get rvSharedRemainSilent => '保持沉默。不要撒谎，但您不必回答任何问题。';
 
   @override
   String get rvSharedSign => '拒绝签署任何文件。';
@@ -613,7 +613,7 @@ class LangZhCn extends LangZh {
   String get faqSplitClarity1 => '授予对某位联系人的访问权限并不会使其成为紧急联系人。只有列在';
 
   @override
-  String get faqSplitClarity2 => ' 中的号码才会在 SOS 广播期间收到联系。';
+  String get faqSplitClarity2 => ' 中的号码才会在 SOS 广播期间被联系。';
 
   @override
   String get faqUnavailable => 'SOS 显示“位置不可用”？';
@@ -884,7 +884,7 @@ class LangZhCn extends LangZh {
   String get rvSharedLawyer => '您有权联系律师。如您已被正式逮捕，则有权请求法院为您指派律师。';
 
   @override
-  String get rvSharedRemainSilent => '保持沉默。无需撒谎，但您不必回答任何问题。';
+  String get rvSharedRemainSilent => '保持沉默。不要撒谎，但您不必回答任何问题。';
 
   @override
   String get rvSharedSign => '拒绝签署任何文件。';

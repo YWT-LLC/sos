@@ -12,7 +12,7 @@ class LangJa extends Lang {
   String get bsAddHint => '別の連絡先を追加';
 
   @override
-  String get bsAddSomeone => '追加してSOSを有効にする';
+  String get bsAddSomeone => '誰かを追加してSOSを有効にしてください';
 
   @override
   String get bsCloseOffWarning => '意図しない発信を防ぐため、アプリは自動的に閉じます。';
@@ -65,7 +65,7 @@ class LangJa extends Lang {
 
   @override
   String get faqAutoShareA =>
-      ' はスマートフォンの組み込みの共有機能を使用します。保存された緊急連絡先（ある場合）は使用しません。共有は任意であり、いつでもキャンセルできます。';
+      ' スマートフォンの組み込みの共有機能を使用します。保存された緊急連絡先（ある場合）は使用しません。共有は任意であり、いつでもキャンセルできます。';
 
   @override
   String get faqContact => 'サポートに連絡';
@@ -92,7 +92,7 @@ class LangJa extends Lang {
 
   @override
   String get faqLinkA =>
-      ' は、緊急連絡先に位置情報を送信する方法です。「Googleマップ」、「Appleマップ」、「Waze」は、各サービスのクリック可能なリンクを送信します。「座標」は、緯度と経度をプレーンテキストで送信します。';
+      ' 緊急連絡先に位置情報を送信する方法を選択します。「Googleマップ」、「Appleマップ」、「Waze」は、各サービスのクリック可能なリンクを送信します。「座標」は、緯度と経度をプレーンテキストで送信します。';
 
   @override
   String get faqListA => '権利リストは、以下を含むいくつかの公開リソースから引用されました：';
@@ -150,11 +150,10 @@ class LangJa extends Lang {
       'iOSショートカットについてはどうですか？\nユーザーショートカットへのアクセスにも制限があり、重要な機能が損なわれるためです。主に、動画の録画が中断されるという問題があります。';
 
   @override
-  String get faqSplitClarity1 =>
-      '連絡先へのアクセスを許可しても、その人が緊急連絡先になるわけではありません。次の場所に記載された番号のみが';
+  String get faqSplitClarity1 => '連絡先へのアクセスを許可しても、その人が緊急連絡先になるわけではありません。';
 
   @override
-  String get faqSplitClarity2 => ' SOS発信中に連絡されます。';
+  String get faqSplitClarity2 => 'に記載された番号のみが、SOS発信中に連絡されます。';
 
   @override
   String get faqUnavailable => 'SOSで「位置情報が利用できません」と表示されますか？';
@@ -435,7 +434,7 @@ class LangJa extends Lang {
   String get rvSharedLawyer => '弁護士に相談する。正式に逮捕された場合、国選弁護人が付く権利があります。';
 
   @override
-  String get rvSharedRemainSilent => '黙秘する。嘘をつく必要はありませんが、質問に答える義務もありません。';
+  String get rvSharedRemainSilent => '黙秘する。嘘はつかないでください。ただし、質問に答える義務はありません。';
 
   @override
   String get rvSharedSign => '何にも署名しない。';

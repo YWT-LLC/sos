@@ -119,7 +119,7 @@ class LangEs extends Lang {
   String get faqMissing => '¿Por qué faltan algunas funciones de Android?';
 
   @override
-  String get faqName => 'Preguntas Frecuentes';
+  String get faqName => 'Preguntas frecuentes';
 
   @override
   String get faqOnInterruptA =>
@@ -157,7 +157,7 @@ class LangEs extends Lang {
 
   @override
   String get faqSplitClarity1 =>
-      'Dar acceso a un contacto no lo convierte en un contacto de emergencia. Solo los números listados en los ';
+      'Dar acceso a un contacto no lo convierte en un contacto de emergencia. Solo los números listados en la ';
 
   @override
   String get faqSplitClarity2 =>
@@ -247,7 +247,7 @@ class LangEs extends Lang {
 
   @override
   String get hsCameraSetupHint =>
-      'Activar para dar permiso a la cámara a Insta-SOS';
+      'Activar para dar permiso a Insta-SOS de usar la cámara';
 
   @override
   String get hsCameraSnack =>

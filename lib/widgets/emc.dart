@@ -6,9 +6,9 @@
 import '../utils/export.dart';
 
 import 'dart:math';
-import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:open_ui/open_ui.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class ContactList extends StatefulWidget {
   final EzCP config;
@@ -48,7 +48,11 @@ class _ContactListState extends State<ContactList> {
               EzIconButton(
                 widget.config,
                 fauxDisabled: widget.fauxDisabled,
-                icon: Icon(Icons.add_circle_outline, semanticLabel: l10n(widget.config).bsAddHint),
+                icon: EzIcon(
+                  widget.config,
+                  Icons.add_circle_outline,
+                  semanticLabel: l10n(widget.config).bsAddHint,
+                ),
                 onPressed: addContact,
                 onLongPress: widget.fauxDisabled ? openAppSettings : null,
                 tooltip: l10n(widget.config).bsAddHint,
@@ -68,9 +72,8 @@ class _ContactListState extends State<ContactList> {
                     side: widget.fauxDisabled
                         ? null
                         : widget.config.borderSide(
-                            color: widget.config.colors.primaryContainer.withValues(
-                              alpha: focusOpacity,
-                            ),
+                            fill: widget.config.primaryContainerFill,
+                            opacity: focusOpacity,
                           ),
                   ),
                   textStyle: widget.config.bodyStyle,
@@ -153,27 +156,29 @@ class _ContactTile extends StatelessWidget {
             // Initials coin (if available)
             if (initials != null) ...<Widget>[
               fauxDisabled
-                  ? CircleAvatar(
+                  ? EzAvatar(
+                      config,
+                      fill: config.outlineFiller,
+                      foregroundColor: config.onSurface,
                       radius: config.padding + config.iconSize / 2,
-                      foregroundColor: config.colors.onSurface,
-                      backgroundColor: config.colors.outline,
                       child: Text(
                         initials!,
                         style: config.bodyStyle?.copyWith(
-                          color: config.colors.onSurface,
+                          color: config.onSurface,
                           fontWeight: FontWeight.bold,
                         ),
                         textAlign: TextAlign.start,
                       ),
                     )
-                  : CircleAvatar(
+                  : EzAvatar(
+                      config,
+                      fill: config.secondaryFill,
+                      foregroundColor: config.onSecondary,
                       radius: config.padding + config.iconSize / 2,
-                      foregroundColor: config.colors.onSecondary,
-                      backgroundColor: config.colors.secondary,
                       child: Text(
                         initials!,
                         style: config.bodyStyle?.copyWith(
-                          color: config.colors.onSecondary,
+                          color: config.onSecondary,
                           fontWeight: FontWeight.bold,
                         ),
                         textAlign: TextAlign.start,
@@ -187,7 +192,7 @@ class _ContactTile extends StatelessWidget {
               child: Text(
                 number,
                 style: fauxDisabled
-                    ? config.bodyStyle?.copyWith(color: config.colors.outline)
+                    ? config.bodyStyle?.copyWith(color: config.outline)
                     : config.bodyStyle,
                 textAlign: TextAlign.center,
               ),
@@ -197,7 +202,11 @@ class _ContactTile extends StatelessWidget {
             config.rowSpacer,
             EzIconButton(
               config,
-              icon: Icon(Icons.remove_circle_outline, semanticLabel: l10n(config).bsRemoveHint),
+              icon: EzIcon(
+                config,
+                Icons.remove_circle_outline,
+                semanticLabel: l10n(config).bsRemoveHint,
+              ),
               onPressed: onRemove,
               tooltip: l10n(config).bsRemoveHint,
             ),

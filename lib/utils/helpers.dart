@@ -9,12 +9,12 @@ import '../widgets/export.dart';
 import 'dart:async';
 import 'package:gal/gal.dart';
 import 'package:open_ui/open_ui.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:flutter_contacts/flutter_contacts.dart' as c;
+import 'package:material_ui/material_ui.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_contacts/flutter_contacts.dart' as c;
 
 // Camera //
 
@@ -23,7 +23,7 @@ import 'package:permission_handler/permission_handler.dart';
 Future<void> saveToGallery(String path, bool image) async {
   if (kIsWeb) return;
 
-  final bool galAccess = await Gal.requestAccess();
+  final bool galAccess = await Gal.requestPermission();
   if (!galAccess) return;
 
   try {
@@ -241,7 +241,7 @@ Future<void> appSetupModal(EzCP config, BuildContext context) async {
           ),
           config.centerLine,
           Text(l10n(config).hsYourApp, style: config.bodyStyle, textAlign: TextAlign.center),
-          config.divider,
+          EzDivider(config),
 
           // Permission checklist
           CameraSetup(
@@ -272,7 +272,7 @@ Future<void> appSetupModal(EzCP config, BuildContext context) async {
             label: l10n(config).gDone,
             icon: EzIcon(config, Icons.check),
             textAlign: TextAlign.center,
-            style: TextButton.styleFrom(backgroundColor: config.colors.surfaceContainer),
+            style: TextButton.styleFrom(backgroundColor: config.surfaceContainerFill.asColor),
             onPressed: () => Navigator.of(mCon).pop(true),
           ),
 
@@ -347,7 +347,7 @@ Future<bool> foregroundSOS(Lang l10n) async {
       currEMC.map((String contact) => contact.split(contactSplit).last).toList();
 
   final Map<String, dynamic> mapData = <String, dynamic>{
-    'message': 'SOS\n${await getCoordinates(l10n, linkBase: linkType.base)}',
+    'message': 'SOS\n${await getCoordinates(l10n)}',
     'recipients': isIOS ? numbers : numbers.join(';'),
   };
 
@@ -363,10 +363,10 @@ Future<bool> foregroundSOS(Lang l10n) async {
 /// Gets coordinates from [Geolocator]
 /// Returns the coordinates injected into a Google Maps URL
 /// Includes error handling
-Future<String?> getCoordinates(Lang l10n, {required String linkBase, bool nullable = false}) async {
-  late final String? disabled = nullable ? null : l10n.sosDisabled;
-  late final String? denied = nullable ? null : l10n.sosDenied;
-  late final String? errored = nullable ? null : l10n.sosError;
+Future<String?> getCoordinates(Lang l10n) async {
+  late final String disabled = l10n.sosDisabled;
+  late final String denied = l10n.sosDenied;
+  late final String errored = l10n.sosError;
 
   final bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
   if (!serviceEnabled) return disabled;
@@ -385,7 +385,7 @@ Future<String?> getCoordinates(Lang l10n, {required String linkBase, bool nullab
 
   try {
     final Position pos = await Geolocator.getCurrentPosition();
-    return '$linkBase${pos.latitude.toStringAsFixed(4)},${pos.longitude.toStringAsFixed(4)}';
+    return '${linkType.base}${pos.latitude.toStringAsFixed(4)},${pos.longitude.toStringAsFixed(4)}';
   } catch (e) {
     ezLog('Error getting coordinates');
     ezLog(e.toString());
