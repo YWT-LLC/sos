@@ -223,22 +223,20 @@ final Map<String, Object> sosConfig = <String, Object>{
   lightVideoColorKey: 0xFFFF0000,
 };
 
-const Map<String, Type> allSOSKeys = <String, Type>{
-  ...allEZConfigKeys,
+final Map<String, Type> uniquePairs = <String, Type>{
   ...sosBTSKeys,
   ...sosBroadcastKeys,
   ...sosColorKeys,
 };
 
-final Set<String> uniqueKeys = <String>{
-  ...sosBTSKeys.keys,
-  ...sosBroadcastKeys.keys,
-  ...sosColorKeys.keys,
+final Map<String, Type> neverResetPairs = <String, Type>{
+  ...sosBTSKeys,
+  ...sosBroadcastKeys,
 };
 
-final Set<String> neverResetKeys = <String>{
-  ...sosBTSKeys.keys,
-  ...sosBroadcastKeys.keys,
+final Map<String, Type> allSOSPairs = <String, Type>{
+  ...allEzConfigPairs,
+  ...uniquePairs,
 };
 
 //* Runtime *//

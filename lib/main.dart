@@ -90,11 +90,11 @@ void main() async {
     l10nFallback: await OUILang.delegate.load(americanEnglish),
     preferences: await SharedPreferencesWithCache.create(
       cacheOptions: SharedPreferencesWithCacheOptions(
-        allowList: allSOSKeys.keys.toSet(),
+        allowList: allSOSPairs.keys.toSet(),
       ),
     ),
     defaults: sosConfig,
-    neverReset: neverResetKeys,
+    neverReset: neverResetPairs.keys.toSet(),
   );
 
   // Run the app //
