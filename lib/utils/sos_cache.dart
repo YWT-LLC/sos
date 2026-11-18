@@ -12,7 +12,7 @@ class SOSCache extends EzAppCache {
   Locale _locale;
   Lang _l10n;
 
-  late Color _videoColor;
+  late EzSwitchColor _videoColor;
   late Color _videoTextColor;
 
   SOSCache(Locale locale, Lang l10n)
@@ -33,8 +33,8 @@ class SOSCache extends EzAppCache {
   }
 
   void _setVideoColors(bool isDark) {
-    _videoColor = Color(EzCM.get(isDark ? darkVideoColorKey : lightVideoColorKey) as int);
-    _videoTextColor = ezTextColor(_videoColor);
+    _videoColor = ezCOG(EzCM.get(isDark ? darkVideoColorKey : lightVideoColorKey)) ?? _backupFill;
+    _videoTextColor = ezTextColor(_videoColor.asColor);
   }
 }
 
@@ -60,8 +60,8 @@ LLType get linkType => LLTypeConfig.safeLookup(EzCM.get(linkTypeKey));
 
 // Color //
 
-Color videoColor(EzCP config) => _cache(config)._videoColor;
-EzSwitchColor videoFill(EzCP config) => EzSwitchColor(color: videoColor(config));
+const EzSwitchColor _backupFill = EzSwitchColor(color: Colors.red);
+EzSwitchColor videoFill(EzCP config) => _cache(config)._videoColor;
 
 Color videoTextColor(EzCP config) => _cache(config)._videoTextColor;
 EzSwitchColor videoTextFiller(EzCP config) => EzSwitchColor(color: videoTextColor(config));
