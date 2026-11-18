@@ -104,15 +104,12 @@ extension SituationConfig on Situation {
 }
 
 //* App config *//
-// Naming/ID //
 
 /// net.empathetech.sos
 const String androidPackage = 'net.empathetech.sos';
 
 /// [androidPackage]/broadcast
 const MethodChannel platform = MethodChannel('$androidPackage/broadcast');
-
-// Local assets //
 
 /// assets/og-baddie.jpg
 /// Public domain image; CC0 1.0 Universal
@@ -121,8 +118,7 @@ const String ladyLiberty = 'assets/og-baddie.jpg';
 /// [ladyLiberty]
 const Set<String> assetPaths = <String>{ladyLiberty};
 
-//* EzConfig *//
-// BTS settings //
+// BTS //
 
 /// savedTab
 const String savedTabKey = 'savedTab';
@@ -192,17 +188,27 @@ const Map<String, Type> sosColorKeys = <String, Type>{
   lightVideoColorKey: String,
 };
 
-// EzConfig default //
+// Shared //
 
-/// defaults for [EzCM.init]
-final Map<String, Object> sosConfig = <String, Object>{
-  // Base
-  ...ywtMobileConfig,
-  darkShowBackFABKey: true,
-  lightShowBackFABKey: true,
-  darkTextBackgroundOpacityKey: 0.8,
-  lightTextBackgroundOpacityKey: 0.8,
+final Map<String, Type> uniquePairs = <String, Type>{
+  ...sosBTSKeys,
+  ...sosBroadcastKeys,
+  ...sosColorKeys,
+};
 
+final Map<String, Type> neverResetPairs = <String, Type>{
+  ...sosBTSKeys,
+  ...sosBroadcastKeys,
+};
+
+final Map<String, Type> allSOSPairs = <String, Type>{
+  ...allEzConfigPairs,
+  ...uniquePairs,
+};
+
+//* Runtime *//
+
+final Map<String, Object> uniqueDefaults = <String, Object>{
   // BTS
   savedTabKey: esWalking,
   setupCompleteKey: false,
@@ -223,23 +229,15 @@ final Map<String, Object> sosConfig = <String, Object>{
   lightVideoColorKey: 0xFFFF0000,
 };
 
-final Map<String, Type> uniquePairs = <String, Type>{
-  ...sosBTSKeys,
-  ...sosBroadcastKeys,
-  ...sosColorKeys,
+/// defaults for [EzCM.init]
+final Map<String, Object> sosConfig = <String, Object>{
+  ...ywtMobileConfig,
+  darkShowBackFABKey: true,
+  lightShowBackFABKey: true,
+  darkTextBackgroundOpacityKey: 0.8,
+  lightTextBackgroundOpacityKey: 0.8,
+  ...uniqueDefaults,
 };
-
-final Map<String, Type> neverResetPairs = <String, Type>{
-  ...sosBTSKeys,
-  ...sosBroadcastKeys,
-};
-
-final Map<String, Type> allSOSPairs = <String, Type>{
-  ...allEzConfigPairs,
-  ...uniquePairs,
-};
-
-//* Runtime *//
 
 // Misc //
 
