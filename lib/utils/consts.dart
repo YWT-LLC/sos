@@ -225,8 +225,8 @@ final Map<String, Object> uniqueDefaults = <String, Object>{
   linkTypeKey: LLType.google.name,
 
   // Color
-  darkVideoColorKey: 0xFFFF0000,
-  lightVideoColorKey: 0xFFFF0000,
+  darkVideoColorKey: '0xFFFF0000',
+  lightVideoColorKey: '0xFFFF0000',
 };
 
 /// defaults for [EzCM.init]
