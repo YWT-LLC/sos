@@ -20,11 +20,11 @@ class SOSCache extends EzAppCache {
         _l10n = l10n;
 
   @override
-  void init(bool isDark) => _setVideoColors(isDark);
+  void init(EzCP config) => _setVideoColors(config);
 
   @override
   Future<void> rebuild(EzCP config) async {
-    _setVideoColors(config.isDark);
+    _setVideoColors(config);
 
     if (_locale != config.locale) {
       _locale = config.locale;
@@ -32,8 +32,9 @@ class SOSCache extends EzAppCache {
     }
   }
 
-  void _setVideoColors(bool isDark) {
-    _videoColor = ezCOG(EzCM.get(isDark ? darkVideoColorKey : lightVideoColorKey)) ?? _backupFill;
+  void _setVideoColors(EzCP config) {
+    _videoColor =
+        ezCOG(EzCM.get(config.isDark ? darkVideoColorKey : lightVideoColorKey)) ?? _backupFill;
     _videoTextColor = ezTextColor(_videoColor.asColor);
   }
 }
