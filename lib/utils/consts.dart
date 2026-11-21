@@ -229,7 +229,7 @@ final Map<String, Object> uniqueDefaults = <String, Object>{
   lightVideoColorKey: '0xFFFF0000',
 };
 
-/// defaults for [EzCM.init]
+/// defaults for [EzManager.init]
 final Map<String, Object> sosConfig = <String, Object>{
   ...ywtMobileConfig,
   darkShowBackFABKey: true,

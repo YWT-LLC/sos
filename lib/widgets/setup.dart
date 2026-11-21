@@ -16,13 +16,13 @@ import 'package:flutter_contacts/flutter_contacts.dart' as fc;
 
 // Icon generators //
 
-Widget boolIcon(EzCP config, bool? status) => switch (status) {
+Widget boolIcon(EzProvider config, bool? status) => switch (status) {
       true => EzIcon(config, Icons.check, fill: config.primaryFill),
       false => EzIcon(config, Icons.cancel_outlined, fill: config.errorFill),
       null => EzIcon(config, Icons.help_outline, fill: config.primaryFill),
     };
 
-Widget pStatusIcon(EzCP config, PermissionStatus? status) => switch (status) {
+Widget pStatusIcon(EzProvider config, PermissionStatus? status) => switch (status) {
       PermissionStatus.granted ||
       PermissionStatus.limited ||
       PermissionStatus.provisional =>
@@ -35,7 +35,7 @@ Widget pStatusIcon(EzCP config, PermissionStatus? status) => switch (status) {
       null => EzIcon(config, Icons.help_outline, fill: config.primaryFill),
     };
 
-Widget lStatusIcon(EzCP config, LocationPermission? status) => switch (status) {
+Widget lStatusIcon(EzProvider config, LocationPermission? status) => switch (status) {
       LocationPermission.always => EzIcon(config, Icons.check, fill: config.primaryFill),
       LocationPermission.denied ||
       LocationPermission.deniedForever =>
@@ -49,13 +49,13 @@ Widget lStatusIcon(EzCP config, LocationPermission? status) => switch (status) {
 
 // Setting cards //
 
-OutlinedBorder cardShape(EzCP config) => RoundedRectangleBorder(
+OutlinedBorder cardShape(EzProvider config) => RoundedRectangleBorder(
       side: config.borderSide(),
       borderRadius: config.buttonShape.textRadius,
     );
 
 class CameraSetup extends StatefulWidget {
-  final EzCP config;
+  final EzProvider config;
   final bool locked;
   final void Function(bool) setLock;
 
@@ -298,7 +298,7 @@ class _CameraSetupState extends State<CameraSetup> {
 }
 
 class SOSSetup extends StatefulWidget {
-  final EzCP config;
+  final EzProvider config;
   final bool locked;
   final void Function(bool) setLock;
 
@@ -502,7 +502,7 @@ class _SOSSetupState extends State<SOSSetup> {
 }
 
 class LocationSetup extends StatefulWidget {
-  final EzCP config;
+  final EzProvider config;
   final bool locked;
   final void Function(bool) setLock;
 

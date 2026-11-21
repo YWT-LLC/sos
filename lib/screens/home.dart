@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   // Define custom functions //
 
-  Future<bool> initCamera(EzCP config) async {
+  Future<bool> initCamera(EzProvider config) async {
     if (camera != null) return true;
 
     if (cameraDesc != null) {
@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen>
     }
   }
 
-  Future<void> saveNShare(EzCP config, XFile file, bool image) async {
+  Future<void> saveNShare(EzProvider config, XFile file, bool image) async {
     await saveToGallery(file.path, image);
 
     if (autoShareMedia && mounted) {
@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen>
     }
   }
 
-  Future<bool> sosChecks(EzCP config) async {
+  Future<bool> sosChecks(EzProvider config) async {
     // Check permissions
     if (!isIOS && deniedPermCheck(await Permission.sms.status)) {
       mounted
@@ -142,12 +142,12 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   /// Runs [backgroundSOS] on successful [sosChecks]
-  Future<void> startBackgroundSOS(EzCP config) async {
+  Future<void> startBackgroundSOS(EzProvider config) async {
     if (await sosChecks(config) == true) await backgroundSOS(l10n(config));
   }
 
   /// [foregroundSOS] every 5 minutes on successful [sosChecks]
-  Future<void> startForegroundSOS(EzCP config, {bool showSnack = false}) async {
+  Future<void> startForegroundSOS(EzProvider config, {bool showSnack = false}) async {
     // Cleanup any existing timer and run checks
     sosTimer?.cancel();
     if (await sosChecks(config) == false) return;
@@ -193,18 +193,18 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Future<void> afterFirstLayout(BuildContext context) async {
-    final EzCP config = configWatcher(context);
+    final EzProvider config = configWatcher(context);
 
     // Check for fresh installs
-    if (EzCM.get(setupCompleteKey) != true) {
-      while (EzCM.get(setupCompleteKey) != true) {
+    if (EzManager.get(setupCompleteKey) != true) {
+      while (EzManager.get(setupCompleteKey) != true) {
         // While loop re-opens the dialog on locale change
         await appSetupModal(config, context);
       }
       await initCamera(config);
     } else {
       // Check for auto SOS
-      final bool taskRunning = EzCM.get(taskRunningKey);
+      final bool taskRunning = EzManager.get(taskRunningKey);
 
       if (taskRunning) await stopBackgroundSOS(config, context: context);
       if (sosOnOpen || taskRunning) await startForegroundSOS(config, showSnack: true);
@@ -225,8 +225,8 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<EzCP>(
-      builder: (_, EzCP config, __) => SosScaffold(
+    return Consumer<EzProvider>(
+      builder: (_, EzProvider config, __) => SosScaffold(
         config,
         body: SafeArea(
           child: Stack(
@@ -362,8 +362,8 @@ class _HomeScreenState extends State<HomeScreen>
                             ),
                             tooltip: l10n(config).hsStartSOS,
                             onPressed: () => kIsWeb
-                                ? launchUrl(Uri.parse((EzCM.platform == TargetPlatform.iOS ||
-                                        EzCM.platform == TargetPlatform.macOS)
+                                ? launchUrl(Uri.parse((EzManager.platform == TargetPlatform.iOS ||
+                                        EzManager.platform == TargetPlatform.macOS)
                                     ? ywt.sosAppStore
                                     : ywt.sosGPlay))
                                 : startForegroundSOS(config),
@@ -522,7 +522,7 @@ class _HomeScreenState extends State<HomeScreen>
                                       ),
                               ),
                             );
-                            await EzCM.setBool(showTutorialKey, false);
+                            await EzManager.setBool(showTutorialKey, false);
                             if (mounted) setState(() => showRights = true);
                           },
                         ),
@@ -681,9 +681,9 @@ class _HomeScreenState extends State<HomeScreen>
           return;
         }
 
-        final EzCP config = configWatcher(context);
+        final EzProvider config = configWatcher(context);
 
-        final bool alreadyRunning = EzCM.get(taskRunningKey);
+        final bool alreadyRunning = EzManager.get(taskRunningKey);
         final bool active = sosTimer?.isActive == true;
 
         if (recording) {
@@ -717,7 +717,7 @@ class _HomeScreenState extends State<HomeScreen>
         break;
 
       case AppLifecycleState.resumed:
-        final EzCP config = configWatcher(context);
+        final EzProvider config = configWatcher(context);
 
         // Restore camera
         if (cameraDesc != null) {
@@ -735,7 +735,7 @@ class _HomeScreenState extends State<HomeScreen>
         }
 
         // Check SOS state
-        if (EzCM.get(taskRunningKey) == true) {
+        if (EzManager.get(taskRunningKey) == true) {
           // stopBackgroundSOS handles the async context
           // ignore: use_build_context_synchronously
           await stopBackgroundSOS(config, context: context);

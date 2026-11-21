@@ -37,7 +37,7 @@ Future<void> saveToGallery(String path, bool image) async {
 // Contacts //
 
 /// Open a native contact picker and updates [emc] accordingly
-Future<void> addEMC(EzCP config, {required BuildContext context, bool loop = true}) async {
+Future<void> addEMC(EzProvider config, {required BuildContext context, bool loop = true}) async {
   final List<String> currEMC = List<String>.from(emc);
 
   // Check contact permissions
@@ -59,7 +59,7 @@ Future<void> addEMC(EzCP config, {required BuildContext context, bool loop = tru
 
   // The way iOS handles partial contacts is hot garbage
   // Best thing we can do is remind users that they will see all contacts, not just the shared ones
-  if (isIOS && EzCM.get(showContactsMsgKey) == true) {
+  if (isIOS && EzManager.get(showContactsMsgKey) == true) {
     final bool show = await Permission.contacts.isLimited;
 
     if (show && context.mounted) {
@@ -97,7 +97,7 @@ Future<void> addEMC(EzCP config, {required BuildContext context, bool loop = tru
             confirmIsDefault: true,
             denyMsg: l10n(config).gNotAgain,
             onDeny: () async {
-              await EzCM.setBool(showContactsMsgKey, false);
+              await EzManager.setBool(showContactsMsgKey, false);
               if (dCon.mounted) Navigator.of(dCon).pop(false);
             },
             denyIsDestructive: true,
@@ -176,7 +176,7 @@ Future<void> addEMC(EzCP config, {required BuildContext context, bool loop = tru
     currEMC.add(initials + number);
   }
 
-  await EzCM.setStringList(emcKey, currEMC);
+  await EzManager.setStringList(emcKey, currEMC);
 }
 
 /// I can't believe you've done this @flutter_contacts
@@ -201,7 +201,7 @@ PermissionStatus? lPermMirror(LocationPermission? status) => switch (status) {
 // Fresh install //
 
 /// Allow the user to enable what parts of InstaSOS they want
-Future<void> appSetupModal(EzCP config, BuildContext context) async {
+Future<void> appSetupModal(EzProvider config, BuildContext context) async {
   bool locked = false;
 
   final bool? setup = await ezModal(
@@ -291,7 +291,7 @@ Future<void> appSetupModal(EzCP config, BuildContext context) async {
     ),
   );
 
-  if (setup == true) await EzCM.setBool(setupCompleteKey, true);
+  if (setup == true) await EzManager.setBool(setupCompleteKey, true);
 }
 
 // SOS //
@@ -316,13 +316,13 @@ Future<void> backgroundSOS(Lang l10n) async {
     ezLog(e.toString());
     // We still want to continue. Could be a partial success
   }
-  await EzCM.setBool(taskRunningKey, true);
+  await EzManager.setBool(taskRunningKey, true);
 }
 
 /// For Android only
 /// Safe to send [context], a mounted check is included
 /// Handles platform errors, no other checks are required
-Future<void> stopBackgroundSOS(EzCP config, {required BuildContext context}) async {
+Future<void> stopBackgroundSOS(EzProvider config, {required BuildContext context}) async {
   try {
     await platform.invokeMethod<void>('cancelBackgroundSOS');
   } catch (e) {
@@ -333,7 +333,7 @@ Future<void> stopBackgroundSOS(EzCP config, {required BuildContext context}) asy
         ? ezLogAlert(config, context: context, message: e.toString())
         : ezLog(e.toString());
   }
-  await EzCM.setBool(taskRunningKey, false);
+  await EzManager.setBool(taskRunningKey, false);
 }
 
 /// Call the [MethodChannel] to send a foregroundSOS

@@ -11,7 +11,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class ContactList extends StatefulWidget {
-  final EzCP config;
+  final EzProvider config;
   final void Function() onUpdate;
   final bool fauxDisabled;
 
@@ -112,7 +112,7 @@ class _ContactListState extends State<ContactList> {
                             fauxDisabled: widget.fauxDisabled,
                             onRemove: () async {
                               currEMC.remove(contact);
-                              await EzCM.setStringList(emcKey, currEMC);
+                              await EzManager.setStringList(emcKey, currEMC);
                               if (mounted) setState(() => currEMC = emc);
                               widget.onUpdate.call();
                             },
@@ -131,7 +131,7 @@ class _ContactListState extends State<ContactList> {
 }
 
 class _ContactTile extends StatelessWidget {
-  final EzCP config;
+  final EzProvider config;
   final String? initials;
   final String number;
   final bool fauxDisabled;

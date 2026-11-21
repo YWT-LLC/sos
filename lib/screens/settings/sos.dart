@@ -61,8 +61,8 @@ class _SOSSettingsScreenState extends State<SOSSettingsScreen> with WidgetsBindi
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<EzCP>(
-      builder: (_, EzCP config, __) => SosScaffold(
+    return Consumer<EzProvider>(
+      builder: (_, EzProvider config, __) => SosScaffold(
         config,
         body: EzScreen(
           config,
@@ -113,7 +113,7 @@ class _SOSSettingsScreenState extends State<SOSSettingsScreen> with WidgetsBindi
                 onSelected: (LLType? selection) async {
                   if (selection == null || selection == _linkType) return;
 
-                  await EzCM.setString(linkTypeKey, selection.name);
+                  await EzManager.setString(linkTypeKey, selection.name);
                   if (mounted) setState(() => _linkType = selection);
                 },
               ),

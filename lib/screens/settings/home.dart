@@ -22,7 +22,7 @@ class SettingsHomeScreen extends StatelessWidget {
   // Define custom functions //
 
   Future<void> followLink(
-    EzCP config, {
+    EzProvider config, {
     required String url,
     required BuildContext parentContext,
     required BuildContext modalContext,
@@ -58,8 +58,8 @@ class SettingsHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<EzCP>(
-      builder: (_, EzCP config, __) => SosScaffold(
+    return Consumer<EzProvider>(
+      builder: (_, EzProvider config, __) => SosScaffold(
         config,
         body: EzScreen(
           config,
@@ -782,7 +782,7 @@ class SettingsHomeScreen extends StatelessWidget {
                                   config,
                                   text: l10n(config).faqReset,
                                   onPressed: () async {
-                                    await EzCM.setBool(showTutorialKey, true);
+                                    await EzManager.setBool(showTutorialKey, true);
                                     if (mCon.mounted) Navigator.of(mCon).pop();
                                     await config.rebuildUI();
                                   },

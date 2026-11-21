@@ -18,8 +18,8 @@ class AppearanceSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<EzCP>(
-      builder: (_, EzCP config, __) => SosScaffold(
+    return Consumer<EzProvider>(
+      builder: (_, EzProvider config, __) => SosScaffold(
         config,
         body: EzScreen(
           config,
@@ -33,8 +33,8 @@ class AppearanceSettingsScreen extends StatelessWidget {
                 title: config.ezL10n.gGlobal,
                 icon: EzIcon(
                   config,
-                  EzCM.onMobile
-                      ? EzCM.platform == TargetPlatform.iOS
+                  EzManager.onMobile
+                      ? EzManager.platform == TargetPlatform.iOS
                           ? Icons.phone_iphone
                           : Icons.phone_android
                       : Icons.computer,
@@ -55,7 +55,7 @@ class AppearanceSettingsScreen extends StatelessWidget {
                 title: config.ezL10n.gColor,
                 icon: EzIcon(config, Icons.palette, semanticLabel: config.ezL10n.gColor),
                 subSettings: <EzSubSetting>[EzSubSetting.qckColor, EzSubSetting.advColor],
-                fromStorage: () => (secondary ?? EzCM.get(advancedColorsKey) == true)
+                fromStorage: () => (secondary ?? EzManager.get(advancedColorsKey) == true)
                     ? EzSubSetting.advColor
                     : EzSubSetting.qckColor,
                 build: (EzSubSetting subSec) => EzColorSettings(
@@ -72,7 +72,7 @@ class AppearanceSettingsScreen extends StatelessWidget {
                 title: config.ezL10n.gDesign,
                 icon: EzIcon(config, Icons.design_services, semanticLabel: config.ezL10n.gDesign),
                 subSettings: <EzSubSetting>[EzSubSetting.butDesign, EzSubSetting.pagDesign],
-                fromStorage: () => (secondary ?? EzCM.get(pageTabKey) == true)
+                fromStorage: () => (secondary ?? EzManager.get(pageTabKey) == true)
                     ? EzSubSetting.pagDesign
                     : EzSubSetting.butDesign,
                 build: (EzSubSetting subSec) => EzDesignSettings(
@@ -88,7 +88,7 @@ class AppearanceSettingsScreen extends StatelessWidget {
                 title: config.ezL10n.gText,
                 icon: EzIcon(config, Icons.text_format, semanticLabel: config.ezL10n.gText),
                 subSettings: <EzSubSetting>[EzSubSetting.qckText, EzSubSetting.advText],
-                fromStorage: () => (secondary ?? EzCM.get(advancedTextKey) == true)
+                fromStorage: () => (secondary ?? EzManager.get(advancedTextKey) == true)
                     ? EzSubSetting.advText
                     : EzSubSetting.qckText,
                 build: (EzSubSetting subSec) => EzTextSettings(config, target: subSec),
@@ -112,7 +112,7 @@ class AppearanceSettingsScreen extends StatelessWidget {
 }
 
 class _RightsOpacity extends StatelessWidget {
-  final EzCP config;
+  final EzProvider config;
 
   const _RightsOpacity(this.config);
 
@@ -169,11 +169,11 @@ class _RightsOpacity extends StatelessWidget {
                     // Slider functions
                     onChanged: (double value) => setModal(() => opacity = value),
                     onChangeEnd: (double value) async {
-                      if (EzCM.updateBoth || config.isDark) {
-                        await EzCM.setDouble(darkTextBackgroundOpacityKey, value);
+                      if (EzManager.updateBoth || config.isDark) {
+                        await EzManager.setDouble(darkTextBackgroundOpacityKey, value);
                       }
-                      if (EzCM.updateBoth || !config.isDark) {
-                        await EzCM.setDouble(lightTextBackgroundOpacityKey, value);
+                      if (EzManager.updateBoth || !config.isDark) {
+                        await EzManager.setDouble(lightTextBackgroundOpacityKey, value);
                       }
                     },
                   ),
@@ -189,14 +189,14 @@ class _RightsOpacity extends StatelessWidget {
                     EzElevatedIconButton(
                       config,
                       onPressed: () async {
-                        if (EzCM.updateBoth || config.isDark) {
-                          await EzCM.remove(darkTextBackgroundOpacityKey);
+                        if (EzManager.updateBoth || config.isDark) {
+                          await EzManager.remove(darkTextBackgroundOpacityKey);
                         }
-                        if (EzCM.updateBoth || !config.isDark) {
-                          await EzCM.remove(lightTextBackgroundOpacityKey);
+                        if (EzManager.updateBoth || !config.isDark) {
+                          await EzManager.remove(lightTextBackgroundOpacityKey);
                         }
 
-                        setModal(() => opacity = EzCM.getDefault(config.isDark
+                        setModal(() => opacity = EzManager.getDefault(config.isDark
                             ? darkTextBackgroundOpacityKey
                             : lightTextBackgroundOpacityKey));
                       },

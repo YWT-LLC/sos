@@ -9,7 +9,7 @@ import 'package:open_ui/open_ui.dart';
 import 'package:material_ui/material_ui.dart';
 
 class RightsView extends StatefulWidget {
-  final EzCP config;
+  final EzProvider config;
 
   const RightsView(this.config, {super.key});
 
@@ -20,7 +20,7 @@ class RightsView extends StatefulWidget {
 class _RightsViewState extends State<RightsView> {
   // Define the build data //
 
-  Situation currTab = SituationConfig.safeLookup(EzCM.get(savedTabKey));
+  Situation currTab = SituationConfig.safeLookup(EzManager.get(savedTabKey));
   int delta = 0;
 
   // Define custom functions //
@@ -28,13 +28,13 @@ class _RightsViewState extends State<RightsView> {
   Future<void> _nav(Situation choice) async {
     delta = choice.position - currTab.position;
 
-    await EzCM.setString(savedTabKey, choice.name);
+    await EzManager.setString(savedTabKey, choice.name);
 
     currTab = choice;
     if (mounted) setState(() {});
   }
 
-  List<Widget> _unique(EzCP config) => switch (currTab) {
+  List<Widget> _unique(EzProvider config) => switch (currTab) {
         Situation.walking => <Widget>[
             _rightsText(config, l10n(config).rvMobilePockets),
             _rightsText(config, l10n(config).rvMobileQuestion),
@@ -128,5 +128,5 @@ class _RightsViewState extends State<RightsView> {
   }
 }
 
-Text _rightsText(EzCP config, String text) =>
+Text _rightsText(EzProvider config, String text) =>
     Text('$text\n', textAlign: TextAlign.start, style: config.bodyStyle);

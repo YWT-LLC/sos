@@ -10,7 +10,7 @@ import 'package:open_ui/open_ui.dart';
 import 'package:material_ui/material_ui.dart';
 
 class FlashButton extends StatefulWidget {
-  final EzCP config;
+  final EzProvider config;
   final CameraController camera;
 
   /// [EzIconButton] for toggling the [camera]s [FlashMode]
@@ -126,7 +126,7 @@ class _FlashButtonState extends State<FlashButton> {
 }
 
 class SOSIcon extends StatefulWidget {
-  final EzCP config;
+  final EzProvider config;
 
   const SOSIcon(this.config, {super.key});
 

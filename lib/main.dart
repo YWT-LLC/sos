@@ -81,7 +81,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[DeviceOrientation.portraitUp]);
 
-  EzCM.init(
+  EzManager.init(
     appName: 'InstaSOS',
     androidPackage: androidPackage,
     assetPaths: assetPaths,

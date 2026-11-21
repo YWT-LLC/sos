@@ -20,10 +20,10 @@ class SOSCache extends EzAppCache {
         _l10n = l10n;
 
   @override
-  void init(EzCP config) => _setVideoColors(config);
+  void init(EzProvider config) => _setVideoColors(config);
 
   @override
-  Future<void> rebuild(EzCP config) async {
+  Future<void> rebuild(EzProvider config) async {
     _setVideoColors(config);
 
     if (_locale != config.locale) {
@@ -32,37 +32,37 @@ class SOSCache extends EzAppCache {
     }
   }
 
-  void _setVideoColors(EzCP config) {
+  void _setVideoColors(EzProvider config) {
     _videoColor =
-        ezCOG(EzCM.get(config.isDark ? darkVideoColorKey : lightVideoColorKey)) ?? _backupFill;
+        ezCOG(EzManager.get(config.isDark ? darkVideoColorKey : lightVideoColorKey)) ?? _backupFill;
     _videoTextColor = ezTextColor(_videoColor.asColor);
   }
 }
 
 // Global //
 
-SOSCache _cache(EzCP config) => config.appCache! as SOSCache;
+SOSCache _cache(EzProvider config) => config.appCache! as SOSCache;
 
-bool get isIOS => EzCM.platform == TargetPlatform.iOS;
-bool get showTutorial => EzCM.get(showTutorialKey);
+bool get isIOS => EzManager.platform == TargetPlatform.iOS;
+bool get showTutorial => EzManager.get(showTutorialKey);
 
-Lang l10n(EzCP config) => _cache(config)._l10n;
+Lang l10n(EzProvider config) => _cache(config)._l10n;
 
 // SOS //
 
-bool get autoShareMedia => EzCM.get(autoShareMediaKey);
+bool get autoShareMedia => EzManager.get(autoShareMediaKey);
 
-List<String> get emc => EzCM.get(emcKey);
+List<String> get emc => EzManager.get(emcKey);
 
-bool get sosOnOpen => EzCM.get(sosOnOpenKey);
-bool get sosOnClose => EzCM.get(sosOnCloseKey);
-bool get sosOnInterrupt => EzCM.get(sosOnInterruptKey);
-LLType get linkType => LLTypeConfig.safeLookup(EzCM.get(linkTypeKey));
+bool get sosOnOpen => EzManager.get(sosOnOpenKey);
+bool get sosOnClose => EzManager.get(sosOnCloseKey);
+bool get sosOnInterrupt => EzManager.get(sosOnInterruptKey);
+LLType get linkType => LLTypeConfig.safeLookup(EzManager.get(linkTypeKey));
 
 // Color //
 
 const EzSwitchColor _backupFill = EzSwitchColor(color: Colors.red);
-EzSwitchColor videoFill(EzCP config) => _cache(config)._videoColor;
+EzSwitchColor videoFill(EzProvider config) => _cache(config)._videoColor;
 
-Color videoTextColor(EzCP config) => _cache(config)._videoTextColor;
-EzSwitchColor videoTextFiller(EzCP config) => EzSwitchColor(color: videoTextColor(config));
+Color videoTextColor(EzProvider config) => _cache(config)._videoTextColor;
+EzSwitchColor videoTextFiller(EzProvider config) => EzSwitchColor(color: videoTextColor(config));
